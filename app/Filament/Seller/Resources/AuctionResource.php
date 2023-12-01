@@ -89,9 +89,11 @@ class AuctionResource extends Resource
                     ->label('Image')
                     ->collection('Auctions')
                     ->circular()
-                    ->stacked(),
+                    ->stacked()
+                    ->limit(3),
                 TextColumn::make('title')
-                    ->searchable(),
+                    ->searchable()
+                    ->limit(20),
                 TextColumn::make('price')
                     ->money('LYD')
                     ->sortable(),

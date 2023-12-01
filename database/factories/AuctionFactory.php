@@ -17,7 +17,16 @@ class AuctionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => $this->faker->sentence,
+            'info' => [
+                'color' => $this->faker->colorName,
+                'size' => $this->faker->randomElement(['S', 'M', 'L', 'XL']),
+            ],
+            'description' => $this->faker->paragraph,
+            'price' => $this->faker->numberBetween(100, 10000),
+            'start' => $this->faker->dateTimeBetween('-1 week', '+1 week'),
+            'end' => $this->faker->dateTimeBetween('+1 week', '+2 week'),
+            'user_id' => 1,
         ];
     }
 }
