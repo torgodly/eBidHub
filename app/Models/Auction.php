@@ -23,8 +23,24 @@ class Auction extends Model implements HasMedia
         'user_id'
     ];
 
+
     //casts
     protected $casts = [
         'info' => 'json',
     ];
+
+
+    //attributes status
+    public function getStatusAttribute()
+    {
+        if ($this->start > now()) {
+            return 'upcoming';
+        }
+
+        if ($this->end < now()) {
+            return 'closed';
+        }
+
+        return 'active';
+    }
 }
