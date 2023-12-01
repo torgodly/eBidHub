@@ -26,7 +26,7 @@ class AuctionFactory extends Factory
             'price' => $this->faker->numberBetween(100, 10000),
             'start' => $this->faker->dateTimeBetween('-1 week', '+1 week'),
             'end' => $this->faker->dateTimeBetween('+1 week', '+2 week'),
-            'user_id' => 1,
+            'user_id' => 21,
         ];
     }
 }

@@ -43,4 +43,16 @@ class Auction extends Model implements HasMedia
 
         return 'active';
     }
+
+    //bid
+    public function bids()
+    {
+        return $this->hasMany(Bid::class);
+    }
+
+    //bids count attribute
+    public function getBidsCountAttribute()
+    {
+        return $this->bids()->count();
+    }
 }

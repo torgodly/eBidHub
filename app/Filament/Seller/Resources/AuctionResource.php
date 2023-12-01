@@ -13,6 +13,12 @@ use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Wizard;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\Grid;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
+use Filament\Infolists\Components\Split;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -113,12 +119,14 @@ class AuctionResource extends Resource
                         'upcoming' => 'warning',
                         'active' => 'success',
                         'closed' => 'danger',
-                    })
+                    }),
+                TextColumn::make('bids_count')
             ])
             ->filters([
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -134,21 +142,77 @@ class AuctionResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\BidsRelationManager::class,
         ];
     }
 
     public static function getPages(): array
     {
         return [
+            'view' => Pages\ViewAuction::route('/{record}/show'),
             'index' => Pages\ListAuctions::route('/'),
             'create' => Pages\CreateAuction::route('/create'),
             'edit' => Pages\EditAuction::route('/{record}/edit'),
         ];
     }
 
+    //infolist
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Section::make()
+                    ->schema([
+                        Split::make([
+                            Grid::make(2)
+                                ->schema([
+                                    TextEntry::make('title'),
+                                    TextEntry::make('price')->money('LYD'),
+
+                                    TextEntry::make('start')
+                                        ->dateTime('Y-m-d H:i:s')
+                                        ->formatStateUsing(fn(string $state): string => Carbon::parse($state)->diffForHumans()),
+                                    TextEntry::make('end')
+                                        ->dateTime('Y-m-d H:i:s')
+                                        ->formatStateUsing(fn(string $state): string => Carbon::parse($state)->diffForHumans()),
+
+                                    TextEntry::make('status')
+                                        ->badge()
+                                        ->color(fn(string $state): string => match ($state) {
+                                            'upcoming' => 'warning',
+                                            'active' => 'success',
+                                            'closed' => 'danger',
+                                        }),
+//                                    ]),
+                                ]),
+
+                        ])->from('lg'),
+                    ]),
+                Section::make('Images')
+                    ->schema([
+                        SpatieMediaLibraryImageEntry::make('media')
+                            ->Collection('Auctions')
+                            ->hiddenLabel()
+                            ->columns(2)
+                            ->stacked()
+                        ,
+                    ])
+                    ->collapsible(),
+
+                Section::make('Content')
+                    ->schema([
+                        TextEntry::make('description')
+                            ->prose()
+                            ->markdown()
+                            ->hiddenLabel(),
+                    ])
+                    ->collapsible(),
+            ]);
+    }
+
+
     public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
     {
-        return parent::getEloquentQuery()->where('user_id', auth()->id());
+        return parent::getEloquentQuery()->where('user_id', auth()->id())->orderBy('created_at', 'desc');
     }
 }
