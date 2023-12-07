@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Auction;
+use App\Models\comment;
 use Illuminate\Http\Request;
 
-class AuctionController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('auctions.index', [
-            'auctions' => Auction::all(),
-        ]);
+        //
     }
 
     /**
@@ -36,17 +34,15 @@ class AuctionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Auction $auction)
+    public function show(comment $comment)
     {
-        return view('auctions.show', [
-            'auction' => $auction,
-        ]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Auction $auction)
+    public function edit(comment $comment)
     {
         //
     }
@@ -54,7 +50,7 @@ class AuctionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Auction $auction)
+    public function update(Request $request, comment $comment)
     {
         //
     }
@@ -62,7 +58,7 @@ class AuctionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Auction $auction)
+    public function destroy(comment $comment)
     {
         //
     }

@@ -14,9 +14,11 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->json('info');
-            $table->string('description');
+            $table->string('about');
+            $table->text('description');
             $table->integer('price');
-            $table->timestamp('start');
+            //minium bid
+            $table->integer('minimum_bid');
             $table->timestamp('end');
             $table->foreignId('user_id');
             $table->timestamps();

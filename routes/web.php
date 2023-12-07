@@ -26,6 +26,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+    //auctions
+    Route::get('/auctions', [App\Http\Controllers\AuctionController::class, 'index'])->name('auctions.index');
+    //show
+    Route::get('/auctions/{auction}', [App\Http\Controllers\AuctionController::class, 'show'])->name('auctions.show');
+
 });
 
 require __DIR__.'/auth.php';

@@ -13,10 +13,13 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @livewireScripts
+        @livewireStyles
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
+            <x-Notifications/>
 
             <!-- Page Heading -->
             @if (isset($header))
@@ -33,4 +36,6 @@
             </main>
         </div>
     </body>
+    @stack('scripts')
+
 </html>

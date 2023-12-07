@@ -16,11 +16,12 @@ class DatabaseSeeder extends Seeder
     {
          \App\Models\User::factory(20)->create();
         Auction::factory(1)->create()->each(function (Auction $auction) {
-            for ($i = 0; $i < 20; $i++) {
+            for ($i = 0; $i < 5; $i++) {
                 $auction->addMediaFromUrl('https://picsum.photos/1024/683')->toMediaCollection('Auctions');
             }
         });
-        Bid::factory(100)->create();
+        Bid::factory(50)->create();
+        \App\Models\Comment::factory(50)->create();
 
 
 

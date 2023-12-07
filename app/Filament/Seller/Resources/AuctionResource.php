@@ -10,6 +10,7 @@ use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Wizard;
 use Filament\Forms\Form;
@@ -22,6 +23,7 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class AuctionResource extends Resource
@@ -40,7 +42,9 @@ class AuctionResource extends Resource
                             TextInput::make('title')
                                 ->required()
                                 ->maxLength(255),
-
+                            Textarea::make('about')
+                                ->required()
+                                ->maxLength(255),
                             MarkdownEditor::make('description')
                                 ->toolbarButtons([
                                     'blockquote',
@@ -60,9 +64,6 @@ class AuctionResource extends Resource
                                 ->required()
                                 ->numeric()
                                 ->prefix('LYD'),
-                            DateTimePicker::make('start')
-                                ->prefix('Starts')
-                                ->required(),
                             DateTimePicker::make('end')
                                 ->prefix('Ends')
                                 ->required(),
@@ -79,9 +80,10 @@ class AuctionResource extends Resource
                             SpatieMediaLibraryFileUpload::make('media')
                                 ->collection('Auctions')
                                 ->multiple()
-                                ->enableReordering()
+                                ->reorderable()
                                 ->responsiveImages()
-                                ->hiddenLabel(),
+                                ->hiddenLabel()
+                                ->imageEditor(),
                         ]),
                 ])->columnSpanFull(),
             ]);
@@ -123,7 +125,7 @@ class AuctionResource extends Resource
                 TextColumn::make('bids_count')
             ])
             ->filters([
-                //
+
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
