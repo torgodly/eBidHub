@@ -23,7 +23,6 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class AuctionResource extends Resource
@@ -61,6 +60,10 @@ class AuctionResource extends Resource
                     Wizard\Step::make(__('Price & Date'))
                         ->schema([
                             TextInput::make('price')
+                                ->required()
+                                ->numeric()
+                                ->prefix('LYD'),
+                            TextInput::make('minimum_bid')
                                 ->required()
                                 ->numeric()
                                 ->prefix('LYD'),

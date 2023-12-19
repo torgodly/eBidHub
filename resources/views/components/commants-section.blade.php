@@ -1,7 +1,7 @@
 @props(['comments'])
 
 
-<div class="flow-root">
+<div class="flow-root w-full">
     <div class="flex gap-x-3">
 
         <div class="relative flex-auto">

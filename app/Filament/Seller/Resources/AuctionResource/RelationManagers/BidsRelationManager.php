@@ -14,10 +14,6 @@ class BidsRelationManager extends RelationManager
 {
     protected static string $relationship = 'bids';
 
-    public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
-    {
-        return parent::getEloquentQuery()->orderBy('created_at', 'desc');
-    }
 
     public function form(Form $form): Form
     {
@@ -40,7 +36,7 @@ class BidsRelationManager extends RelationManager
                     ->dateTime('Y-m-d H:i')
                     ->description(fn(Bid $record): string => $record->created_at->diffForHumans(), position: 'above')
                     ->sortable(),
-            ])
+            ])->defaultSort('created_at', 'desc')
             ->filters([
             ])
             ->headerActions([
