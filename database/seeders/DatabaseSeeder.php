@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'Test User',
             'email' => 'admin@admin.com',
+            'balance' => 100000,
         ]);
     }
 }
