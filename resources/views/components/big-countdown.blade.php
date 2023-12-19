@@ -109,7 +109,7 @@
             </template>
             <span class="text-white text-lg">د.ل.{{number_format($auction->end_price)}}</span>
         </div>
-        <div class="flex gap-1 justify-center items-center ">
+        <div class="md:flex gap-1 justify-center items-center hidden  ">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash stroke-gray-300" width="24"
                  height="24"
                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -123,7 +123,7 @@
             <span class="text-gray-300 text-lg">Bids</span>
             <span class="text-white text-lg">{{$auction->bids->count()}}</span>
         </div>
-        <div class="flex gap-1 justify-center items-center ">
+        <div class="md:flex gap-1 justify-center items-center hidden ">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-message stroke-gray-300"
                  width="24" height="24"
                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"

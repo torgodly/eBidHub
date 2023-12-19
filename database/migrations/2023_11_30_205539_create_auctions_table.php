@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->integer('minimum_bid');
             $table->timestamp('end');
             $table->foreignId('user_id');
+            $table->foreignId('winner_id')->nullable();
             $table->timestamps();
         });
     }

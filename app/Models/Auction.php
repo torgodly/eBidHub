@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Events\BidPlaced;
+use App\Events\MyEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -21,7 +23,8 @@ class Auction extends Model implements HasMedia
         'price',
         'end',
         'user_id',
-        'minimum_bid'
+        'minimum_bid',
+        'winner_id'
     ];
 
 
@@ -84,7 +87,7 @@ class Auction extends Model implements HasMedia
 
     //auction price is the highest bid  if there is no bids then it is the starting price
 
-    public function getActivitiesAttribute()
+    public function Activities()
     {
         $comments = $this->comments()->get();
         $bids = $this->bids()->get();
@@ -111,22 +114,37 @@ class Auction extends Model implements HasMedia
         if (auth()->user()->balance < $amount) {
             throw new \Exception('You do not have enough money to place this bid');
         }
-        $this->bids()->create([
-            'user_id' => auth()->id(),
-            'amount' => $amount + $this->end_price,
-        ]);
-        //deduct money from user
-        auth()->user()->update([
-            'balance' => auth()->user()->balance - $amount,
-        ]);
+
+        //if  there is time left
+        if ($this->status !== 'closed') {
+            $this->bids()->create([
+                'user_id' => auth()->id(),
+                'amount' => $amount + $this->end_price,
+            ]);
+            //deduct money from user
+            auth()->user()->update([
+                'balance' => auth()->user()->balance - $amount,
+            ]);
+            event(new BidPlaced('hello world'));
+        } //if auction is closed
+        else {
+            throw new \Exception('This auction is closed');
+        }
+
 
     }
 
-
-    //place bid
+//hasended attribute
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    //place bid
+
+    public function getHasEndedAttribute()
+    {
+        return $this->end < now();
     }
 }

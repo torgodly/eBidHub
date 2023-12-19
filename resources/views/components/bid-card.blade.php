@@ -1,5 +1,5 @@
 @props(['auction'])
-<div id="card" class="flex flex-col items-center gap-6 w-1/2">
+<div id="card" class="flex flex-col items-center gap-6 md:w-1/2 ">
     <div class="sticky  top-32 flex flex-col items-center gap-6  w-full">
         <div
             class="max-w-xs w-full bg-white border border-gray-200 rounded-lg shadow  p-6 flex flex-col justify-center text-center drop-shadow-xl">
@@ -12,9 +12,8 @@
                               required/>
                 <x-input-error :messages="$errors->get('bid')" class="mt-2"/>
                 <x-primary-button class="w-full flex justify-center mt-4 h-12 capitalize !text-base !font-bold"
-                                  wire:click="CreateBid">
-                    <x-loading-indicator wire:loading="CreateBid"/>
-
+                                  wire:click="Bid" wire:target="Bid" wire:loading.attr="disabled">
+                    <x-loading-indicator name="Bid"/>
                     {{__('Bid')}}
                 </x-primary-button>
 

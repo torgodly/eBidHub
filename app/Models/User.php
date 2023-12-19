@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Octopy\Impersonate\Concerns\HasImpersonation;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use HasImpersonation;
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +25,6 @@ class User extends Authenticatable
         'password',
         'balance'
     ];
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -33,7 +34,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
     /**
      * The attributes that should be cast.
      *
@@ -44,8 +44,30 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    /**
+     * @return string
+     */
+    public function getImpersonateDisplayText(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * This following is useful for performing user searches through the interface,
+     * You can use fields in relations freely using dot notation,
+     *
+     * example: posts.title, department.name.
+     */
+    public function getImpersonateSearchField(): array
+    {
+        return [
+            'name',
+        ];
+    }
+
 
     //auctions
+
     public function auctions()
     {
         return $this->hasMany(Auction::class);
@@ -55,5 +77,11 @@ class User extends Authenticatable
     public function bids()
     {
         return $this->hasMany(Bid::class);
+    }
+
+    //comments
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

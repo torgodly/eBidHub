@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Auctions;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Show extends Component
@@ -9,6 +10,11 @@ class Show extends Component
     public $auction;
     public $description; // This will hold the markdown content
     public $bid;
+    public $comment;
+    protected $listeners = ['bid-placed' => 'render'];
+
+
+
 
     public function mount()
     {
@@ -16,7 +22,7 @@ class Show extends Component
         $this->description = $this->auction->description;
     }
 
-    public function CreateBid()
+    public function Bid(): void
     {
         $this->validate([
             'bid' => 'required|numeric|min:' . $this->auction->minimum_bid,
@@ -40,13 +46,28 @@ class Show extends Component
     public function render()
     {
 
-        $this->auction->getActivitiesAttribute();
 
         return view('livewire.auctions.show',
             [
                 'description' => $this->description,
+                'activities' => $this->auction->activities(),
             ]);
     }
 
+    //render the component
 
+    public function addcomment()
+    {
+        //create commant
+        $this->validate([
+            'comment' => 'required|min:3',
+        ]);
+        Auth::user()->comments()->create([
+            'body' => $this->comment,
+            'auction_id' => $this->auction->id,
+        ]);
+//        reset input
+        $this->comment = '';
+        $this->dispatch('notify', content: 'The comment has been added', type: 'success');
+    }
 }
