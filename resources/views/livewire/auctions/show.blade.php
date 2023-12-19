@@ -131,7 +131,7 @@
                     </div>
 
                     <div class="mt-8 w-fit w-full">
-                        <h1 class="text-2xl font-bold capitalize">{{__('What this place offers')}}</h1>
+                        <h1 class="text-2xl font-bold capitalize">{{__('Activities')}}</h1>
                         <div class="flex justify-start items-center mt-4 w-full">
                             <x-commants-section :comments="$activities"/>
                         </div>
