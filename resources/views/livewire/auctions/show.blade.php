@@ -102,11 +102,10 @@
                     </div>
 
                     <div class="mt-8" x-data="{expanded: false}">
-                        <h1 class="text-2xl font-bold capitalize">{{__('About this space')}}</h1>
+                        <h1 class="text-2xl font-bold capitalize">{{__('About this Auction')}}</h1>
                         <div class=" overflow-hidden">
                             <div class="text-base font-light text-black mt-4 prose "
                                  :class="!expanded?'line-clamp-5':''">
-                                {{--                                {!! $auction->description !!}--}}
                                 {{\Illuminate\Mail\Markdown::parse($auction->description)}}
 
                             </div>
@@ -154,12 +153,7 @@
         }
     </style>
 
-    <x-modal name="Show-Description" class="rounded-2xl" focusable>
-        {{--        {{ $this->auctionInfolist }}--}}
-        <div class="prose p-6">
-            {{\Illuminate\Mail\Markdown::parse($auction->description)}}
-        </div>
-    </x-modal>
+
 
     @script
     <script>

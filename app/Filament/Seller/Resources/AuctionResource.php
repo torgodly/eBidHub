@@ -36,7 +36,7 @@ class AuctionResource extends Resource
         return $form
             ->schema([
                 Wizard::make([
-                    Wizard\Step::make('Order')
+                    Wizard\Step::make('General Information')
                         ->schema([
                             TextInput::make('title')
                                 ->required()
@@ -109,19 +109,18 @@ class AuctionResource extends Resource
                     ->money('LYD')
                     ->sortable(),
 
-                TextColumn::make('start')
-                    ->dateTime('Y-m-d H:i:s')
-                    ->description(fn(Auction $record): string => Carbon::parse($record->start)->diffForHumans())
+                TextColumn::make('minimum_bid')
+                    ->money('LYD')
                     ->sortable(),
+
                 TextColumn::make('end')
                     ->dateTime('Y-m-d H:i:s')
-                    ->description(fn(Auction $record): string => Carbon::parse($record->start)->diffForHumans())
+                    ->description(fn(Auction $record): string => Carbon::parse($record->end)->diffForHumans())
                     ->sortable(),
 
                 TextColumn::make('status')
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
-                        'upcoming' => 'warning',
                         'active' => 'success',
                         'closed' => 'danger',
                     }),
