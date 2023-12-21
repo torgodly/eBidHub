@@ -123,6 +123,7 @@ class AuctionResource extends Resource
                     ->color(fn(string $state): string => match ($state) {
                         'active' => 'success',
                         'closed' => 'danger',
+                        'ending soon' => 'warning',
                     }),
                 TextColumn::make('bids_count')
             ])
@@ -183,7 +184,7 @@ class AuctionResource extends Resource
                                     TextEntry::make('status')
                                         ->badge()
                                         ->color(fn(string $state): string => match ($state) {
-                                            'upcoming' => 'warning',
+                                            'ending soon' => 'warning',
                                             'active' => 'success',
                                             'closed' => 'danger',
                                         }),
