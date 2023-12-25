@@ -14,15 +14,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-//         \App\Models\User::factory(20)->create();
-//        Auction::factory(1)->create()->each(function (Auction $auction) {
-//            for ($i = 0; $i < 5; $i++) {
-//                $auction->addMediaFromUrl('https://picsum.photos/1024/683')->toMediaCollection('Auctions');
-//            }
-//        });
+        \App\Models\User::factory(20)->create();
+        Auction::factory(1)->create()->each(function (Auction $auction) {
+            for ($i = 0; $i < 5; $i++) {
+                $auction->addMediaFromUrl('https://picsum.photos/1024/683')->toMediaCollection('Auctions');
+            }
+        });
 //        Bid::factory(50)->create();
-//        \App\Models\Comment::factory(50)->create();
-
+        \App\Models\Comment::factory(50)->create();
 
 
         \App\Models\User::factory()->create([

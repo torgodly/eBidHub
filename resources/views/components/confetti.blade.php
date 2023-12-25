@@ -138,10 +138,10 @@
         //render the confetti then destroy it after 5 seconds and delete the canvas
         initConfetti();
         render();
-        setTimeout(function () {
-            confetti = [];
-            canvas.remove();
-        }, 5000);
+        // setTimeout(function () {
+        //     confetti = [];
+        //     canvas.remove();
+        // }, 5000);
         @endif
         // });
 

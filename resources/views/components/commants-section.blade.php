@@ -169,7 +169,7 @@
             </div>
         </div>
     </div>
-    <ul role="list" class="my-8 ">
+    <ul role="list" class="mt-8 ">
         @foreach($comments as $comment)
             @if($comment instanceof \App\Models\Comment)
                 <li>
@@ -196,7 +196,7 @@
                                     </div>
                                     <p class="mt-0.5 text-sm text-gray-500">{{$comment->created_at->diffforhumans()}}</p>
                                 </div>
-                                <div class="mt-2 text-sm text-gray-700">
+                                <div class="mt-2 text-sm text-gray-700 font-bold">
                                     <p>{{$comment->body}}</p>
                                 </div>
                             </div>
@@ -246,4 +246,10 @@
         @endforeach
 
     </ul>
+  <div class="flex justify-center items-center mb-5">
+      <x-secondary-button wire:click="loadMoreActivities" class="w-fit">
+          <x-loading-indicator name="loadMoreActivities" class="w-3 h-3"/>
+          {{__('Load more')}}
+      </x-secondary-button>
+  </div>
 </div>

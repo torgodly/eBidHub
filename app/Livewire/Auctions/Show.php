@@ -12,14 +12,16 @@ class Show extends Component
     public $bid;
     public $comment;
     protected $listeners = ['bid-placed' => 'render'];
-
-
-
-
+    public $activities_per_load = 10;
     public function mount()
     {
         $this->bid = $this->auction->minimum_bid;
         $this->description = $this->auction->description;
+    }
+
+    public function loadMoreActivities()
+    {
+        $this->activities_per_load += 10;
     }
 
     public function Bid(): void
@@ -50,7 +52,7 @@ class Show extends Component
         return view('livewire.auctions.show',
             [
                 'description' => $this->description,
-                'activities' => $this->auction->activities(),
+                'activities' => $this->auction->activities()->take($this->activities_per_load),
             ]);
     }
 

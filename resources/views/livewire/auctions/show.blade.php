@@ -43,7 +43,7 @@
                 </div>
             </div>
         </div>
-        <div class="mt-2 grid grid-rows-2 grid-cols-4  rounded-xl overflow-clip  gap-2 relative" id="images">
+        <div class="mt-2 md:grid grid-rows-2 grid-cols-4  rounded-xl overflow-clip  gap-2 relative  hidden" id="images">
             @foreach($auction->media->take(5) as $media)
                 <img src="{{$media->getUrl()}}" alt=""
                      class="w-full h-full object-cover shadow-md">
@@ -68,6 +68,53 @@
                 </svg>
                 <p class="text-sm font-bold">{{__('Show all photos')}}</p>
             </div>
+        </div>
+        <div class="group contents md:hidden"
+             x-data="{ activeSlide: 1, slides: {{ count($auction->media) }} }">
+            <div class="relative">
+                <!-- Slides -->
+                @foreach($auction->media as $key => $media)
+                    <div x-show="activeSlide === {{ $key + 1 }}">
+                        <img src="{{$media->getUrl()}}"
+                             alt=""
+                             class="w-full h-52 rounded-xl object-cover shadow-md">
+                    </div>
+                @endforeach
+
+                <!-- Prev/Next arrow buttons (hidden by default) -->
+                <div
+                    class="box flex justify-between items-center mx-2 absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    <button class="bg-white p-1 rounded-full flex justify-center items-center"
+                            x-on:click="activeSlide = activeSlide === 1 ? slides : activeSlide - 1"
+                            onclick="event.stopPropagation();">
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             class="icon icon-tabler icon-tabler-chevron-left" width="24"
+                             height="24"
+                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                             fill="none"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M15 6l-6 6l6 6"></path>
+                        </svg>
+                    </button>
+                    <button class="bg-white p-1 rounded-full flex justify-center items-center"
+                            x-on:click="activeSlide = activeSlide === slides ? 1 : activeSlide + 1"
+                            onclick="event.stopPropagation();">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             class="icon icon-tabler icon-tabler-chevron-right" width="24"
+                             height="24"
+                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                             fill="none"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M9 6l6 6l-6 6"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+
         </div>
         <div class="flex flex-col md:flex-row justify-between  !mt-10 gap-14  ">
 
@@ -100,6 +147,10 @@
                             <div class="w-full border-t border-gray-300"></div>
                         </div>
                     </div>
+                    <div class="md:hidden block mt-8">
+                        <x-bid-card :auction="$auction"/>
+
+                    </div>
 
                     <div class="mt-8" x-data="{expanded: false}">
                         <h1 class="text-2xl font-bold capitalize">{{__('About this Auction')}}</h1>
@@ -111,9 +162,21 @@
                             </div>
                         </div>
 
-                        <div class="mt-4 flex items-center cursor-pointer">
+                        <div class="mt-4 flex items-center cursor-pointer" x-show="!expanded">
                             <h1 class="text-base font-bold underline " @click="expanded = ! expanded">
                                 {{__('Show more')}}
+                            </h1>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 class="icon icon-tabler icon-tabler-chevron-right"
+                                 width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                 fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M9 6l6 6l-6 6"></path>
+                            </svg>
+                        </div>
+                        <div class="mt-4 flex items-center cursor-pointer" x-show="expanded">
+                            <h1 class="text-base font-bold underline " @click="expanded = ! expanded">
+                                {{__('Show less')}}
                             </h1>
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  class="icon icon-tabler icon-tabler-chevron-right"
@@ -138,8 +201,9 @@
                     </div>
                 </div>
             </div>
-            <x-bid-card :auction="$auction"/>
-
+            <div class="md:contents  hidden">
+                <x-bid-card :auction="$auction"/>
+            </div>
         </div>
 
 
@@ -152,7 +216,6 @@
 
         }
     </style>
-
 
 
     @script
@@ -176,7 +239,8 @@
 
             //if the auth user is the winner alert him
             if (data.user_id == {{auth()->user()->id}}) {
-                alert('You are the winner');
+                initConfetti();
+                render();
             }
 
 
