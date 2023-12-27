@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\AuctionWinner;
 use App\Events\BidPlaced;
 use App\Events\MyEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -37,7 +38,7 @@ class Auction extends Model implements HasMedia
     //attributes status
     public function getStatusAttribute()
     {
-        if ($this->end < now()) {
+        if ($this->end < now() ) {
             return 'closed';
         }
         //ending soon
@@ -134,11 +135,43 @@ class Auction extends Model implements HasMedia
 
     }
 
-//hasended attribute
+    //buyNow
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+//hasended attribute
+
+    public function buyNow()
+    {
+        //check if user has enough money
+        if (auth()->user()->balance < $this->price) {
+            throw new \Exception('You do not have enough money to buy this item');
+        }
+
+        //if  there is time left
+        if ($this->status !== 'closed') {
+            $this->bids()->create([
+                'user_id' => auth()->id(),
+                'amount' => $this->end_price,
+            ]);
+
+            //deduct money from user
+            auth()->user()->update([
+                'balance' => auth()->user()->balance - $this->end_price,
+            ]);
+            //update winner id0
+            $this->update([
+                'winner_id' => auth()->id(),
+            ]);
+            event(new AuctionWinner(auth()->user()->id, $this->id));
+
+        } //if auction is closed
+        else {
+            throw new \Exception('This auction is closed');
+        }
     }
 
     //place bid
@@ -146,5 +179,11 @@ class Auction extends Model implements HasMedia
     public function getHasEndedAttribute()
     {
         return $this->end < now();
+    }
+
+    //categorys
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
     }
 }

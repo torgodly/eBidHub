@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -38,6 +39,9 @@ class AuctionResource extends Resource
                 Wizard::make([
                     Wizard\Step::make('General Information')
                         ->schema([
+                            Select::make('categories')
+                                ->multiple()
+                                ->relationship('categories', 'name'),
                             TextInput::make('title')
                                 ->required()
                                 ->maxLength(255),

@@ -11,8 +11,9 @@ class Show extends Component
     public $description; // This will hold the markdown content
     public $bid;
     public $comment;
-    protected $listeners = ['bid-placed' => 'render'];
     public $activities_per_load = 10;
+    protected $listeners = ['bid-placed' => 'render'];
+
     public function mount()
     {
         $this->bid = $this->auction->minimum_bid;
@@ -40,6 +41,19 @@ class Show extends Component
         $this->dispatch('notify', content: 'The Bid has been placed', type: 'success');
 
 
+    }
+
+    //buy now
+    public function buyNow(): void
+    {
+        try {
+            $this->auction->buyNow();
+        } catch (\Exception $e) {
+            $this->dispatch('notify', content: $e->getMessage(), type: 'error');
+            return;
+        }
+
+        $this->dispatch('notify', content: 'The Bid has been placed', type: 'success');
     }
 
 

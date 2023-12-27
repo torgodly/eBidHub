@@ -16,6 +16,15 @@
                     <x-loading-indicator name="Bid"/>
                     {{__('Bid')}}
                 </x-primary-button>
+                @if($auction->status == 'active')
+                    <x-primary-button class="w-full flex justify-center mt-4 h-12 capitalize !text-base !font-bold"
+                                      wire:click="buyNow" wire:target="buyNow" wire:loading.attr="disabled">
+                        <x-loading-indicator name="buyNow"/>
+                        {{__('Buy Now')}}
+                    </x-primary-button>
+
+                @endif
+
 
             </div>
         </div>

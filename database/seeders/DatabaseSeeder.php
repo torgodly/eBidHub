@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Auction;
-use App\Models\Bid;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,8 +20,9 @@ class DatabaseSeeder extends Seeder
                 $auction->addMediaFromUrl('https://picsum.photos/1024/683')->toMediaCollection('Auctions');
             }
         });
-//        Bid::factory(50)->create();
+////        Bid::factory(50)->create();
         \App\Models\Comment::factory(50)->create();
+        Category::factory(100)->create();
 
 
         \App\Models\User::factory()->create([
