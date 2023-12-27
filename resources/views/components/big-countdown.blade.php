@@ -10,7 +10,7 @@
         minutes: '00',
         seconds: '00',
     },
-    countDownDate: new Date('{{$auction->end}}').getTime(),
+    countDownDate: new Date('{{$auction->has_winner ? now() : $auction->end}}').getTime(),
     displayMode: 'days', // Can be 'days' or 'time'
     timerClass: 'bg-[#222222]',
     startCounter: function () {
@@ -75,12 +75,14 @@
                     <path d="M12 7v5l3 3"/>
                 </svg>
                 <div class="text-sm flex gap-3">
-                    <span class="text-gray-300 text-lg">Time Left</span>
                     <template x-if="displayMode === 'days'">
+                        <span class="text-gray-300 text-lg">Time Left</span>
+
                         <span class="text-lg text-white" x-text="timer.days + ' Days'"></span>
                     </template>
                     <template x-if="displayMode === 'time'">
                         <div class="text-lg text-white">
+                            <span class="text-gray-300 text-lg">Time Left</span>
                             <span x-text="timer.hours"></span>:
                             <span x-text="timer.minutes"></span>:
                             <span x-text="timer.seconds"></span>
@@ -89,6 +91,7 @@
                     <template x-if="displayMode === 'sold'">
                         <div class="text-lg text-white">
                             <span x-text="'Sold For'"></span>
+                            <span class="text-white text-lg">د.ل.{{number_format($auction->end_price)}}</span>
                         </div>
                     </template>
                 </div>
@@ -104,9 +107,9 @@
                 <path d="M18 11l-6 -6"/>
                 <path d="M6 11l6 -6"/>
             </svg>
-            <template x-if="displayMode !== 'sold'">
+{{--            <template x-if="displayMode !== 'sold'">--}}
                 <span class="text-gray-300 text-lg">High Bid</span>
-            </template>
+{{--            </template>--}}
             <span class="text-white text-lg">د.ل.{{number_format($auction->end_price)}}</span>
         </div>
         <div class="md:flex gap-1 justify-center items-center hidden  ">
@@ -134,8 +137,7 @@
                 <path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z"/>
             </svg>
             <span class="text-gray-300 text-lg">Comments</span>
-            {{--            TODO: make this the commants--}}
-            <span class="text-white text-lg">{{$auction->bids->count()}}</span>
+            <span class="text-white text-lg">{{$auction->comments->count()}}</span>
         </div>
     </div>
 </div>

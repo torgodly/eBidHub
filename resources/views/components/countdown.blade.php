@@ -10,7 +10,7 @@
         minutes: '00',
         seconds: '00',
     },
-    countDownDate: new Date('{{$auction->end}}').getTime(),
+    countDownDate: new Date('{{$auction->has_winner ? now() : $auction->end}}').getTime(),
     displayMode: 'days', // Can be 'days' or 'time'
     timerClass: 'bg-[#222222]',
     startCounter: function () {

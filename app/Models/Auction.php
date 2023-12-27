@@ -39,7 +39,7 @@ class Auction extends Model implements HasMedia
     //attributes status
     public function getStatusAttribute()
     {
-        if ($this->end < now() ) {
+        if ($this->end < now() || $this->has_winner) {
             return 'closed';
         }
         //ending soon
@@ -186,5 +186,11 @@ class Auction extends Model implements HasMedia
     public function categories()
     {
         return $this->belongsToMany(Category::class);
+    }
+
+    //haswinner
+    public function getHaswinnerAttribute()
+    {
+        return $this->winner_id !== null;
     }
 }
