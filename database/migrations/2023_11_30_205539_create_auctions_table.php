@@ -22,6 +22,7 @@ return new class extends Migration {
             $table->timestamp('end');
             $table->foreignId('user_id');
             $table->foreignId('winner_id')->nullable();
+            $table->boolean('buy_now')->default(false);
             $table->timestamps();
         });
     }

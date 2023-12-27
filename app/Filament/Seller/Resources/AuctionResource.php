@@ -13,6 +13,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Wizard;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\Grid;
@@ -74,6 +75,8 @@ class AuctionResource extends Resource
                             DateTimePicker::make('end')
                                 ->prefix('Ends')
                                 ->required(),
+                            Toggle::make('buy_now')->label('Item is available for buy now')->inline(false),
+
                         ]),
                     Wizard\Step::make(__('Product Information'))
                         ->schema([
