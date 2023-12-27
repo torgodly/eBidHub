@@ -1,7 +1,7 @@
 <div>
 
     <div
-        class="max-w-7xl mx-auto  pt-10 relative md:px-0  px-6"
+        class="max-w-7xl mx-auto  pt-10 relative md:px-0  px-6 "
         x-data="{
             ShowDescription: false , ShowUtilities: false}">
 
@@ -48,9 +48,11 @@
                 <img src="{{$media->getUrl()}}" alt=""
                      class="w-full h-full object-cover shadow-md">
             @endforeach
-            <div
-                class="absolute md:bottom-10 bottom-2  bg-white border rounded-xl border-black right-10 flex justify-center items-center gap-2 px-4 py-2 cursor-pointer"
-                {{--                TODO:: make it trigger a modal--}}
+            <button
+                x-data=""
+                x-on:click.prevent="$dispatch('open-modal', 'Show-all-photos')"
+                class="absolute md:bottom-10 bottom-2  bg-white border rounded-xl border-black right-10 flex justify-center items-center gap-2 px-4 py-2 cursor-pointer "
+
             >
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-grid-dots" width="16px"
                      height="16px" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -67,7 +69,8 @@
                     <path d="M19 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
                 </svg>
                 <p class="text-sm font-bold">{{__('Show all photos')}}</p>
-            </div>
+            </button>
+
         </div>
         <div class="group contents md:hidden"
              x-data="{ activeSlide: 1, slides: {{ count($auction->media) }} }">
@@ -248,5 +251,9 @@
 
     </script>
     @endscript
-
+    <x-modal name="Show-all-photos" focusable >
+        <div class="flex justify-center items-center gap-2 p-6">
+            <x-splade :auction="$auction"/>
+        </div>
+    </x-modal>
 </div>
