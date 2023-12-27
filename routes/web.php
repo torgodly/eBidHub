@@ -35,6 +35,9 @@ Route::middleware('auth')->group(function () {
     //show
     Route::get('/auctions/{auction}', [App\Http\Controllers\AuctionController::class, 'show'])->name('auctions.show');
 
+    //becom a seller
+    Route::post('/become-seller', [App\Http\Controllers\SellerController::class, 'create'])->name('sellers.create');
+
 });
 
 require __DIR__.'/auth.php';

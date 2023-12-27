@@ -23,7 +23,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'balance'
+        'balance',
+        'type'
     ];
     /**
      * The attributes that should be hidden for serialization.
@@ -83,5 +84,12 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    //change type to seller
+    public function becomeSeller()
+    {
+        $this->type = 'seller';
+        $this->save();
     }
 }

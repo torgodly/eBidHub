@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
                 $auction->addMediaFromUrl('https://picsum.photos/1024/683')->toMediaCollection('Auctions');
             }
         });
-////        Bid::factory(50)->create();
+        Bid::factory(50)->create();
         \App\Models\Comment::factory(50)->create();
         Category::factory(100)->create();
 
