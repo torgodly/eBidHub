@@ -42,6 +42,7 @@ class AuctionResource extends Resource
                         ->schema([
                             Select::make('categories')
                                 ->multiple()
+                                ->preload()
                                 ->relationship('categories', 'name'),
                             TextInput::make('title')
                                 ->required()
