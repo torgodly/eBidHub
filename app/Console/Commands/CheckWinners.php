@@ -43,6 +43,9 @@ class CheckWinners extends Command
             //set the winner
             $auction->winner_id = $highestBid->user_id;
             $auction->save();
+
+            //take the money from the winner
+            $highestBid->user->withdraw($highestBid->amount);
             //notify the winner
             event(new AuctionWinner($highestBid->user_id, $auction->id));
 

@@ -24,7 +24,7 @@
                     required/>
                 <x-input-error :messages="$errors->get('bid')" class="mt-2"/>
                 <x-primary-button
-                    :disabled="$auction->has_winner"
+                    :disabled="$auction->has_winner || $auction->status === 'closed'"
                     class="w-full flex justify-center mt-4 h-12 capitalize !text-base !font-bold"
                     wire:click="Bid" wire:target="Bid" wire:loading.attr="disabled">
                     <x-loading-indicator name="Bid"/>

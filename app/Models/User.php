@@ -92,4 +92,12 @@ class User extends Authenticatable
         $this->type = 'seller';
         $this->save();
     }
+
+
+    //withdraw
+    public function withdraw($amount)
+    {
+        $this->balance -= $amount;
+        $this->save();
+    }
 }

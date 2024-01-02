@@ -113,7 +113,7 @@ class Auction extends Model implements HasMedia
     public function placeBid($amount)
     {
         //check if user has enough money
-        if (auth()->user()->balance < $amount) {
+        if (auth()->user()->balance < $amount + $this->end_price) {
             throw new \Exception('You do not have enough money to place this bid');
         }
 
@@ -122,10 +122,6 @@ class Auction extends Model implements HasMedia
             $this->bids()->create([
                 'user_id' => auth()->id(),
                 'amount' => $amount + $this->end_price,
-            ]);
-            //deduct money from user
-            auth()->user()->update([
-                'balance' => auth()->user()->balance - $amount,
             ]);
             event(new BidPlaced('hello world'));
         } //if auction is closed
