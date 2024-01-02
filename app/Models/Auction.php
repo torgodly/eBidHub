@@ -76,6 +76,13 @@ class Auction extends Model implements HasMedia
         return $this->winnerBid->user;
     }
 
+    //winner
+    public function winner()
+    {
+        return $this->belongsTo(User::class, 'winner_id');
+    }
+
+
     //user
 
     public function getEndPriceAttribute()
@@ -134,9 +141,9 @@ class Auction extends Model implements HasMedia
 
     //buyNow
 
-    public function user()
+    public function creator()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 //hasended attribute

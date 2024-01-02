@@ -100,4 +100,20 @@ class User extends Authenticatable
         $this->balance -= $amount;
         $this->save();
     }
+
+    public function scopeWinnersInAuthUserAuctions($query)
+    {
+        $userId = auth()->id();
+
+        return $query->whereHas('wonAuctions', function ($subQuery) use ($userId) {
+            $subQuery->whereHas('creator', function ($subSubQuery) use ($userId) {
+                $subSubQuery->where('user_id', $userId);
+            });
+        });
+    }
+
+    public function wonAuctions()
+    {
+        return $this->hasMany(Auction::class, 'winner_id');
+    }
 }
