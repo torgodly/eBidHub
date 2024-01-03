@@ -68,13 +68,19 @@ class AuctionResource extends Resource
                             TextInput::make('price')
                                 ->required()
                                 ->numeric()
+                                ->disabled(fn ($record) => $record->bids()->exists())
+                                ->dehydrated()
                                 ->prefix('LYD'),
                             TextInput::make('minimum_bid')
                                 ->required()
                                 ->numeric()
+                                ->disabled(fn ($record) => $record->bids()->exists())
+                                ->dehydrated()
                                 ->prefix('LYD'),
                             DateTimePicker::make('end')
                                 ->prefix('Ends')
+                                ->disabled(fn ($record) => $record->bids()->exists())
+                                ->dehydrated()
                                 ->required(),
                             Toggle::make('buy_now')->label('Item is available for buy now')->inline(false),
 
@@ -114,11 +120,26 @@ class AuctionResource extends Resource
                     ->searchable()
                     ->limit(20),
                 TextColumn::make('price')
-                    ->money('LYD')
+                    ->numeric(
+                        decimalPlaces: 0,
+                        decimalSeparator: '.',
+                        thousandsSeparator: ',',
+                    )->prefix('LYD ')
+                    ->sortable(),
+                TextColumn::make('end_price')
+                    ->numeric(
+                        decimalPlaces: 0,
+                        decimalSeparator: '.',
+                        thousandsSeparator: ',',
+                    )->prefix('LYD ')
                     ->sortable(),
 
                 TextColumn::make('minimum_bid')
-                    ->money('LYD')
+                    ->numeric(
+                        decimalPlaces: 0,
+                        decimalSeparator: '.',
+                        thousandsSeparator: ',',
+                    )->prefix('LYD ')
                     ->sortable(),
 
                 TextColumn::make('end')
@@ -141,6 +162,7 @@ class AuctionResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()->hidden(fn ($record) => $record->bids()->exists()),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -181,14 +203,9 @@ class AuctionResource extends Resource
                                 ->schema([
                                     TextEntry::make('title'),
                                     TextEntry::make('price')->money('LYD'),
-
-                                    TextEntry::make('start')
-                                        ->dateTime('Y-m-d H:i:s')
-                                        ->formatStateUsing(fn(string $state): string => Carbon::parse($state)->diffForHumans()),
                                     TextEntry::make('end')
                                         ->dateTime('Y-m-d H:i:s')
                                         ->formatStateUsing(fn(string $state): string => Carbon::parse($state)->diffForHumans()),
-
                                     TextEntry::make('status')
                                         ->badge()
                                         ->color(fn(string $state): string => match ($state) {

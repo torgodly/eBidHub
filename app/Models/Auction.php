@@ -57,7 +57,6 @@ class Auction extends Model implements HasMedia
         return $this->bids()->count();
     }
 
-    //bids count attribute
 
     public function bids()
     {
@@ -70,13 +69,7 @@ class Auction extends Model implements HasMedia
         return $this->bids()->latest()->first();
     }
 
-    //winner is the user who made the highest bid before the auction ends
-    public function getWinnerAttribute()
-    {
-        return $this->winnerBid->user;
-    }
 
-    //winner
     public function winner()
     {
         return $this->belongsTo(User::class, 'winner_id');
@@ -130,7 +123,7 @@ class Auction extends Model implements HasMedia
                 'user_id' => auth()->id(),
                 'amount' => $amount + $this->end_price,
             ]);
-            event(new BidPlaced('hello world'));
+            event(new BidPlaced('A new bid has been placed'));
         } //if auction is closed
         else {
             throw new \Exception('This auction is closed');
@@ -146,12 +139,10 @@ class Auction extends Model implements HasMedia
         return $this->belongsTo(User::class, 'user_id');
     }
 
-//hasended attribute
-
     public function buyNow()
     {
         //check if user has enough money
-        if (auth()->user()->balance < $this->price) {
+        if (auth()->user()->balance < $this->end_price) {
             throw new \Exception('You do not have enough money to buy this item');
         }
 
@@ -196,4 +187,6 @@ class Auction extends Model implements HasMedia
     {
         return $this->winner_id !== null;
     }
+
+    //scope has winner
 }

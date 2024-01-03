@@ -2,10 +2,11 @@
 
 namespace App\Filament\Seller\Pages;
 
-use App\Models\User;
+use App\Models\Auction;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Page;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -23,17 +24,21 @@ class MyCustomers extends Page implements HasForms, HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(User::query()->winnersInAuthUserAuctions())
+            ->query(Auction::with('winner'))
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('email'),
+                TextColumn::make('winner.name'),
+                TextColumn::make('winner.email')->label('Winner Email'),
                 TextColumn::make('phone_number'),
+                TextColumn::make('title'),
+
             ])
             ->filters([
                 // ...
             ])
             ->actions([
-                // ...
+                Action::make('view')
+                    ->url(fn(Auction $record): string => route('auctions.show', $record))
+                    ->openUrlInNewTab()
             ])
             ->bulkActions([
                 // ...
