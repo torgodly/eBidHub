@@ -24,6 +24,7 @@ return new class extends Migration {
             $table->foreignId('winner_id')->nullable();
             $table->boolean('buy_now')->default(false);
             $table->string('winner_code')->nullable();
+            $table->boolean('approved')->default(false);
             $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@ class AuctionController extends Controller
     public function index()
     {
         return view('auctions.index', [
-            'auctions' => Auction::all(),
+            'auctions' => Auction::where('approved', true)->get(),
         ]);
     }
 
@@ -38,6 +38,9 @@ class AuctionController extends Controller
      */
     public function show(Auction $auction)
     {
+        if (!$auction->approved) {
+            abort(404);
+        }
         return view('auctions.show', [
             'auction' => $auction,
         ]);

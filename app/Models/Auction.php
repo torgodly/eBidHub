@@ -27,7 +27,8 @@ class Auction extends Model implements HasMedia
         'minimum_bid',
         'winner_id',
         'buy_now',
-        'winner_code'
+        'winner_code',
+        'approved',
     ];
 
 
@@ -189,5 +190,11 @@ class Auction extends Model implements HasMedia
         return $this->winner_id !== null;
     }
 
-    //scope has winner
+    //approved auction by admin
+    public function approve()
+    {
+        $this->update([
+            'approved' => true,
+        ]);
+    }
 }
