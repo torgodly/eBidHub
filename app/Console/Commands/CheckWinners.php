@@ -26,33 +26,48 @@ class CheckWinners extends Command
      */
     public function handle()
     {
+        // Log information about the task
         $this->info('Checking winners...');
-        //check all the auctions that have ended an
-        $auctions = \App\Models\Auction::where('end', '<', now())->whereNull('winner_id')->get();
+
+        // Get all auctions that have ended and don't have a winner yet
+        $auctions = Auction::where('end', '<', now())->whereNull('winner_id')->get();
+
+        // Loop through each auction
         foreach ($auctions as $auction) {
+            // Log information about the current auction
             $this->info('Checking auction: ' . $auction->title);
-            //get all the bids for this auction
+
+            // Get all the bids for this auction, ordered by amount in descending order
             $bids = $auction->bids()->orderBy('amount', 'desc')->get();
-            //if there are no bids, skip this auction
+
+            // If there are no bids, skip this auction
             if ($bids->count() === 0) {
                 $this->info('No bids for this auction');
                 continue;
             }
-            //get the highest bid
+
+            // Get the highest bid
             $highestBid = $bids->first();
-            //set the winner
+
+            // Set the winner and generate a random winner code
             $auction->winner_id = $highestBid->user_id;
+            $auction->winner_code = Str::random(10);
             $auction->save();
 
-            //take the money from the winner
+            // Withdraw the winning amount from the winner's account
             $highestBid->user->withdraw($highestBid->amount);
-            //notify the winner
+
+            // Notify the winner through an event
             event(new AuctionWinner($highestBid->user_id, $auction->id));
 
+            // Notify the winner via email
+            $highestBid->user->notify(new NotifyAuctionWinner($auction));
+
+            // Log information about the winner
             $this->info('Winner is: ' . $highestBid->user->name);
         }
+
+        // Log completion of the task
         $this->info('Done!');
-
-
     }
 }

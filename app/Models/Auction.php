@@ -26,7 +26,8 @@ class Auction extends Model implements HasMedia
         'user_id',
         'minimum_bid',
         'winner_id',
-        'buy_now'
+        'buy_now',
+        'winner_code'
     ];
 
 

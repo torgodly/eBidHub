@@ -23,6 +23,7 @@ return new class extends Migration {
             $table->foreignId('user_id');
             $table->foreignId('winner_id')->nullable();
             $table->boolean('buy_now')->default(false);
+            $table->string('winner_code')->nullable();
             $table->timestamps();
         });
     }

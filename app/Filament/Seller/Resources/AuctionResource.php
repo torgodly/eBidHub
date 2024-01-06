@@ -68,18 +68,18 @@ class AuctionResource extends Resource
                             TextInput::make('price')
                                 ->required()
                                 ->numeric()
-                                ->disabled(fn ($record) => $record->bids()->exists())
+                                ->disabled(fn ($record) => $record?->bids()?->exists())
                                 ->dehydrated()
                                 ->prefix('LYD'),
                             TextInput::make('minimum_bid')
                                 ->required()
                                 ->numeric()
-                                ->disabled(fn ($record) => $record->bids()->exists())
+                                ->disabled(fn ($record) => $record?->bids()?->exists())
                                 ->dehydrated()
                                 ->prefix('LYD'),
                             DateTimePicker::make('end')
                                 ->prefix('Ends')
-                                ->disabled(fn ($record) => $record->bids()->exists())
+                                ->disabled(fn ($record) => $record?->bids()?->exists())
                                 ->dehydrated()
                                 ->required(),
                             Toggle::make('buy_now')->label('Item is available for buy now')->inline(false),
@@ -162,7 +162,7 @@ class AuctionResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make()->hidden(fn ($record) => $record->bids()->exists()),
+                Tables\Actions\DeleteAction::make()->hidden(fn ($record) => $record->bids()?->exists()),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

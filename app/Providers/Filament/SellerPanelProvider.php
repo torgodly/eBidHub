@@ -41,7 +41,7 @@ class SellerPanelProvider extends PanelProvider
             ->widgets([
 //                Widgets\AccountWidget::class,
 //                Widgets\FilamentInfoWidget::class
-                        StatsOverview::class,
+                StatsOverview::class,
             ])->plugins([
 
             ])
