@@ -3,7 +3,10 @@
 namespace App\Console\Commands;
 
 use App\Events\AuctionWinner;
+use App\Models\Auction;
+use App\Notifications\NotifyAuctionWinner;
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 class CheckWinners extends Command
 {

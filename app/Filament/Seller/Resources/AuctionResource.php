@@ -24,6 +24,7 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -31,26 +32,40 @@ class AuctionResource extends Resource
 {
     protected static ?string $model = Auction::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'tabler-building-store';
+
+    public static function getModelLabel(): string
+    {
+        return __('Auction');
+    }
+
+        public static function getPluralLabel(): ?string
+    {
+        return __('Auctions');
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Wizard::make([
-                    Wizard\Step::make('General Information')
+                    Wizard\Step::make('General Information')->translateLabel()
                         ->schema([
                             Select::make('categories')
+                                ->translateLabel()
                                 ->multiple()
                                 ->preload()
                                 ->relationship('categories', 'name'),
                             TextInput::make('title')
+                                ->translateLabel()
                                 ->required()
                                 ->maxLength(255),
                             Textarea::make('about')
+                                ->translateLabel()
                                 ->required()
                                 ->maxLength(255),
                             MarkdownEditor::make('description')
+                                ->translateLabel()
                                 ->toolbarButtons([
                                     'blockquote',
                                     'bold',
@@ -63,36 +78,42 @@ class AuctionResource extends Resource
                                     'undo',
                                 ])->required()
                         ]),
-                    Wizard\Step::make(__('Price & Date'))
+                    Wizard\Step::make(__('Price & Date'))->translateLabel()
                         ->schema([
                             TextInput::make('price')
+                                ->translateLabel()
                                 ->required()
                                 ->numeric()
-                                ->disabled(fn ($record) => $record?->bids()?->exists())
+                                ->disabled(fn($record) => $record?->bids()?->exists())
                                 ->dehydrated()
                                 ->prefix('LYD'),
                             TextInput::make('minimum_bid')
+                                ->translateLabel()
                                 ->required()
                                 ->numeric()
-                                ->disabled(fn ($record) => $record?->bids()?->exists())
+                                ->disabled(fn($record) => $record?->bids()?->exists())
                                 ->dehydrated()
                                 ->prefix('LYD'),
                             DateTimePicker::make('end')
+                                ->translateLabel()
                                 ->prefix('Ends')
-                                ->disabled(fn ($record) => $record?->bids()?->exists())
+                                ->disabled(fn($record) => $record?->bids()?->exists())
                                 ->dehydrated()
                                 ->required(),
-                            Toggle::make('buy_now')->label('Item is available for buy now')->inline(false),
+                            Toggle::make('buy_now')->label('Item is available for buy now')
+                                ->translateLabel()
+                                ->inline(false),
 
                         ]),
-                    Wizard\Step::make(__('Product Information'))
+                    Wizard\Step::make(__('Product Information'))->translateLabel()
                         ->schema([
                             KeyValue::make(__('info'))
+                                ->translateLabel()
                                 ->keyLabel(__('Info name'))
                                 ->valueLabel(__('Info text'))
                                 ->addActionLabel(__('Add New Info'))
                         ]),
-                    Wizard\Step::make('images')
+                    Wizard\Step::make('Images')->translateLabel()
                         ->schema([
                             SpatieMediaLibraryFileUpload::make('media')
                                 ->collection('Auctions')
@@ -110,31 +131,23 @@ class AuctionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\SpatieMediaLibraryImageColumn::make('Auction-image')
-                    ->label('Image')
+                Tables\Columns\SpatieMediaLibraryImageColumn::make('Auction-image')->translateLabel()
+                    ->label('Images')
                     ->collection('Auctions')
                     ->circular()
                     ->stacked()
                     ->limit(3),
-                TextColumn::make('title')
+                TextColumn::make('title')->translateLabel()
                     ->searchable()
                     ->limit(20),
-                TextColumn::make('price')
+                TextColumn::make('price')->translateLabel()
                     ->numeric(
                         decimalPlaces: 0,
                         decimalSeparator: '.',
                         thousandsSeparator: ',',
                     )->prefix('LYD ')
                     ->sortable(),
-                TextColumn::make('end_price')
-                    ->numeric(
-                        decimalPlaces: 0,
-                        decimalSeparator: '.',
-                        thousandsSeparator: ',',
-                    )->prefix('LYD ')
-                    ->sortable(),
-
-                TextColumn::make('minimum_bid')
+                TextColumn::make('end_price')->translateLabel()
                     ->numeric(
                         decimalPlaces: 0,
                         decimalSeparator: '.',
@@ -142,27 +155,37 @@ class AuctionResource extends Resource
                     )->prefix('LYD ')
                     ->sortable(),
 
-                TextColumn::make('end')
+                TextColumn::make('minimum_bid')->translateLabel()
+                    ->numeric(
+                        decimalPlaces: 0,
+                        decimalSeparator: '.',
+                        thousandsSeparator: ',',
+                    )->prefix('LYD ')
+                    ->sortable(),
+
+                TextColumn::make('end')->translateLabel()
                     ->dateTime('Y-m-d H:i:s')
                     ->description(fn(Auction $record): string => Carbon::parse($record->end)->diffForHumans())
                     ->sortable(),
 
-                TextColumn::make('status')
+                TextColumn::make('status')->translateLabel()
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
                         'active' => 'success',
                         'closed' => 'danger',
                         'ending soon' => 'warning',
                     }),
-                TextColumn::make('bids_count')
+                TextColumn::make('bids_count')->translateLabel()
             ])
             ->filters([
 
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make()->hidden(fn ($record) => $record->bids()?->exists()),
+                ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make()->hidden(fn($record) => $record->bids()?->exists()),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

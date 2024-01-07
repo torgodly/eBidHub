@@ -21,22 +21,32 @@ class MyCustomers extends Page implements HasForms, HasTable
 
     protected static string $view = 'filament.seller.pages.my-customers';
 
+    public static function getNavigationLabel(): string
+    {
+        return __(parent::getNavigationLabel());
+    }
+
+    public function getTitle(): string
+    {
+        return __(parent::getTitle());
+    }
+
     public function table(Table $table): Table
     {
         return $table
             ->query(Auction::with('winner'))
             ->columns([
-                TextColumn::make('winner.name'),
-                TextColumn::make('winner.email')->label('Winner Email'),
-                TextColumn::make('phone_number'),
-                TextColumn::make('title'),
+                TextColumn::make('winner.name')->label('Winner Name')->translateLabel(),
+                TextColumn::make('winner.email')->label('Winner Email')->translateLabel(),
+                TextColumn::make('phone_number')->translateLabel(),
+                TextColumn::make('title')->translateLabel(),
 
             ])
             ->filters([
                 // ...
             ])
             ->actions([
-                Action::make('view')
+                Action::make('View')->translateLabel()
                     ->url(fn(Auction $record): string => route('auctions.show', $record))
                     ->openUrlInNewTab()
             ])
