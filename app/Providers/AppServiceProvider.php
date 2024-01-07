@@ -21,13 +21,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
-            $switch
-                ->locales(['ar','en'])->visible(true,true)->outsidePanelRoutes([
-                    'admin',
-                    'seller',
-                    // Additional custom routes where the switcher should be visible outside panels
-                ])->outsidePanelPlacement(Placement::BottomRight); // also accepts a closure
-        });
+        //
     }
 }

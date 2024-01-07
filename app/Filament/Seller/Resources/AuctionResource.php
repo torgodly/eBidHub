@@ -33,16 +33,25 @@ class AuctionResource extends Resource
     protected static ?string $model = Auction::class;
 
     protected static ?string $navigationIcon = 'tabler-building-store';
+    protected static ?string $navigationGroup = 'Auctions';
+
 
     public static function getModelLabel(): string
     {
         return __('Auction');
     }
 
-        public static function getPluralLabel(): ?string
+    public static function getPluralLabel(): ?string
     {
         return __('Auctions');
     }
+
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __(parent::getNavigationGroup());
+    }
+
 
     public static function form(Form $form): Form
     {

@@ -20,6 +20,7 @@ class MyCustomers extends Page implements HasForms, HasTable
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
     protected static string $view = 'filament.seller.pages.my-customers';
+    protected static ?string $navigationGroup = 'Auctions';
 
     public static function getNavigationLabel(): string
     {
@@ -31,6 +32,14 @@ class MyCustomers extends Page implements HasForms, HasTable
         return __(parent::getTitle());
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __(parent::getNavigationGroup());
+    }
+
+
+
+
     public function table(Table $table): Table
     {
         return $table
@@ -39,6 +48,7 @@ class MyCustomers extends Page implements HasForms, HasTable
                 TextColumn::make('winner.name')->label('Winner Name')->translateLabel(),
                 TextColumn::make('winner.email')->label('Winner Email')->translateLabel(),
                 TextColumn::make('phone_number')->translateLabel(),
+                TextColumn::make('end_price')->money('LYD')->translateLabel(),
                 TextColumn::make('title')->translateLabel(),
 
             ])
