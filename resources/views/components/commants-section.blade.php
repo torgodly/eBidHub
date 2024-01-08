@@ -178,7 +178,7 @@
                             <div class="relative">
                                 <img
                                     class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ring-8 ring-white"
-                                    src="{{$comment->user->filament_avatar_url}}}}"
+                                    src="{{asset($comment->user->getFilamentAvatarUrl())}}"
                                     alt="">
 
                                 <span class="absolute -bottom-0.5 -right-1 rounded-tl bg-white px-0.5 py-px">

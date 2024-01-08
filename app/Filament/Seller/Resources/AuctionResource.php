@@ -108,7 +108,7 @@ class AuctionResource extends Resource
                                 ->prefix('Ends')
                                 ->disabled(fn($record) => $record?->bids()?->exists())
                                 ->dehydrated()
-                                ->required(),
+                                ->required()->native(false),
                             Toggle::make('buy_now')->label('Item is available for buy now')
                                 ->translateLabel()
                                 ->inline(false),
@@ -116,11 +116,11 @@ class AuctionResource extends Resource
                         ]),
                     Wizard\Step::make(__('Product Information'))->translateLabel()
                         ->schema([
-                            KeyValue::make(__('info'))
+                            KeyValue::make('info')
                                 ->translateLabel()
                                 ->keyLabel(__('Info name'))
                                 ->valueLabel(__('Info text'))
-                                ->addActionLabel(__('Add New Info'))
+                                ->addActionLabel(__('Add New Info'))->live()
                         ]),
                     Wizard\Step::make('Images')->translateLabel()
                         ->schema([
