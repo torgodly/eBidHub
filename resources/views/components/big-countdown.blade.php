@@ -76,9 +76,10 @@
                 </svg>
                 <div class="text-sm flex gap-3">
                     <template x-if="displayMode === 'days'">
-                        <span class="text-gray-300 text-lg">Time Left</span>
-
-                        <span class="text-lg text-white" x-text="timer.days + ' Days'"></span>
+                       <div>
+                           <span class="text-gray-300 text-lg">Time Left</span>
+                           <span class="text-lg text-white" x-text="timer.days + ' Days'"></span>
+                       </div>
                     </template>
                     <template x-if="displayMode === 'time'">
                         <div class="text-lg text-white">
