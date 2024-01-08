@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Models\Auction;
 use Carbon\Carbon;
+use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\BulkAction;
@@ -21,6 +22,7 @@ class ApproveAuctions extends Page implements HasTable
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
 
     protected static string $view = 'filament.pages.approve-auctions';
+
     public static function getNavigationLabel(): string
     {
         return __(parent::getNavigationLabel());
@@ -30,6 +32,7 @@ class ApproveAuctions extends Page implements HasTable
     {
         return __(parent::getTitle());
     }
+
     public function table(Table $table): Table
     {
         return $table
@@ -70,9 +73,15 @@ class ApproveAuctions extends Page implements HasTable
                 // ...
             ])
             ->actions([
-                Action::make('Approve')
+                Action::make(__('Approve'))
                     ->requiresConfirmation()
-                    ->action(fn(Auction $record) => $record->approve()),
+                    ->action(function (Auction $record) {
+                        $record->approve();
+                        Notification::make()
+                            ->title(__("Auction Approved Successfully"))
+                            ->success()
+                            ->send();
+                    })->sendSuccessNotification(),
             ])
             ->bulkActions([
                 BulkActionGroup::make([

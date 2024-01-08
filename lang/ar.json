@@ -36,5 +36,12 @@
     "Date and time sent": "تاريخ ووقت الإرسال",
     "Users": "المستخدمين",
     "users": "المستخدمين",
-    "user": "المستخدم"
+    "user": "المستخدم",
+    "Balance": "الرصيد",
+    "Add Balance": "إضافة رصيد",
+    "Add balance to user account": "إضافة رصيد إلى حساب المستخدم",
+    "Email copied to clipboard.": "تم نسخ البريد الإلكتروني إلى الحافظة.",
+    "Balance Added Successfully": "تمت إضافة الرصيد بنجاح",
+    "Auction Approved Successfully": "تمت الموافقة على المزاد بنجاح",
+    "Approve": "الموافقة"
 }
