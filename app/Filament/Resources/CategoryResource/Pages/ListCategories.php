@@ -13,7 +13,13 @@ class ListCategories extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->modalWidth('md')
+                ->modalHeading(__('Add Category'))
+                ->modalDescription(__('Add a new category'))
+                ->modalSubmitActionLabel(__('Add Category'))
+                ->modalIcon('heroicon-o-tag')
+                ->requiresConfirmation(),
         ];
     }
 }

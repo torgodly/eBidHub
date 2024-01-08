@@ -17,14 +17,21 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
-    public static function form(Form $form): Form
+
+    public static function getModelLabel(): string
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255)->columnSpanFull()->translateLabel(),
-            ]);
+        return __(parent::getModelLabel());
+    }
+
+    public static function getPluralLabel(): ?string
+    {
+        return __('Categories');
+    }
+
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __(parent::getNavigationGroup());
     }
 
     public static function table(Table $table): Table
@@ -45,6 +52,7 @@ class CategoryResource extends Resource
                     ->modalSubmitActionLabel(__('Edit Category'))
                     ->modalIcon('heroicon-o-tag')
                     ->requiresConfirmation()
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -53,12 +61,7 @@ class CategoryResource extends Resource
             ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make()
-                    ->modalWidth('md')
-                    ->modalHeading(__('Add Category'))
-                    ->modalDescription(__('Add a new category'))
-                    ->modalSubmitActionLabel(__('Add Category'))
-                    ->modalIcon('heroicon-o-tag')
-                    ->requiresConfirmation(),
+
             ]);
     }
 
@@ -76,5 +79,28 @@ class CategoryResource extends Resource
 //            'create' => Pages\CreateCategory::route('/create'),
 //            'edit' => Pages\EditCategory::route('/{record}/edit'),
         ];
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Tables\Actions\CreateAction::make()
+                ->modalWidth('md')
+                ->modalHeading(__('Add Category'))
+                ->modalDescription(__('Add a new category'))
+                ->modalSubmitActionLabel(__('Add Category'))
+                ->modalIcon('heroicon-o-tag')
+                ->requiresConfirmation(),
+        ];
+    }
+
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(255)->columnSpanFull()->translateLabel(),
+            ]);
     }
 }

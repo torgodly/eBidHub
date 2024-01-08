@@ -44,5 +44,7 @@
     "Balance Added Successfully": "تمت إضافة الرصيد بنجاح",
     "Auction Approved Successfully": "تمت الموافقة على المزاد بنجاح",
     "Approve": "الموافقة",
-    "Name": "الاسم"
+    "Name": "الاسم",
+    "Add Category": "إضافة فئة",
+    "category": "فئة"
 }
