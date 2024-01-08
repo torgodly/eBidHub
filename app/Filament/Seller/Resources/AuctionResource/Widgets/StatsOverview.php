@@ -99,7 +99,7 @@ class StatsOverview extends BaseWidget
                 ->chart([4.0, 4.5, 4.2, 4.8, 5.0])
                 ->color('info'),
 
-            Stat::make('Top Bidders', $topBidders->user->name . ' - $' . Number::format($topBidders->total_amount))
+            Stat::make('Top Bidders', $topBidders->user?->name??'-' . ' - $' . Number::format($topBidders->total_amount??0))
                 ->description('Top bidders and total amounts')
                 ->descriptionIcon('heroicon-m-trophy')
                 ->color('warning')->extraAttributes(['style' => 'width: max-content;']),

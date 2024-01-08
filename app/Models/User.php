@@ -3,16 +3,19 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Filament\Facades\Filament;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Octopy\Impersonate\Concerns\HasImpersonation;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasAvatar, FilamentUser
 {
-    use HasApiTokens, HasFactory, Notifiable;
-    use HasImpersonation;
 
     /**
      * The attributes that are mass assignable.
@@ -26,7 +29,9 @@ class User extends Authenticatable
         'balance',
         'type',
         'phone_number',
+        'avatar_url'
     ];
+    // ...
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -36,6 +41,10 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    use HasApiTokens, HasFactory, Notifiable;
+    use HasImpersonation;
+
     /**
      * The attributes that should be cast.
      *
@@ -45,6 +54,24 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        if (Filament::getCurrentPanel()->getId() === 'admin') {
+            return $this->type == 'admin';
+        }
+
+        if (Filament::getCurrentPanel()->getId() === 'seller') {
+            return $this->type == 'admin' || $this->type == 'seller';
+        }
+
+        return false;
+    }
+
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->avatar_url ? Storage::url($this->avatar_url) : null;
+    }
 
     /**
      * @return string
@@ -101,9 +128,6 @@ class User extends Authenticatable
         $this->balance -= $amount;
         $this->save();
     }
-
-
-
 
 
     public function wonAuctions()
