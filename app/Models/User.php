@@ -134,4 +134,16 @@ class User extends Authenticatable implements HasAvatar, FilamentUser
     {
         return $this->hasMany(Auction::class, 'winner_id');
     }
+
+    //is seller attribute
+    public function getIsSellerAttribute()
+    {
+        return $this->type == 'seller';
+    }
+
+    //is admin attribute
+    public function getIsAdminAttribute()
+    {
+        return $this->type == 'admin';
+    }
 }

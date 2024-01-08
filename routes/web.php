@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
 
 
     //auctions
-    Route::get('/auctions', [App\Http\Controllers\AuctionController::class, 'index'])->name('auctions.index');
+    Route::get('/', [App\Http\Controllers\AuctionController::class, 'index'])->name('auctions.index');
     //show
     Route::get('/auctions/{auction}', [App\Http\Controllers\AuctionController::class, 'show'])->name('auctions.show');
 
@@ -37,4 +37,8 @@ Route::middleware('auth')->group(function () {
 
 });
 
+//terms and conditions
+Route::get('/terms-and-conditions', function () {
+    return view('terms-and-conditions');
+})->name('terms-and-conditions')->middleware(['guest']);
 require __DIR__ . '/auth.php';

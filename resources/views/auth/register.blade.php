@@ -39,6 +39,14 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
+        <div class="block mt-4 ">
+            <label for="terms_and_conditions" class="inline-flex items-center">
+                <input id="terms_and_conditions" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="terms_and_conditions">
+                <a href="{{route('terms-and-conditions')}}" class="ms-2 text-sm text-blue-500 hover:underline">{{ __('I agree to the terms and conditions') }}</a>
+            </label>
+            <x-input-error :messages="$errors->get('terms_and_conditions')" class="mt-2" />
+        </div>
+
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                 {{ __('Already registered?') }}

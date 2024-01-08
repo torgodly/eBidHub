@@ -9,8 +9,8 @@
                 class="overflow-hidden rounded-lg pb-12 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600 bg-white">
                 <label for="comment" class="sr-only">Add your comment</label>
                 <input rows="2" name="comment" id="comment" wire:model="comment"
-                          class="block w-full resize-none border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                          placeholder="Add your comment..."></input>
+                       class="block w-full resize-none border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                       placeholder="Add your comment..."></input>
             </div>
 
             <div class="absolute inset-x-0 bottom-0 flex justify-between py-2 pl-3 pr-2">
@@ -178,7 +178,7 @@
                             <div class="relative">
                                 <img
                                     class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ring-8 ring-white"
-                                    src="https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+                                    src="{{$comment->user->filament_avatar_url}}}}"
                                     alt="">
 
                                 <span class="absolute -bottom-0.5 -right-1 rounded-tl bg-white px-0.5 py-px">
@@ -210,7 +210,7 @@
                             <div class="relative">
                                 <img
                                     class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ring-8 ring-white"
-                                    src="https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+                                    src="{{asset($comment->user->getFilamentAvatarUrl())}}"
                                     alt="">
 
                                 <span class="absolute -bottom-0.5 -right-1 rounded-tl bg-white px-0.5 py-px">
@@ -246,10 +246,10 @@
         @endforeach
 
     </ul>
-  <div class="flex justify-center items-center mb-5">
-      <x-secondary-button wire:click="loadMoreActivities" class="w-fit">
-          <x-loading-indicator name="loadMoreActivities" class="w-3 h-3"/>
-          {{__('Load more')}}
-      </x-secondary-button>
-  </div>
+    <div class="flex justify-center items-center mb-5">
+        <x-secondary-button wire:click="loadMoreActivities" class="w-fit">
+            <x-loading-indicator name="loadMoreActivities" class="w-3 h-3"/>
+            {{__('Load more')}}
+        </x-secondary-button>
+    </div>
 </div>
