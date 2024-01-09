@@ -22,7 +22,10 @@ class ApproveAuctions extends Page implements HasTable
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
 
     protected static string $view = 'filament.pages.approve-auctions';
-
+    public static function getNavigationBadge(): ?string
+    {
+        return Auction::query()->where('approved', false)->count();
+    }
     public static function getNavigationLabel(): string
     {
         return __(parent::getNavigationLabel());
