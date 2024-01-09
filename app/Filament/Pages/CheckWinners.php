@@ -21,6 +21,11 @@ class CheckWinners extends Page implements HasTable
     protected static ?string $navigationIcon = 'tabler-trophy';
 
     protected static string $view = 'filament.pages.check-winners';
+
+    public static function getNavigationBadge(): ?string
+    {
+        return Auction::query()->where('end', '<', now())->whereNull('winner_id')->count();
+    }
     public static function getNavigationLabel(): string
     {
         return __(parent::getNavigationLabel());
