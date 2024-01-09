@@ -132,7 +132,10 @@ class AuctionResource extends Resource
                                 ->hiddenLabel()
                                 ->imageEditor(),
                         ]),
-                ])->columnSpanFull(),
+                ])->columnSpanFull()->skippable(fn($record) => $record !== null)
+                //skipable on edit
+
+                ,
             ]);
     }
 

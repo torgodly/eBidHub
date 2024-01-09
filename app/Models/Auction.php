@@ -5,8 +5,10 @@ namespace App\Models;
 use App\Events\AuctionWinner;
 use App\Events\BidPlaced;
 use App\Events\MyEvent;
+use App\Notifications\NotifyAuctionWinner;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -196,5 +198,30 @@ class Auction extends Model implements HasMedia
         $this->update([
             'approved' => true,
         ]);
+    }
+
+    //checkwinner
+    public function checkWinners()
+    {
+        // Get all the bids for this auction, ordered by amount in descending order
+        $bids = $this->bids()->orderBy('amount', 'desc')->get();
+
+
+        // Get the highest bid
+        $highestBid = $bids->first();
+
+        // Set the winner and generate a random winner code
+        $this->winner_id = $highestBid->user_id;
+        $this->winner_code = Str::random(10);
+        $this->save();
+
+        // Withdraw the winning amount from the winner's account
+        $highestBid->user->withdraw($highestBid->amount);
+
+        // Notify the winner through an event
+        event(new AuctionWinner($highestBid->user_id, $this->id));
+
+        // Notify the winner via email
+        $highestBid->user->notify(new NotifyAuctionWinner($this));
     }
 }

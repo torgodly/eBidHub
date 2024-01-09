@@ -25,7 +25,7 @@
     "Winner Name": "اسم الفائز",
     "Winner Email": "بريد الفائز",
     "Phone number": "رقم الهاتف",
-    "View": "عرض",
+    "View": "عرض المزاد",
     "Approve Auctions": "الموافقة على المزادات",
     "Email log": "سجل البريد الإلكتروني",
     "Send again": "إرسال مرة أخرى",
@@ -46,5 +46,7 @@
     "Approve": "الموافقة",
     "Name": "الاسم",
     "Add Category": "إضافة فئة",
-    "category": "فئة"
+    "category": "فئة",
+    "Check Winners": "تحقق من الفائزين",
+    "Check winners": "تحقق من الفائزين"
 }
