@@ -1,4 +1,4 @@
-<div>
+<div wire:poll.keep-alive>
 
     <div
         class="max-w-7xl mx-auto  pt-10 relative md:px-0  px-6 "
@@ -225,7 +225,7 @@
     <script>
 
         // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
+        // Pusher.logToConsole = true;
 
         var pusher = new Pusher('eb88c7fb8f20568f431b', {
             cluster: 'mt1'
