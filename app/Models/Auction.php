@@ -31,6 +31,7 @@ class Auction extends Model implements HasMedia
         'buy_now',
         'winner_code',
         'approved',
+        "buy_now_price"
     ];
 
 

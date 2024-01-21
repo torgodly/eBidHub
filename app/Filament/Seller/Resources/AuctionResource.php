@@ -16,6 +16,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Wizard;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Infolists\Components\Grid;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
@@ -107,12 +108,20 @@ class AuctionResource extends Resource
                                 ->translateLabel()
                                 ->prefix('Ends')
                                 ->disabled(fn($record) => $record?->bids()?->exists())
+                                ->minDate(now())
                                 ->dehydrated()
                                 ->required()->native(false),
                             Toggle::make('buy_now')->label('Item is available for buy now')
                                 ->translateLabel()
-                                ->inline(false),
-
+                                ->inline(false)->live(),
+                            TextInput::make('buy_now_price')
+                                ->translateLabel()
+                                ->required()
+                                ->numeric()
+                                ->disabled(fn($record) => $record?->bids()?->exists())
+                                ->dehydrated()
+                                ->prefix('LYD')
+                                ->visible(fn(Get $get): bool => $get('buy_now')),
                         ]),
                     Wizard\Step::make(__('Product Information'))->translateLabel()
                         ->schema([

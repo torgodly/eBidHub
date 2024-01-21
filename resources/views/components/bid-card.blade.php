@@ -24,19 +24,19 @@
                     required/>
                 <x-input-error :messages="$errors->get('bid')" class="mt-2"/>
                 <x-primary-button
-                    :disabled="$auction->has_winner || $auction->status === 'closed'"
+                    :disabled="$auction->has_winner || $auction->status === 'closed' || $auction->creator->id == Auth::user()->id"
                     class="w-full flex justify-center mt-4 h-12 capitalize !text-base !font-bold"
                     wire:click="Bid" wire:target="Bid" wire:loading.attr="disabled">
                     <x-loading-indicator name="Bid"/>
                     {{__('Bid')}}
                 </x-primary-button>
-                @if($auction->buy_now)
+                @if($auction->buy_now && $auction->end_price < $auction->buy_now_price)
                     <x-primary-button
-                        :disabled="$auction->has_winner"
-                        class="w-full flex justify-center  h-12 capitalize !text-base !font-bold"
+                        :disabled="$auction->has_winner || $auction->creator->id == Auth::user()->id"
+                        class="w-full flex justify-center  h-12 capitalize !text-base !font-bold" dir="auto"
                         wire:click="buyNow" wire:target="buyNow" wire:loading.attr="disabled">
                         <x-loading-indicator name="buyNow"/>
-                        {{__('Buy Now')}}
+                        {{__('Buy Now')}}    {{$auction->buy_now_price}}د.ل
                     </x-primary-button>
                 @endif
 
