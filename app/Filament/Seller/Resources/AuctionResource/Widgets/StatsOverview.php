@@ -59,48 +59,44 @@ class StatsOverview extends BaseWidget
             ->toArray();
 
         return [
-            Stat::make('Bids Count', $totalBidsCount)
-                ->description('Total bids across all auctions')
+            Stat::make(__('Bids Count'), $totalBidsCount)
+                ->description(__('Total bids across all auctions'))
                 ->descriptionIcon('heroicon-m-information-circle')
                 ->chart($bidsCountChartData)
                 ->color('primary'),
 
-            Stat::make('Activity Rate', $activityRate)
-                ->description('Overall activity rate')
+            Stat::make(__('Activity Rate'), $activityRate)
+                ->description(__('Overall activity rate'))
                 ->descriptionIcon('heroicon-m-information-circle')
                 ->chart([3.0, 3.5, 3.2, 3.8, 4.0])
                 ->color('info'),
 
-
-            Stat::make('Revenue Generated', '$' . Number::format($totalRevenueGenerated))
-                ->description('Total revenue generated')
+            Stat::make(__('Revenue Generated'), '$' . Number::format($totalRevenueGenerated))
+                ->description(__('Total revenue generated'))
                 ->descriptionIcon('heroicon-m-currency-dollar')
                 ->chart([1000, 2000, 3000, 4000, 5000])
                 ->color('success'),
 
-            Stat::make('Ending Soon Alerts', $endingSoonAlerts)
-                ->description('Auctions ending soon')
+            Stat::make(__('Ending Soon Alerts'), $endingSoonAlerts)
+                ->description(__('Auctions ending soon'))
                 ->descriptionIcon('heroicon-m-clock')
                 ->chart([5, 6, 7, 4, 5])
                 ->color('warning'),
 
-
-
-
-            Stat::make('User Participation', $userParticipation)
-                ->description('Total users participating')
+            Stat::make(__('User Participation'), $userParticipation)
+                ->description(__('Total users participating'))
                 ->descriptionIcon('heroicon-m-users')
                 ->chart([1200, 1300, 1400, 1500, 1600])
                 ->color('primary'),
 
-            Stat::make('Bidder Engagement', $bidderEngagement)
-                ->description('Average bids per day')
+            Stat::make(__('Bidder Engagement'), $bidderEngagement)
+                ->description(__('Average bids per day'))
                 ->descriptionIcon('heroicon-m-chart-bar')
                 ->chart([4.0, 4.5, 4.2, 4.8, 5.0])
                 ->color('info'),
 
-            Stat::make('Top Bidders', $topBidders->user?->name??'-' . ' - $' . Number::format($topBidders->total_amount??0))
-                ->description('Top bidders and total amounts')
+            Stat::make(__('Top Bidders'), $topBidders->user?->name ?? '-' . ' - $' . Number::format($topBidders->total_amount ?? 0))
+                ->description(__('Top bidders and total amounts'))
                 ->descriptionIcon('heroicon-m-trophy')
                 ->color('warning')->extraAttributes(['style' => 'width: max-content;']),
         ];

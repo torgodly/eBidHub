@@ -2,8 +2,7 @@
 
     <div
         class="max-w-7xl mx-auto  pt-10 relative md:px-0  px-6 "
-        x-data="{
-            ShowDescription: false , ShowUtilities: false}">
+       >
 
         <div class="flex justify-between items-center">
             <div class="flex justify-start  flex-col ">
@@ -221,37 +220,8 @@
     </style>
 
 
-    @script
-    <script>
 
-        // Enable pusher logging - don't include this in production
-        // Pusher.logToConsole = true;
-
-        var pusher = new Pusher('eb88c7fb8f20568f431b', {
-            cluster: 'mt1'
-        });
-
-        var channelBid = pusher.subscribe('Bid-channel');
-        channelBid.bind('Bid-event', function (data) {
-
-            $wire.dispatch('bid-placed');
-
-        });
-        var channelwinner = pusher.subscribe('AuctionWinner-channel');
-        channelwinner.bind('AuctionWinner-event', function (data) {
-
-            //if the auth user is the winner alert him
-            if (data.user_id == {{auth()->user()->id}}) {
-                initConfetti();
-                render();
-            }
-
-
-        });
-
-    </script>
-    @endscript
-    <x-modal name="Show-all-photos" focusable >
+    <x-modal name="Show-all-photos" focusable  wire:ignore>
         <div class="flex justify-center items-center gap-2 p-6">
             <x-splade :auction="$auction"/>
         </div>

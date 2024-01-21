@@ -77,13 +77,13 @@
                 <div class="text-sm flex gap-3">
                     <template x-if="displayMode === 'days'">
                        <div>
-                           <span class="text-gray-300 text-lg">Time Left</span>
-                           <span class="text-lg text-white" x-text="timer.days + ' Days'"></span>
+                           <span class="text-gray-300 text-lg">{{__('Time Left')}}</span>
+                           <span class="text-lg text-white" x-text="timer.days + ' ايام'"></span>
                        </div>
                     </template>
                     <template x-if="displayMode === 'time'">
                         <div class="text-lg text-white">
-                            <span class="text-gray-300 text-lg">Time Left</span>
+                            <span class="text-gray-300 text-lg">{{__('Time Left')}}</span>
                             <span x-text="timer.hours"></span>:
                             <span x-text="timer.minutes"></span>:
                             <span x-text="timer.seconds"></span>
@@ -91,7 +91,7 @@
                     </template>
                     <template x-if="displayMode === 'sold'">
                         <div class="text-lg text-white">
-                            <span x-text="'Sold For'"></span>
+                            <span x-text="{{__('Sold For')}}"></span>
                             <span class="text-white text-lg">د.ل.{{number_format($auction->end_price)}}</span>
                         </div>
                     </template>
@@ -109,7 +109,7 @@
                 <path d="M6 11l6 -6"/>
             </svg>
 {{--            <template x-if="displayMode !== 'sold'">--}}
-                <span class="text-gray-300 text-lg">High Bid</span>
+                <span class="text-gray-300 text-lg">{{__('High Bid')}}</span>
 {{--            </template>--}}
             <span class="text-white text-lg">د.ل.{{number_format($auction->end_price)}}</span>
         </div>
@@ -124,7 +124,7 @@
                 <path d="M11 4l-4 16"/>
                 <path d="M17 4l-4 16"/>
             </svg>
-            <span class="text-gray-300 text-lg">Bids</span>
+            <span class="text-gray-300 text-lg">{{__('Bids')}}</span>
             <span class="text-white text-lg">{{$auction->bids->count()}}</span>
         </div>
         <div class="md:flex gap-1 justify-center items-center hidden ">
@@ -137,7 +137,7 @@
                 <path d="M8 13h6"/>
                 <path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z"/>
             </svg>
-            <span class="text-gray-300 text-lg">Comments</span>
+            <span class="text-gray-300 text-lg">{{__('Comments')}}</span>
             <span class="text-white text-lg">{{$auction->comments->count()}}</span>
         </div>
     </div>

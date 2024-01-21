@@ -28,6 +28,12 @@ class ProfileController extends Controller
     {
         $request->user()->fill($request->validated());
 
+         if ($request->hasFile('avatar_url')) {
+            $avatar = $request->file('avatar_url');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+            $avatar->storeAs('public/', $filename);
+            $request->user()->avatar_url = $filename;
+         }
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
