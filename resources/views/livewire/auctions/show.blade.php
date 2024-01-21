@@ -2,7 +2,7 @@
 
     <div
         class="max-w-7xl mx-auto  pt-10 relative md:px-0  px-6 "
-       >
+    >
 
         <div class="flex justify-between items-center">
             <div class="flex justify-start  flex-col ">
@@ -14,33 +14,33 @@
                 </div>
 
             </div>
-{{--            <div class="md:flex justify-start items-center gap-2 hidden ">--}}
-{{--                <div class="flex gap-2">--}}
-{{--                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" stroke-width="1"--}}
-{{--                         stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">--}}
-{{--                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>--}}
-{{--                        <path--}}
-{{--                            d="M8 9h-1a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-8a2 2 0 0 0 -2 -2h-1"></path>--}}
-{{--                        <path d="M12 14v-11"></path>--}}
-{{--                        <path d="M9 6l3 -3l3 3"></path>--}}
-{{--                    </svg>--}}
-{{--                    <span class="text-sm font-bold underline">{{__('Share')}}</span>--}}
-{{--                </div>--}}
-{{--                <div class="flex gap-2">--}}
-{{--                    <div class="cursor-pointer">--}}
-{{--                        <svg xmlns="http://www.w3.org/2000/svg"--}}
-{{--                             class="w-5 h-5 "--}}
-{{--                             viewBox="0 0 24 24" stroke-width="1"--}}
-{{--                             stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">--}}
-{{--                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>--}}
-{{--                            <path--}}
-{{--                                d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>--}}
-{{--                        </svg>--}}
-{{--                    </div>--}}
+            {{--            <div class="md:flex justify-start items-center gap-2 hidden ">--}}
+            {{--                <div class="flex gap-2">--}}
+            {{--                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" stroke-width="1"--}}
+            {{--                         stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">--}}
+            {{--                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>--}}
+            {{--                        <path--}}
+            {{--                            d="M8 9h-1a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-8a2 2 0 0 0 -2 -2h-1"></path>--}}
+            {{--                        <path d="M12 14v-11"></path>--}}
+            {{--                        <path d="M9 6l3 -3l3 3"></path>--}}
+            {{--                    </svg>--}}
+            {{--                    <span class="text-sm font-bold underline">{{__('Share')}}</span>--}}
+            {{--                </div>--}}
+            {{--                <div class="flex gap-2">--}}
+            {{--                    <div class="cursor-pointer">--}}
+            {{--                        <svg xmlns="http://www.w3.org/2000/svg"--}}
+            {{--                             class="w-5 h-5 "--}}
+            {{--                             viewBox="0 0 24 24" stroke-width="1"--}}
+            {{--                             stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">--}}
+            {{--                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>--}}
+            {{--                            <path--}}
+            {{--                                d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>--}}
+            {{--                        </svg>--}}
+            {{--                    </div>--}}
 
-{{--                    <span class="text-sm font-bold underline">{{__('Likes')}}</span>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+            {{--                    <span class="text-sm font-bold underline">{{__('Likes')}}</span>--}}
+            {{--                </div>--}}
+            {{--            </div>--}}
         </div>
         <div class="mt-2 md:grid grid-rows-2 grid-cols-4  rounded-xl overflow-clip  gap-2 relative  hidden" id="images">
             @foreach($auction->media->take(5) as $media)
@@ -220,9 +220,8 @@
     </style>
 
 
-
-    <x-modal name="Show-all-photos" focusable  wire:ignore>
-        <div class="flex justify-center items-center gap-2 p-6">
+    <x-modal name="Show-all-photos" focusable wire:ignore>
+        <div class="flex justify-center items-center gap-2 p-6" wire:ignore>
             <x-splade :auction="$auction"/>
         </div>
     </x-modal>

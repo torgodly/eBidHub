@@ -8,7 +8,7 @@
     }
 </style>
 
-<div
+<div wire:ignore
     x-data="{
         init() {
             new Splide(this.$refs.splide, {
