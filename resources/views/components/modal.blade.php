@@ -52,6 +52,7 @@
     x-on:keydown.tab.prevent="$event.shiftKey || nextFocusable().focus()"
     x-on:keydown.shift.tab.prevent="prevFocusable().focus()"
     x-show="show"
+    style="display: none"
     :style="{'display': show ? 'flex' : 'none'}"
     class="fixed inset-0 overflow-y-auto px-4 py-6 sm:px-0 z-50 flex justify-center {{$position}}"
 >

@@ -147,7 +147,7 @@ class Auction extends Model implements HasMedia
     public function buyNow()
     {
         //check if user has enough money
-        if (auth()->user()->balance < $this->end_price) {
+        if (auth()->user()->balance < $this->buy_now_price) {
             throw new \Exception('You do not have enough money to buy this item');
         }
 
@@ -155,12 +155,12 @@ class Auction extends Model implements HasMedia
         if ($this->status !== 'closed') {
             $this->bids()->create([
                 'user_id' => auth()->id(),
-                'amount' => $this->end_price,
+                'amount' => $this->buy_now_price,
             ]);
 
             //deduct money from user
             auth()->user()->update([
-                'balance' => auth()->user()->balance - $this->end_price,
+                'balance' => auth()->user()->balance - $this->buy_now_price,
             ]);
             //update winner id0
             $this->update([
