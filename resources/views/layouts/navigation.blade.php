@@ -94,6 +94,21 @@
             <x-responsive-nav-link href="/" :active="request()->routeIs('/')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @if(Auth::user()->is_seller || Auth::user()->is_admin)
+                @if(Auth::user()->is_admin)
+                    <x-responsive-nav-link href="/admin">
+                        {{ __('Admin Dashboard') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link href="/seller">
+                        {{ __('Seller Dashboard') }}
+                    </x-responsive-nav-link>
+                @else
+                    <x-responsive-nav-link href="/seller">
+                        {{ __('Seller Dashboard') }}
+                    </x-responsive-nav-link>
+                @endif
+
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
