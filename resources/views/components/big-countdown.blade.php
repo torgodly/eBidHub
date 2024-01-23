@@ -82,11 +82,11 @@
                        </div>
                     </template>
                     <template x-if="displayMode === 'time'">
-                        <div class="text-lg text-white">
+                        <div class="text-lg text-white" >
                             <span class="text-gray-300 text-lg">{{__('Time Left')}}</span>
-                            <span x-text="timer.hours"></span>:
-                            <span x-text="timer.minutes"></span>:
                             <span x-text="timer.seconds"></span>
+                            <span x-text="timer.minutes"></span>:
+                            <span x-text="timer.hours"></span>:
                         </div>
                     </template>
                     <template x-if="displayMode === 'sold'">
