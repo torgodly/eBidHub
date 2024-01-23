@@ -39,7 +39,7 @@ class ApproveAuctions extends Page implements HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(Auction::query()->where('approved', false))
+            ->query(Auction::query()->where('approved', null))
             ->columns([
                 TextColumn::make('title')
                     ->searchable()
@@ -78,6 +78,7 @@ class ApproveAuctions extends Page implements HasTable
             ->actions([
                 Action::make(__('Approve'))
                     ->requiresConfirmation()
+                    ->icon('tabler-clipboard-check')
                     ->action(function (Auction $record) {
                         $record->approve();
                         Notification::make()
@@ -85,6 +86,19 @@ class ApproveAuctions extends Page implements HasTable
                             ->success()
                             ->send();
                     })->sendSuccessNotification(),
+                //decline
+                Action::make(__('Decline'))
+                    ->requiresConfirmation()
+                    ->icon('tabler-clipboard-x')
+                    ->color('danger') // Set the color of the action to 'danger'
+                    ->action(function (Auction $record) {
+                        $record->decline();
+                        Notification::make()
+                            ->title(__("Auction Declined Successfully"))
+                            ->success()
+                            ->send();
+                    })
+                    ->sendSuccessNotification()
             ])
             ->bulkActions([
                 BulkActionGroup::make([

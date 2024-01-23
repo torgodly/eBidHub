@@ -934,4 +934,9 @@
     "A new bid has been placed": "تم وضع مزايدة جديدة",
     "This auction is closed": "هذا المزاد مغلق",
     "You do not have enough money to place this bid": "ليس لديك ما يكفي من المال لوضع هذه المزايدة",
+    "Decline": "رفض",
+    "Auction Declined Successfully": "تم رفض المزاد بنجاح",
+    "Approve Status": "حالة الموافقة",
+    "Approved": "موافق عليه",
+    "Declined": "مرفوض"
 }

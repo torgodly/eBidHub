@@ -38,9 +38,10 @@ class AuctionController extends Controller
      */
     public function show(Auction $auction)
     {
-        if (!$auction->approved) {
+        if (!$auction->approved || $auction->approved == null) {
             abort(404);
         }
+
         return view('auctions.show', [
             'auction' => $auction,
         ]);

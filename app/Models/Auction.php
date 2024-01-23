@@ -201,6 +201,14 @@ class Auction extends Model implements HasMedia
         ]);
     }
 
+    //decline
+    public function decline()
+    {
+        $this->update([
+            'approved' => false,
+        ]);
+    }
+
     //checkwinner
     public function checkWinners()
     {
@@ -225,4 +233,7 @@ class Auction extends Model implements HasMedia
         // Notify the winner via email
         $highestBid->user->notify(new NotifyAuctionWinner($this));
     }
+
+    //decline
+
 }

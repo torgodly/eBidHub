@@ -122,6 +122,7 @@ class AuctionResource extends Resource
                                 ->dehydrated()
                                 ->prefix('LYD')
                                 ->visible(fn(Get $get): bool => $get('buy_now')),
+
                         ]),
                     Wizard\Step::make(__('Product Information'))->translateLabel()
                         ->schema([
@@ -196,7 +197,16 @@ class AuctionResource extends Resource
                         'closed' => 'danger',
                         'ending soon' => 'warning',
                     }),
+                TextColumn::make('approved')->label('Approve Status')
+                    ->translateLabel()
+                    ->formatStateUsing(fn(string $state): string => $state === '1' ? __('Approved') : __('Declined'))
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        '1' => 'success',
+                        '0' => 'danger',
+                    }),
                 TextColumn::make('bids_count')->translateLabel()
+
             ])
             ->filters([
 
