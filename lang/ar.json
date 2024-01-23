@@ -929,5 +929,9 @@
     "Average bids per day": "متوسط العروض في اليوم",
     "Top Bidders": "أعلى المزايدين",
     "Top bidders and total amounts": "أعلى المزايدين والمبالغ الإجمالية",
-    "avatar": "الصورة الشخصية"
+    "avatar": "الصورة الشخصية",
+    "You do not have enough money to buy this item": "ليس لديك ما يكفي من المال لشراء هذا العنصر",
+    "A new bid has been placed": "تم وضع مزايدة جديدة",
+    "This auction is closed": "هذا المزاد مغلق",
+    "You do not have enough money to place this bid": "ليس لديك ما يكفي من المال لوضع هذه المزايدة",
 }

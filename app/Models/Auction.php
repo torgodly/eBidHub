@@ -119,7 +119,7 @@ class Auction extends Model implements HasMedia
     {
         //check if user has enough money
         if (auth()->user()->balance < $amount + $this->end_price) {
-            throw new \Exception('You do not have enough money to place this bid');
+            throw new \Exception(__("You do not have enough money to place this bid"));
         }
 
         //if  there is time left
@@ -128,10 +128,10 @@ class Auction extends Model implements HasMedia
                 'user_id' => auth()->id(),
                 'amount' => $amount + $this->end_price,
             ]);
-            event(new BidPlaced('A new bid has been placed'));
+            event(new BidPlaced(__('A new bid has been placed')));
         } //if auction is closed
         else {
-            throw new \Exception('This auction is closed');
+            throw new \Exception(__('This auction is closed'));
         }
 
 
@@ -148,7 +148,7 @@ class Auction extends Model implements HasMedia
     {
         //check if user has enough money
         if (auth()->user()->balance < $this->buy_now_price) {
-            throw new \Exception('You do not have enough money to buy this item');
+            throw new \Exception(__('You do not have enough money to buy this item'));
         }
 
         //if  there is time left
@@ -170,7 +170,7 @@ class Auction extends Model implements HasMedia
 
         } //if auction is closed
         else {
-            throw new \Exception('This auction is closed');
+            throw new \Exception(__('This auction is closed'));
         }
     }
 
