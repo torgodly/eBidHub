@@ -83,13 +83,13 @@ class StatsOverview extends BaseWidget
                 ->chart([5, 6, 7, 4, 5])
                 ->color('warning'),
 
-            Stat::make(__('User Participation'), $userParticipation)
+            Stat::make(__('User Participation'), round($userParticipation))
                 ->description(__('Total users participating'))
                 ->descriptionIcon('heroicon-m-users')
                 ->chart([1200, 1300, 1400, 1500, 1600])
                 ->color('primary'),
 
-            Stat::make(__('Bidder Engagement'), $bidderEngagement)
+            Stat::make(__('Bidder Engagement'), round($bidderEngagement))
                 ->description(__('Average bids per day'))
                 ->descriptionIcon('heroicon-m-chart-bar')
                 ->chart([4.0, 4.5, 4.2, 4.8, 5.0])
