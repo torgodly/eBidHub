@@ -70,4 +70,12 @@ class AuctionController extends Controller
     {
         //
     }
+
+    //wonAuctions
+    public function wonAuctions()
+    {
+        return view('auctions.won-auctions', [
+            'auctions' => \Auth::user()->wonAuctions,
+        ]);
+    }
 }

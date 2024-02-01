@@ -234,6 +234,16 @@ class Auction extends Model implements HasMedia
         $highestBid->user->notify(new NotifyAuctionWinner($this));
     }
 
-    //decline
+    //favoritedBy
+
+    public function isFavorited()
+    {
+        return $this->favoritedBy()->where('user_id', auth()->id())->exists();
+    }
+
+    public function favoritedBy()
+    {
+        return $this->belongsToMany(User::class, 'favorites');
+    }
 
 }

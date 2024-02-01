@@ -16,9 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [App\Http\Controllers\AuctionController::class, 'index'])->name('auctions.index');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -27,12 +26,16 @@ Route::middleware('auth')->group(function () {
 
 
     //auctions
-    Route::get('/', [App\Http\Controllers\AuctionController::class, 'index'])->name('auctions.index');
     //show
     Route::get('/auctions/{auction}', [App\Http\Controllers\AuctionController::class, 'show'])->name('auctions.show');
 
     //becom a seller
     Route::post('/become-seller', [App\Http\Controllers\SellerController::class, 'create'])->name('sellers.create');
+
+    //favorite index
+    Route::get('/favorites', [App\Http\Controllers\FavoriteController::class, 'index'])->name('favorites.index');
+    //auction that user has won
+    Route::get('/won-auctions', [App\Http\Controllers\AuctionController::class, 'wonAuctions'])->name('auctions.won-auctions');
 
 });
 

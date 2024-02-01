@@ -19,7 +19,11 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+            @if(Auth::check())
+                @include('layouts.navigation')
+            @else
+                @include('layouts.public_navigation')
+            @endif
             <x-notifications/>
 
             <!-- Page Heading -->

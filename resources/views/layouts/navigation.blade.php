@@ -15,6 +15,13 @@
                     <x-nav-link :href="route('auctions.index')" :active="request()->routeIs('auctions.index')">
                         {{ __('Auctions') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('favorites.index')" :active="request()->routeIs('favorites.index')">
+                        {{ __('Favorites') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('auctions.won-auctions')" :active="request()->routeIs('auctions.won-auctions')">
+                        {{ __('Won Auctions') }}
+                    </x-nav-link>
+
                 </div>
             </div>
 
@@ -24,7 +31,7 @@
                     <x-slot name="trigger">
                         <button
                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+                            <div>{{ Auth::user()->name ?? '-' }}</div>
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -114,8 +121,8 @@
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name ?? '-' }}</div>
+                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email ?? '-' }}</div>
             </div>
 
             <div class="mt-3 space-y-1">

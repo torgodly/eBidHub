@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 //        \App\Models\User::factory(20)->create();
-        Auction::factory(1)->create()->each(function (Auction $auction) {
+        Auction::factory(3)->create()->each(function (Auction $auction) {
             for ($i = 0; $i < 5; $i++) {
                 $auction->addMediaFromUrl('https://picsum.photos/1024/683')->toMediaCollection('Auctions');
             }

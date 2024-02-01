@@ -65,7 +65,7 @@ class StatsOverview extends BaseWidget
                 ->chart($bidsCountChartData)
                 ->color('primary'),
 
-            Stat::make(__('Activity Rate'), $activityRate)
+            Stat::make(__('Activity Rate'), round($activityRate))
                 ->description(__('Overall activity rate'))
                 ->descriptionIcon('heroicon-m-information-circle')
                 ->chart([3.0, 3.5, 3.2, 3.8, 4.0])

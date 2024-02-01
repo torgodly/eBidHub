@@ -11,6 +11,7 @@ class Show extends Component
     public $description; // This will hold the markdown content
     public $bid;
     public $comment;
+    public $isfavorite;
     public $activities_per_load = 10;
     protected $listeners = ['bid-placed' => 'render'];
 
@@ -61,6 +62,8 @@ class Show extends Component
 
     public function render()
     {
+        //$favorite
+        $this->isfavorite = $this->auction->favoritedBy()->where('user_id', Auth::id())->exists();
 
 
         return view('livewire.auctions.show',
@@ -86,4 +89,11 @@ class Show extends Component
         $this->comment = '';
         $this->dispatch('notify', content: 'The comment has been added', type: 'success');
     }
+
+    //Favorite
+    public function favorite()
+    {
+        $this->auction->favoritedBy()->toggle(Auth::id());
+    }
+
 }

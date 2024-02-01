@@ -146,4 +146,18 @@ class User extends Authenticatable implements HasAvatar, FilamentUser
     {
         return $this->type == 'admin';
     }
+
+    //Favorite
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    //favorit auctions
+    public function favoriteAuctions()
+    {
+        return $this->belongsToMany(Auction::class, 'favorites', 'user_id', 'auction_id');
+    }
+
+
 }
