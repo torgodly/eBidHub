@@ -61,7 +61,7 @@ For any inquiries or to arrange a viewing appointment, please contact us at cont
 ",
             'price' => $this->faker->numberBetween(100, 10000),
             'end' => $this->faker->dateTimeBetween('+1 week', '+2 week'),
-            'user_id' => 21,
+            'user_id' => 1,
             'minimum_bid' => 10
         ];
     }
