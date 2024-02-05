@@ -33,6 +33,7 @@ class Auction extends Model implements HasMedia
         'approved',
         "buy_now_price"
     ];
+    protected $appends = ['status'];
 
 
     //casts

@@ -940,5 +940,8 @@
     "Approved": "موافق عليه",
     "Declined": "مرفوض",
     "No winner In this auction": "لا يوجد فائز في هذا المزاد",
-    "Buy Now Price": "سعر الشراء الآن"
+    "Buy Now Price": "سعر الشراء الآن",
+    "Active": "نشط",
+    "Ending Soon": "الانتهاء قريبا",
+    "Closed": "مغلق"
 }
