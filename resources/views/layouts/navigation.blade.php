@@ -19,7 +19,7 @@
                         {{ __('Favorites') }}
                     </x-nav-link>
                     <x-nav-link :href="route('auctions.won-auctions')" :active="request()->routeIs('auctions.won-auctions')">
-                        {{ __('Won Auctions') }}
+                        {{ __('My Won Auctions') }}
                     </x-nav-link>
 
                 </div>

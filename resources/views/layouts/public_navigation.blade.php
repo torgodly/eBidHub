@@ -11,34 +11,8 @@
             </div>
 
             {{--search bar--}}
-            @if(request()->routeIs('estate.index'))
-                {{--                <div wire:click="ShowFilter"--}}
-                {{--                    class="shrink-0 flex items-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">--}}
-                {{--                    <div id="search-bar"--}}
-                {{--                         class="pl-2 rounded-full  border   shadow-md hover:shadow-lg transition duration-200 ease-in-out flex justify-between items-center gap-8 md:gap-28">--}}
-                {{--                        <h1 class="px-4 font-bold text-sm">Start your search</h1>--}}
-                {{--                        <div--}}
-                {{--                            class="rounded-full bg-[#ff385c] w-8 h-8 flex justify-center items-center my-[7px] mr-[7px]">--}}
-                {{--                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true"--}}
-                {{--                                 role="presentation" focusable="false"--}}
-                {{--                                 class=" w-3 h-3 stroke-white stroke-[5.33333]">--}}
-                {{--                                <path fill="none" d="M13 24a11 11 0 1 0 0-22 11 11 0 0 0 0 22zm8-3 9 9" class=""></path>--}}
-                {{--                            </svg>--}}
-                {{--                        </div>--}}
 
-                {{--                    </div>--}}
-
-                {{--                </div>--}}
-            @endif
-            {{--            setting + language + add your house--}}
-            <div class="shrink-0 flex items-center justify-between gap-5" >
-                {{--                @if(request()->routeIs('estate.index'))--}}
-                {{--                    <x-secondary-button--}}
-                {{--                        class="border-0 !shadow-none focus:ring-0 hover:bg-[#F7F7F7] focus:border-0 !rounded-full hidden md:block !py-2 !px-4 !text-base  !normal-case">--}}
-                {{--                        Add--}}
-                {{--                        your house--}}
-                {{--                    </x-secondary-button>--}}
-                {{--                @endif--}}
+            <div class="shrink-0 flex items-center justify-between gap-5">
 
 
                 <!-- Settings Dropdown -->
@@ -75,32 +49,13 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            @if(Auth::check())
 
-                                <x-dropdown-link :href="route('favorites.index')">
-                                    {{ __('Favorites') }}
-                                </x-dropdown-link>
-                                <x-dropdown-link :href="route('profile.edit')">
-                                    {{ __('Profile') }}
-                                </x-dropdown-link>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-
-                                    <x-dropdown-link :href="route('logout')"
-                                                     onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                        {{ __('Log Out') }}
-                                    </x-dropdown-link>
-                                </form>
-
-                            @else
-                                <x-dropdown-link class="font-bold" :href="route('login')">
-                                    {{ __('Sign in') }}
-                                </x-dropdown-link>
-                                <x-dropdown-link :href="route('register')">
-                                    {{ __('Sign up') }}
-                                </x-dropdown-link>
-                            @endif
+                            <x-dropdown-link class="font-bold" :href="route('login')">
+                                {{ __('Sign in') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('register')">
+                                {{ __('Sign up') }}
+                            </x-dropdown-link>
                         </x-slot>
                     </x-dropdown>
                 </div>
@@ -138,9 +93,7 @@
 
 
                 <div class="mt-3 space-y-1">
-                    <x-responsive-nav-link>
-                        {{ __('Add Your House') }}
-                    </x-responsive-nav-link>
+
                     <x-responsive-nav-link>
                         {{ __('Help') }}
                     </x-responsive-nav-link>
