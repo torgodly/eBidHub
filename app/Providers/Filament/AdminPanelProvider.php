@@ -34,12 +34,14 @@ class AdminPanelProvider extends PanelProvider
                 hasAvatars: true, // Enables the avatar upload form component (default = false)
                 slug: 'my-profile' // Sets the slug for the profile page (default = 'my-profile')
             ))
+            ->brandLogo(asset('images/logo.png'))
+            ->brandLogoHeight('2rem')
             ->default()
             ->id('admin')
             ->path('admin')
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => "#086bd6",
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')

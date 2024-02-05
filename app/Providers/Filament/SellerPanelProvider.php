@@ -37,8 +37,10 @@ class SellerPanelProvider extends PanelProvider
             ))
             ->id('seller')
             ->path('seller')
+            ->brandLogo(asset('images/logo.png'))
+            ->brandLogoHeight('2rem')
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => "#086bd6",
             ])
             ->discoverResources(in: app_path('Filament/Seller/Resources'), for: 'App\\Filament\\Seller\\Resources')
             ->discoverPages(in: app_path('Filament/Seller/Pages'), for: 'App\\Filament\\Seller\\Pages')
