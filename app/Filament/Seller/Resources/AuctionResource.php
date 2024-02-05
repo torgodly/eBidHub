@@ -115,6 +115,7 @@ class AuctionResource extends Resource
                                 ->translateLabel()
                                 ->inline(false)->live(),
                             TextInput::make('buy_now_price')
+                                ->label('Buy Now Price')
                                 ->translateLabel()
                                 ->required()
                                 ->numeric()

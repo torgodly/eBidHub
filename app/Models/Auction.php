@@ -80,6 +80,14 @@ class Auction extends Model implements HasMedia
         return $this->belongsTo(User::class, 'winner_id');
     }
 
+    //winner name
+    public function getWinnerNameAttribute()
+    {
+        return $this->winner ? $this->winner->name : __("No winner In this auction");
+    }
+
+
+
 
     //user
 
@@ -181,6 +189,7 @@ class Auction extends Model implements HasMedia
         return $this->end < now();
     }
 
+
     //categorys
     public function categories()
     {
@@ -219,19 +228,27 @@ class Auction extends Model implements HasMedia
         // Get the highest bid
         $highestBid = $bids->first();
 
-        // Set the winner and generate a random winner code
-        $this->winner_id = $highestBid->user_id;
-        $this->winner_code = Str::random(10);
-        $this->save();
+        if ($highestBid) {
+            // Set the winner and generate a random winner code
+            $this->winner_id = $highestBid->user_id ?? 0;
+            $this->winner_code = $highestBid ? Str::random(10) : "Auction has ended without a winner";
+            $this->save();
 
-        // Withdraw the winning amount from the winner's account
-        $highestBid->user->withdraw($highestBid->amount);
+            // Withdraw the winning amount from the winner's account
+            $highestBid->user->withdraw($highestBid->amount);
 
-        // Notify the winner through an event
-        event(new AuctionWinner($highestBid->user_id, $this->id));
+            // Notify the winner through an event
+            event(new AuctionWinner($highestBid->user_id, $this->id));
 
-        // Notify the winner via email
-        $highestBid->user->notify(new NotifyAuctionWinner($this));
+            // Notify the winner via email
+            $highestBid->user->notify(new NotifyAuctionWinner($this));
+        } else {
+            $this->update([
+                'winner_code' => "Auction has ended without a winner",
+                'winner_id' => 0,
+            ]);
+        }
+
     }
 
     //favoritedBy

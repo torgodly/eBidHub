@@ -938,5 +938,7 @@
     "Auction Declined Successfully": "تم رفض المزاد بنجاح",
     "Approve Status": "حالة الموافقة",
     "Approved": "موافق عليه",
-    "Declined": "مرفوض"
+    "Declined": "مرفوض",
+    "No winner In this auction": "لا يوجد فائز في هذا المزاد",
+    "Buy Now Price": "سعر الشراء الآن"
 }

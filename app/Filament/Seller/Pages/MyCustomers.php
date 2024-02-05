@@ -43,9 +43,9 @@ class MyCustomers extends Page implements HasForms, HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(Auction::with('winner'))
+            ->query(Auction::with('winner')->where('end', '<', now()))
             ->columns([
-                TextColumn::make('winner.name')->label('Winner Name')->translateLabel(),
+                TextColumn::make('winner_name')->label('Winner Name')->translateLabel(),
                 TextColumn::make('winner.email')->label('Winner Email')->translateLabel(),
                 TextColumn::make('phone_number')->translateLabel(),
                 TextColumn::make('end_price')->suffix('د.ل')->translateLabel(),
