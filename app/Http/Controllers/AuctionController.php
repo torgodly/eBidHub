@@ -13,8 +13,8 @@ class AuctionController extends Controller
      */
     public function index()
     {
-        $categories = \App\Models\Category::all();
-        $auctions = Auction::where('approved', true);
+        $categories = \App\Models\Category::with('auctions')->get();
+        $auctions = Auction::where('approved', true)->with('media', 'bids');
         $filters = (new Request())->merge(
             [
                 // get the filter keys and the values is the querey string if exist
@@ -53,6 +53,8 @@ class AuctionController extends Controller
         if (!$auction->approved || $auction->approved == null) {
             abort(404);
         }
+        $auction->load('bids', 'creator', 'media', 'comments');
+
 
         return view('auctions.show', [
             'auction' => $auction,

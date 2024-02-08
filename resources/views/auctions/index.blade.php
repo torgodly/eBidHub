@@ -6,25 +6,30 @@
             <form class="mx-auto flex justify-center items-center flex-wrap gap-3 flex-row-reverse">
                 <div>
                     <x-input-label for="price" :value="__('Price')"/>
-                    <x-text-input id="price" name="price" type="number" class="mt-1 block w-full" :value="request('price')"
-                                   autofocus autocomplete="price"/>
+                    <x-text-input id="price" name="price" type="number" class="mt-1 block w-full"
+                                  :value="request('price')"
+                                  autofocus autocomplete="price"/>
                     <x-input-error class="mt-2" :messages="$errors->get('price')"/>
                 </div>
                 <div>
                     <x-input-label for="min_bid" :value="__('Minimum bid')"/>
-                    <x-text-input id="min_bid" name="min_bid" type="number" class="mt-1 block w-full" :value="request('min_bid')"
-                                   autofocus autocomplete="min_bid"/>
+                    <x-text-input id="min_bid" name="min_bid" type="number" class="mt-1 block w-full"
+                                  :value="request('min_bid')"
+                                  autofocus autocomplete="min_bid"/>
                     <x-input-error class="mt-2" :messages="$errors->get('min_bid')"/>
                 </div>
                 <div>
                     <x-input-label for="end" :value="__('Ending')"/>
-                    <x-text-input id="end" name="end" type="datetime-local" class="mt-1 block w-full" :value="request('end')"
-                                   autofocus autocomplete="end"/>
+                    <x-text-input id="end" name="end" type="datetime-local" class="mt-1 block w-full"
+                                  :value="request('end')"
+                                  autofocus autocomplete="end"/>
                     <x-input-error class="mt-2" :messages="$errors->get('end')"/>
                 </div>
                 <div>
                     <x-input-label for="buy_now" :value="__('Buy Now')"/>
-                    <select  id="buy_now" name="buy_now" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" :value="request('buy_now')"
+                    <select id="buy_now" name="buy_now"
+                            class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full"
+                            :value="request('buy_now')"
                             autofocus autocomplete="buy_now">
                         <option {{request('buy_now') === null ? 'selected' : ''}} value="">{{__('Select')}}</option>
                         <option value="1" {{request('buy_now') === '1' ? 'selected' : ''}}>{{__('Yes')}}</option>
@@ -34,11 +39,8 @@
                 </div>
 
                 <x-primary-button class="bg-blue-500 hover:bg-blue-700 text-4xl mt-6">
-                   <x-tabler-filter-search/> {{ __('Search') }}
+                    <x-tabler-filter-search/> {{ __('Search') }}
                 </x-primary-button>
-
-
-
 
 
             </form>
@@ -49,7 +51,11 @@
                 <h1 class="text-2xl font-bold mb-4 flex justify-center items-center">
                     <x-tabler-category-2/>
                     <span>{{__('Categories')}}</span></h1>
+                <p class="text-sm text-gray-800 cursor-pointer hover:text-blue-500 transition duration-300 ease-in-out hover:underline"dir="auto"
+                     onclick="location.href='{{route('auctions.index')}}'">({{$auctions->count()}}) {{__('All')}}</p>
+
                 @foreach($categories as $category)
+
                     <p class="text-sm text-gray-800 cursor-pointer hover:text-blue-500 transition duration-300 ease-in-out hover:underline"
                        onclick="location.href='{{route('auctions.index', ['category' => $category->id])}}'">{{$category->name}} ({{$category->auctions_count}})</p>
 
@@ -71,6 +77,12 @@
                      role="menu" aria-orientation="vertical" aria-labelledby="options-menu" style="display: none;">
                     <ul class="py-1">
 
+                        <li class="text-gray-700 cursor-pointer hover:bg-gray-100 px-4 py-2 text-sm"
+                            role="menuitem">
+                            <a href="{{route('auctions.index')}}"
+                               class="block  text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                               role="menuitem">{{__('All')}} ({{$auctions->count()}})</a>
+                        </li>
                         @foreach($categories as $category)
                             <li class="text-gray-700 cursor-pointer hover:bg-gray-100 px-4 py-2 text-sm"
                                 role="menuitem">

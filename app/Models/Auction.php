@@ -72,7 +72,7 @@ class Auction extends Model implements HasMedia
     //winner bid is the highest bid before the auction ends
     public function getWinnerBidAttribute()
     {
-        return $this->bids()->latest()->first();
+        return $this->bids->last();
     }
 
 
