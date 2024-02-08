@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\AuctionsFilter;
 use App\Models\Auction;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,18 @@ class AuctionController extends Controller
     public function index()
     {
         $categories = \App\Models\Category::all();
-        $auctions = Auction::where('approved', true)->get();
+        $auctions = Auction::where('approved', true);
+        $filters = (new Request())->merge(
+            [
+                // get the filter keys and the values is the querey string if exist
+                'price' => \request('price'),
+                'min_bid' => \request('min_bid'),
+                'end' => \request('end'),
+                'buy_now' => \request('buy_now'),
+                'category' => \request('category'),
+            ]
+        );
+        $auctions = (new AuctionsFilter($filters))->apply($auctions)->get();
         return view('auctions.index', compact('auctions', 'categories'));
     }
 

@@ -14,11 +14,19 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function edit(Request $request): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
     {
         return view('profile.edit', [
             'user' => $request->user(),
         ]);
+    }
+
+    public function deleteAvatar(Request $request): RedirectResponse
+    {
+        $request->user()->avatar_url = null;
+        $request->user()->save();
+
+        return back()->with('status', 'avatar-deleted');
     }
 
     /**

@@ -21,10 +21,15 @@
         <div>
             <x-input-label for="avatar" :value="__('avatar')"/>
             {{--            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />--}}
-            <x-filepond name="avatar_url"/>
             @if($user->avatar_url)
-                <img src="{{asset($user->getFilamentAvatarUrl())}}"
-                     alt="{{ $user->name }}" class="w-20 h-20 rounded-full"/>
+                <div>
+                    <img src="{{asset($user->getFilamentAvatarUrl())}}"
+                         alt="{{ $user->name }}" class="w-20 h-20 rounded-full"/>
+                </div>
+
+            @else
+                <x-filepond name="avatar_url"/>
+
             @endif
             <x-input-error class="mt-2" :messages="$errors->get('avatar')"/>
         </div>

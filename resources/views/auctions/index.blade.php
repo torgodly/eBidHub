@@ -1,6 +1,50 @@
 <x-app-layout>
     <div class="md:py-12 py-5">
+
+
+        <div class="mb-5">
+            <form class="mx-auto flex justify-center items-center flex-wrap gap-3 flex-row-reverse">
+                <div>
+                    <x-input-label for="price" :value="__('Price')"/>
+                    <x-text-input id="price" name="price" type="number" class="mt-1 block w-full" :value="request('price')"
+                                   autofocus autocomplete="price"/>
+                    <x-input-error class="mt-2" :messages="$errors->get('price')"/>
+                </div>
+                <div>
+                    <x-input-label for="min_bid" :value="__('Minimum bid')"/>
+                    <x-text-input id="min_bid" name="min_bid" type="number" class="mt-1 block w-full" :value="request('min_bid')"
+                                   autofocus autocomplete="min_bid"/>
+                    <x-input-error class="mt-2" :messages="$errors->get('min_bid')"/>
+                </div>
+                <div>
+                    <x-input-label for="end" :value="__('Ending')"/>
+                    <x-text-input id="end" name="end" type="datetime-local" class="mt-1 block w-full" :value="request('end')"
+                                   autofocus autocomplete="end"/>
+                    <x-input-error class="mt-2" :messages="$errors->get('end')"/>
+                </div>
+                <div>
+                    <x-input-label for="buy_now" :value="__('Buy Now')"/>
+                    <select  id="buy_now" name="buy_now" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" :value="request('buy_now')"
+                            autofocus autocomplete="buy_now">
+                        <option {{request('buy_now') === null ? 'selected' : ''}} value="">{{__('Select')}}</option>
+                        <option value="1" {{request('buy_now') === '1' ? 'selected' : ''}}>{{__('Yes')}}</option>
+                        <option value="0" {{request('buy_now') === '0' ? 'selected' : ''}}>{{__('No')}}</option>
+                    </select>
+                    <x-input-error class="mt-2" :messages="$errors->get('buy_now')"/>
+                </div>
+
+                <x-primary-button class="bg-blue-500 hover:bg-blue-700 text-4xl mt-6">
+                   <x-tabler-filter-search/> {{ __('Search') }}
+                </x-primary-button>
+
+
+
+
+
+            </form>
+        </div>
         <div class="max-w-full mx-auto sm:px-6 lg:px-8 flex md:flex-row flex-col md:gap-32 gap-5">
+
             <div class="w-1/3 md:flex justify-center items-start hidden  flex-col">
                 <h1 class="text-2xl font-bold mb-4 flex justify-center items-center">
                     <x-tabler-category-2/>
@@ -11,6 +55,7 @@
 
                 @endforeach
             </div>
+
             <div x-data="{ open: false }" class="mx-5 md:hidden">
                 <button
 
