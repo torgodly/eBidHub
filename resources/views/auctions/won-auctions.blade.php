@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 grid-cols-1  gap-6">
+            <div class="grid md:grid-cols-4 grid-cols-1  gap-6 mx-5">
                 @foreach($auctions as $auction)
 
                     <div class="relative" onclick="location.href='{{route('auctions.show', $auction)}}'">

@@ -117,6 +117,17 @@
 
                     <h1 class="text-gray-600 py-2 text-right">
                         {{__('Ending')}} {{\Carbon\Carbon::parse($auction->end)->translatedFormat('d F H:m:a')}}</h1>
+                        <div class="border-b-2"></div>
+                        <div class="my-3 flex justify-start items-center gap-5">
+                            <img
+                                src="{{asset($auction->creator->getFilamentAvatarUrl()??'https://ui-avatars.com/api/?name='.$auction->creator->name)}}"
+                                 alt="Creator" class="w-10 h-10 rounded-full"/>
+                            <div>
+                                <h1 class="text-lg font-bold">{{$auction->creator->name}}</h1>
+                                <h1 class="text-sm font-light">{{$auction->creator->auctions->count()}} {{__('Auctions Count')}}</h1>
+                            </div>
+                        </div>
+
                     <div>
 
 

@@ -52,7 +52,7 @@
                     <x-tabler-category-2/>
                     <span>{{__('Categories')}}</span></h1>
                 <p class="text-sm text-gray-800 cursor-pointer hover:text-blue-500 transition duration-300 ease-in-out hover:underline"dir="auto"
-                     onclick="location.href='{{route('auctions.index')}}'">({{$auctions->count()}}) {{__('All')}}</p>
+                     onclick="location.href='{{route('auctions.index')}}'">({{\App\Models\Auction::count()}}) {{__('All')}}</p>
 
                 @foreach($categories as $category)
 
