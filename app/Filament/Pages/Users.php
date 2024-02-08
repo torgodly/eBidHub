@@ -9,6 +9,7 @@ use Filament\Pages\Page;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
@@ -51,6 +52,9 @@ class Users extends Page implements HasTable
                         default => 'success',
                     }
                 )->icon('heroicon-o-currency-dollar')->translateLabel(),
+                ToggleColumn::make('active')->label(
+                    'Account Status'
+                )->translateLabel()
             ])
             ->filters([
                 // ...
@@ -83,6 +87,9 @@ class Users extends Page implements HasTable
 
                 ,
 //                    ->confirmable()
+
+            //activete and de activeate user account
+
 
             ])
             ->bulkActions([

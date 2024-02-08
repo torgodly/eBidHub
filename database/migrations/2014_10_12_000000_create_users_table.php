@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->integer('balance')->default(0);
             $table->string('type')->default('user');
             $table->string('avatar_url')->nullable();
+            $table->boolean('active')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

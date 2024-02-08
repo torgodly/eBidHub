@@ -5,6 +5,7 @@ namespace App\Providers\Filament;
 use App\Filament\Seller\Resources\AuctionResource\Widgets\Auctions;
 use App\Filament\Seller\Resources\AuctionResource\Widgets\StatsOverview;
 use App\Filament\Seller\Resources\AuctionResource\Widgets\SystemStats;
+use App\Http\Middleware\IsActive;
 use Awcodes\Overlook\OverlookPlugin;
 use Awcodes\Overlook\Widgets\OverlookWidget;
 use Filament\Enums\ThemeMode;
@@ -14,7 +15,6 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
-use Filament\Support\Colors\Color;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -31,6 +31,7 @@ class SellerPanelProvider extends PanelProvider
         return $panel
             ->darkMode(false)
             ->defaultThemeMode(ThemeMode::Light)
+
             ->plugin(BreezyCore::make()->myProfile(
                 shouldRegisterUserMenu: true, // Sets the 'account' link in the panel User Menu (default = true)
                 shouldRegisterNavigation: false, // Adds a main navigation item for the My Profile page (default = false)

@@ -29,6 +29,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        //check if account is active or logout and redirect back with error
+        if (Auth::user()->active === 0) {
+            Auth::logout();
+            return back()->withErrors(['email' => __('Your account is not active')]);
+        }
+
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
