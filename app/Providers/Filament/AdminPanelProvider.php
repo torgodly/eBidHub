@@ -4,13 +4,13 @@ namespace App\Providers\Filament;
 
 use App\Filament\Widgets\AdminChartOverview;
 use App\Filament\Widgets\AdminStatsOverview;
+use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
-use Filament\Support\Colors\Color;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -26,6 +26,8 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->darkMode(false)
+            ->defaultThemeMode(ThemeMode::Light)
             ->plugin(new FilamentEmail())
             ->plugin(BreezyCore::make()->myProfile(
                 shouldRegisterUserMenu: true, // Sets the 'account' link in the panel User Menu (default = true)
@@ -33,7 +35,7 @@ class AdminPanelProvider extends PanelProvider
                 navigationGroup: 'Settings', // Sets the navigation group for the My Profile page (default = null)
                 hasAvatars: true, // Enables the avatar upload form component (default = false)
                 slug: 'my-profile' // Sets the slug for the profile page (default = 'my-profile')
-            ))
+            )->enableTwoFactorAuthentication())
             ->brandLogo(asset('images/logo.png'))
             ->brandLogoHeight('2rem')
             ->default()
