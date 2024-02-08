@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         });
 ////        Bid::factory(50)->create();
 //        \App\Models\Comment::factory(50)->create();
-//        Category::factory(100)->create();
+        Category::factory(100)->create();
 //
 
         \App\Models\User::factory()->create([

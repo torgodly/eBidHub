@@ -18,4 +18,10 @@ class Category extends Model
     {
         return $this->belongsToMany(Auction::class);
     }
+
+    //use count method to get the number of auctions in a category Attribute
+    public function getAuctionsCountAttribute()
+    {
+        return $this->auctions->count();
+    }
 }

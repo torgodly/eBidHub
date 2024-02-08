@@ -12,9 +12,9 @@ class AuctionController extends Controller
      */
     public function index()
     {
-        return view('auctions.index', [
-            'auctions' => Auction::where('approved', true)->get(),
-        ]);
+        $categories = \App\Models\Category::all();
+        $auctions = Auction::where('approved', true)->get();
+        return view('auctions.index', compact('auctions', 'categories'));
     }
 
     /**
