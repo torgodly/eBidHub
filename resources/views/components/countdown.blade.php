@@ -95,7 +95,7 @@
         </div>
         <div class="flex gap-2 justify-center items-center">
             <template x-if="displayMode !== 'sold'">
-                <span class="text-gray-300">Bid</span>
+                <span class="text-gray-300">{{__('Bid')}}</span>
             </template>
             <span class="text-sm text-white">د.ل.{{number_format($auction->end_price)}}</span>
         </div>
