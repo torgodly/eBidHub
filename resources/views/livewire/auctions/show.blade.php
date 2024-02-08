@@ -14,7 +14,7 @@
                 </div>
 
             </div>
-            <div class="md:flex justify-start items-center gap-2 hidden  " >
+            <div class="md:flex justify-start items-center gap-2 hidden  ">
                 <div class="flex gap-2">
                     <div class="cursor-pointer" wire:click="favorite">
                         <svg xmlns="http://www.w3.org/2000/svg"

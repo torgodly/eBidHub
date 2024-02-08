@@ -1,10 +1,9 @@
 <x-app-layout>
-    <div class="py-12">
-        <div class="max-w-full mx-auto sm:px-6 lg:px-8 flex">
-
-            <div class="w-1/2 flex justify-center items-start flex-col">
+    <div class="md:py-12 py-5">
+        <div class="max-w-full mx-auto sm:px-6 lg:px-8 flex md:flex-row flex-col md:gap-32 gap-5">
+            <div class="w-1/3 md:flex justify-center items-start hidden  flex-col">
                 <h1 class="text-2xl font-bold mb-4 flex justify-center items-center">
-                    <x-tabler-menu-2/>
+                    <x-tabler-category-2/>
                     <span>{{__('Categories')}}</span></h1>
                 @foreach($categories as $category)
                     <p class="text-sm text-gray-800 cursor-pointer hover:text-blue-500 transition duration-300 ease-in-out hover:underline"
@@ -12,11 +11,37 @@
 
                 @endforeach
             </div>
-            <div>
-                <h1 class="text-2xl font-bold mb-4 flex justify-start items-center">
-                    <x-tabler-menu-2/>
+            <div x-data="{ open: false }" class="mx-5 md:hidden">
+                <button
+
+                    @click="open = !open"
+                    class="flex justify-center items-center w-full bg-white border border-gray-300 rounded-md shadow-sm px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    id="options-menu" aria-haspopup="true" x-bind:aria-expanded="open">
+                    <x-tabler-category-2/>
+                    {{__('Categories')}}
+
+                </button>
+                <div x-show="open" @click.away="open = false"
+                     class="origin-top-right  mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                     role="menu" aria-orientation="vertical" aria-labelledby="options-menu" style="display: none;">
+                    <ul class="py-1">
+
+                        @foreach($categories as $category)
+                            <li class="text-gray-700 cursor-pointer hover:bg-gray-100 px-4 py-2 text-sm"
+                                role="menuitem">
+                                <a href="{{route('auctions.index', ['category' => $category->id])}}"
+                                   class="block  text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                                   role="menuitem">{{$category->name}} ({{$category->auctions_count}})</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            <div class="mx-5">
+                <h1 class="text-2xl font-bold mb-4 flex justify-start items-center ">
+                    <x-tabler-building-store/>
                     <span>{{__('Auctions')}}</span></h1>
-                <div class="grid md:grid-cols-3 grid-cols-1  gap-6">
+                <div class="grid md:grid-cols-3 grid-cols-1  gap-6 ">
                     @foreach($auctions as $auction)
 
                         <div class="relative" onclick="location.href='{{route('auctions.show', $auction)}}'">
