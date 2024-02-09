@@ -3,7 +3,7 @@
 
 
         <div class="mb-5">
-            <form class="mx-auto flex justify-center items-center flex-wrap gap-3 flex-row-reverse">
+            <form class="mx-auto flex justify-center items-center flex-wrap gap-3 ">
                 <div>
                     <x-input-label for="price" :value="__('Price')"/>
                     <x-text-input id="price" name="price" type="number" class="mt-1 block w-full"
@@ -127,21 +127,6 @@
                                                     class="bg-white p-1 rounded-full flex justify-center items-center"
                                                     x-on:click="activeSlide = activeSlide === 1 ? slides : activeSlide - 1"
                                                     onclick="event.stopPropagation();">
-
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                         class="icon icon-tabler icon-tabler-chevron-left" width="24"
-                                                         height="24"
-                                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                                         fill="none"
-                                                         stroke-linecap="round" stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                        <path d="M15 6l-6 6l6 6"></path>
-                                                    </svg>
-                                                </button>
-                                                <button
-                                                    class="bg-white p-1 rounded-full flex justify-center items-center"
-                                                    x-on:click="activeSlide = activeSlide === slides ? 1 : activeSlide + 1"
-                                                    onclick="event.stopPropagation();">
                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                          class="icon icon-tabler icon-tabler-chevron-right" width="24"
                                                          height="24"
@@ -151,6 +136,22 @@
                                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                                         <path d="M9 6l6 6l-6 6"></path>
                                                     </svg>
+
+                                                </button>
+                                                <button
+                                                    class="bg-white p-1 rounded-full flex justify-center items-center"
+                                                    x-on:click="activeSlide = activeSlide === slides ? 1 : activeSlide + 1"
+                                                    onclick="event.stopPropagation();">
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                         class="icon icon-tabler icon-tabler-chevron-left" width="24"
+                                                         height="24"
+                                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                         fill="none"
+                                                         stroke-linecap="round" stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <path d="M15 6l-6 6l6 6"></path>
+                                                    </svg>
+
                                                 </button>
                                             </div>
                                             <x-countdown :auction="$auction"/>

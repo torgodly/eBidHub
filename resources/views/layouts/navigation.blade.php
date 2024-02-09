@@ -10,14 +10,16 @@
                     </a>
                 </div>
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden gap-8 sm:-my-px sm:ms-10 sm:flex" >
 
                     <x-nav-link :href="route('auctions.index')" :active="request()->routeIs('auctions.index')">
                         {{ __('Auctions') }}
                     </x-nav-link>
+
                     <x-nav-link :href="route('favorites.index')" :active="request()->routeIs('favorites.index')">
                         {{ __('Favorites') }}
                     </x-nav-link>
+
                     <x-nav-link :href="route('auctions.won-auctions')"
                                 :active="request()->routeIs('auctions.won-auctions')">
                         {{ __('My Won Auctions') }}
@@ -106,7 +108,7 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden" >
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
 
             <x-responsive-nav-link href="#" :active="false">
