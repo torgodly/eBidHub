@@ -27,7 +27,9 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class AuctionResource extends Resource
 {
@@ -196,7 +198,13 @@ class AuctionResource extends Resource
                         'active' => 'success',
                         'closed' => 'danger',
                         'ending soon' => 'warning',
-                    }),
+                    })
+                    ->formatStateUsing(fn(string $state): string => match ($state) {
+                        'ending soon' => __('Ending Soon'),
+                        'active' => __('Active'),
+                        'closed' => __('Closed'),
+                    })
+                ,
                 TextColumn::make('approved')->label('Approve Status')
                     ->translateLabel()
                     ->formatStateUsing(fn(string $state): string => $state === '1' ? __('Approved') : __('Declined'))
@@ -209,6 +217,29 @@ class AuctionResource extends Resource
 
             ])
             ->filters([
+                Filter::make('created_at')
+                    ->form([
+                        Select::make('Status')->options(
+                            [
+                                'active' => __('Active'),
+                                'closed' => __('Closed'),
+                                'ending soon' => __('Ending Soon')
+                            ]
+                        )->translateLabel(),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['Status'] === 'active',
+                                fn(Builder $query, $date): Builder => $query->where('end', '>', now()),
+                            )->when(
+                                $data['Status'] === 'closed',
+                                fn(Builder $query, $date): Builder => $query->where('end', '<', now()),
+                            )->when(
+                                $data['Status'] === 'ending soon',
+                                fn(Builder $query, $date): Builder => $query->where('end', '<', now()->addHours(3)),
+                            );
+                    })
 
             ])
             ->actions([

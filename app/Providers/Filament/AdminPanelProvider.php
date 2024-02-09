@@ -38,6 +38,7 @@ class AdminPanelProvider extends PanelProvider
             )->enableTwoFactorAuthentication())
             ->brandLogo(asset('images/logo.png'))
             ->brandLogoHeight('2rem')
+            ->homeUrl('/')
             ->default()
             ->id('admin')
             ->path('admin')

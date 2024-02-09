@@ -63,7 +63,7 @@ class CategoryResource extends Resource
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make()
 
-            ]);
+            ])->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array
@@ -101,6 +101,7 @@ class CategoryResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
+                    ->unique(Category::class, 'name')
                     ->maxLength(255)->columnSpanFull()->translateLabel(),
             ]);
     }

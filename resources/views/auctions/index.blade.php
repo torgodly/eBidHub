@@ -47,7 +47,7 @@
         </div>
         <div class="max-w-full mx-auto sm:px-6 lg:px-8 flex md:flex-row flex-col md:gap-32 gap-5">
 
-            <div class="w-1/3 md:flex justify-center items-start hidden  flex-col">
+            <div class="w-1/3 md:flex justify-start items-start hidden  flex-col">
                 <h1 class="text-2xl font-bold mb-4 flex justify-center items-center">
                     <x-tabler-category-2/>
                     <span>{{__('Categories')}}</span></h1>

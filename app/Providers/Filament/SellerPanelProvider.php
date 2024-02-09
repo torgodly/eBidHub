@@ -44,6 +44,7 @@ class SellerPanelProvider extends PanelProvider
             ->path('seller')
             ->brandLogo(asset('images/logo.png'))
             ->brandLogoHeight('2rem')
+            ->homeUrl('/')
             ->colors([
                 'primary' => "#086bd6",
             ])

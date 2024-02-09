@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Auction;
-use App\Models\Bid;
 use App\Models\Category;
 use Illuminate\Database\Seeder;
 
@@ -32,6 +31,12 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'admin@admin.com',
             'type' => 'admin',
+            'balance' => 100000,
+        ]);
+        \App\Models\User::factory()->create([
+            'name' => 'User User',
+            'email' => 'torgodly@gmail.com',
+            'type' => 'user',
             'balance' => 100000,
         ]);
     }

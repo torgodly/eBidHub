@@ -14,12 +14,12 @@ class ListCategories extends ListRecords
     {
         return [
             Actions\CreateAction::make()
+                ->requiresConfirmation()
                 ->modalWidth('md')
                 ->modalHeading(__('Add Category'))
                 ->modalDescription(__('Add a new category'))
                 ->modalSubmitActionLabel(__('Add Category'))
-                ->modalIcon('heroicon-o-tag')
-                ->requiresConfirmation(),
+                ->modalIcon('heroicon-o-tag'),
         ];
     }
 }
