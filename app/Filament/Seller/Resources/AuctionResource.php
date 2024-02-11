@@ -18,6 +18,7 @@ use Filament\Forms\Components\Wizard;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Infolists\Components\Grid;
+use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 use Filament\Infolists\Components\Split;
@@ -53,102 +54,6 @@ class AuctionResource extends Resource
     public static function getNavigationGroup(): ?string
     {
         return __(parent::getNavigationGroup());
-    }
-
-
-    public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                Wizard::make([
-                    Wizard\Step::make('General Information')->translateLabel()
-                        ->schema([
-                            Select::make('categories')
-                                ->translateLabel()
-                                ->multiple()
-                                ->preload()
-                                ->relationship('categories', 'name'),
-                            TextInput::make('title')
-                                ->translateLabel()
-                                ->required()
-                                ->maxLength(255),
-                            Textarea::make('about')
-                                ->translateLabel()
-                                ->required()
-                                ->maxLength(255),
-                            MarkdownEditor::make('description')
-                                ->translateLabel()
-                                ->toolbarButtons([
-                                    'blockquote',
-                                    'bold',
-                                    'bulletList',
-                                    'heading',
-                                    'italic',
-                                    'link',
-                                    'orderedList',
-                                    'redo',
-                                    'undo',
-                                ])->required()
-                        ]),
-                    Wizard\Step::make(__('Price & Date'))->translateLabel()
-                        ->schema([
-                            TextInput::make('price')
-                                ->translateLabel()
-                                ->required()
-                                ->numeric()
-                                ->disabled(fn($record) => $record?->bids()?->exists())
-                                ->dehydrated()
-                                ->prefix('LYD'),
-                            TextInput::make('minimum_bid')
-                                ->translateLabel()
-                                ->required()
-                                ->numeric()
-                                ->disabled(fn($record) => $record?->bids()?->exists())
-                                ->dehydrated()
-                                ->prefix('LYD'),
-                            DateTimePicker::make('end')
-                                ->translateLabel()
-                                ->prefix('Ends')
-                                ->disabled(fn($record) => $record?->bids()?->exists())
-                                ->minDate(now())
-                                ->dehydrated()
-                                ->required()->native(false),
-                            Toggle::make('buy_now')->label('Item is available for buy now')
-                                ->translateLabel()
-                                ->inline(false)->live(),
-                            TextInput::make('buy_now_price')
-                                ->translateLabel()
-                                ->required()
-                                ->numeric()
-                                ->disabled(fn($record) => $record?->bids()?->exists())
-                                ->dehydrated()
-                                ->prefix('LYD')
-                                ->visible(fn(Get $get): bool => $get('buy_now')),
-
-                        ]),
-                    Wizard\Step::make(__('Product Information'))->translateLabel()
-                        ->schema([
-                            KeyValue::make('info')
-                                ->translateLabel()
-                                ->keyLabel(__('Info name'))
-                                ->valueLabel(__('Info text'))
-                                ->addActionLabel(__('Add New Info'))->live()
-                        ]),
-                    Wizard\Step::make('Images')->translateLabel()
-                        ->schema([
-                            SpatieMediaLibraryFileUpload::make('media')
-                                ->collection('Auctions')
-                                ->multiple()
-                                ->reorderable()
-                                ->responsiveImages()
-                                ->hiddenLabel()
-                                ->imageEditor(),
-                        ]),
-                ])->columnSpanFull()->skippable(fn($record) => $record !== null)
-                //skipable on edit
-
-                ,
-            ]);
     }
 
     public static function table(Table $table): Table
@@ -259,6 +164,101 @@ class AuctionResource extends Resource
             ]);
     }
 
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                Wizard::make([
+                    Wizard\Step::make('General Information')->translateLabel()
+                        ->schema([
+                            Select::make('categories')
+                                ->translateLabel()
+                                ->multiple()
+                                ->preload()
+                                ->relationship('categories', 'name'),
+                            TextInput::make('title')
+                                ->translateLabel()
+                                ->required()
+                                ->maxLength(255),
+                            Textarea::make('about')
+                                ->translateLabel()
+                                ->required()
+                                ->maxLength(255),
+                            MarkdownEditor::make('description')
+                                ->translateLabel()
+                                ->toolbarButtons([
+                                    'blockquote',
+                                    'bold',
+                                    'bulletList',
+                                    'heading',
+                                    'italic',
+                                    'link',
+                                    'orderedList',
+                                    'redo',
+                                    'undo',
+                                ])->required()
+                        ]),
+                    Wizard\Step::make(__('Price & Date'))->translateLabel()
+                        ->schema([
+                            TextInput::make('price')
+                                ->translateLabel()
+                                ->required()
+                                ->numeric()
+                                ->disabled(fn($record) => $record?->bids()?->exists())
+                                ->dehydrated()
+                                ->prefix('LYD'),
+                            TextInput::make('minimum_bid')
+                                ->translateLabel()
+                                ->required()
+                                ->numeric()
+                                ->disabled(fn($record) => $record?->bids()?->exists())
+                                ->dehydrated()
+                                ->prefix('LYD'),
+                            DateTimePicker::make('end')
+                                ->translateLabel()
+                                ->prefix('Ends')
+                                ->disabled(fn($record) => $record?->bids()?->exists())
+                                ->minDate(now())
+                                ->dehydrated()
+                                ->required()->native(false),
+                            Toggle::make('buy_now')->label('Item is available for buy now')
+                                ->translateLabel()
+                                ->inline(false)->live(),
+                            TextInput::make('buy_now_price')
+                                ->translateLabel()
+                                ->required()
+                                ->numeric()
+                                ->disabled(fn($record) => $record?->bids()?->exists())
+                                ->dehydrated()
+                                ->prefix('LYD')
+                                ->visible(fn(Get $get): bool => $get('buy_now')),
+
+                        ]),
+                    Wizard\Step::make(__('Product Information'))->translateLabel()
+                        ->schema([
+                            KeyValue::make('info')
+                                ->translateLabel()
+                                ->keyLabel(__('Info name'))
+                                ->valueLabel(__('Info text'))
+                                ->addActionLabel(__('Add New Info'))->live()
+                        ]),
+                    Wizard\Step::make('Images')->translateLabel()
+                        ->schema([
+                            SpatieMediaLibraryFileUpload::make('media')
+                                ->collection('Auctions')
+                                ->multiple()
+                                ->reorderable()
+                                ->responsiveImages()
+                                ->hiddenLabel()
+                                ->imageEditor(),
+                        ]),
+                ])->columnSpanFull()->skippable(fn($record) => $record !== null)
+                //skipable on edit
+
+                ,
+            ]);
+    }
+
     public static function getRelations(): array
     {
         return [
@@ -286,35 +286,48 @@ class AuctionResource extends Resource
                         Split::make([
                             Grid::make(2)
                                 ->schema([
-                                    TextEntry::make('title'),
-                                    TextEntry::make('price')->money('LYD'),
-                                    TextEntry::make('end')
-                                        ->dateTime('Y-m-d H:i:s')
-                                        ->formatStateUsing(fn(string $state): string => Carbon::parse($state)->diffForHumans()),
-                                    TextEntry::make('status')
+                                    TextEntry::make('title')->translateLabel(),
+                                    TextEntry::make('price')->translateLabel()->suffix("د.ل"),
+                                    TextEntry::make('end')->translateLabel()
+                                        ->dateTime('Y-m-d H:i:s'),
+                                    TextEntry::make('status')->translateLabel()
                                         ->badge()
                                         ->color(fn(string $state): string => match ($state) {
                                             'ending soon' => 'warning',
                                             'active' => 'success',
                                             'closed' => 'danger',
                                         }),
-//                                    ]),
+                                    TextEntry::make('approved')->translateLabel()
+                                        ->formatStateUsing(fn(string $state): string => $state === '1' ? __('Approved') : __('Declined'))
+                                        ->badge()
+                                        ->color(fn(string $state): string => match ($state) {
+                                            '1' => 'success',
+                                            '0' => 'danger',
+                                        }),
+                                    TextEntry::make('bids_count')->translateLabel(),
+
+                                    TextEntry::make('categories.name')->translateLabel()->badge(),
+                                    TextEntry::make('minimum_bid')->translateLabel()->suffix("د.ل"),
+                                    IconEntry::make('buy_now')->translateLabel()
+                                        ->boolean(),
+                                    TextEntry::make('buy_now_price')->translateLabel()->suffix("د.ل")->default(0),
+
+
                                 ]),
 
                         ])->from('lg'),
                     ]),
                 Section::make('Images')
+                    ->translateLabel()
                     ->schema([
                         SpatieMediaLibraryImageEntry::make('media')
                             ->Collection('Auctions')
-                            ->hiddenLabel()
-                            ->columns(2)
-                            ->stacked()
-                        ,
+                            ->hiddenLabel(),
                     ])
                     ->collapsible(),
 
                 Section::make('Content')
+                    ->translateLabel()
                     ->schema([
                         TextEntry::make('description')
                             ->prose()
