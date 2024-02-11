@@ -32,7 +32,7 @@
                 </x-primary-button>
                 @if($auction->buy_now && $auction->end_price < $auction->buy_now_price)
                     <x-primary-button
-                        :disabled="$auction->has_winner || $auction->creator->id == Auth::user()->id"
+                        :disabled="$auction->has_winner || $auction->creator->id == Auth::user()->id || Auth::user()->balance < $auction->buy_now_price"
                         class="w-full flex justify-center  h-12 capitalize !text-base !font-bold" dir="auto"
                         wire:click="buyNow" wire:target="buyNow" wire:loading.attr="disabled">
                         <x-loading-indicator name="buyNow"/>

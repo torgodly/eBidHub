@@ -88,8 +88,6 @@ class Auction extends Model implements HasMedia
     }
 
 
-
-
     //user
 
     public function getEndPriceAttribute()
@@ -174,8 +172,12 @@ class Auction extends Model implements HasMedia
             //update winner id0
             $this->update([
                 'winner_id' => auth()->id(),
+                'winner_code' => Str::random(10)
             ]);
+
             event(new AuctionWinner(auth()->user()->id, $this->id));
+            auth()->user()->notify(new NotifyAuctionWinner($this));
+
 
         } //if auction is closed
         else {

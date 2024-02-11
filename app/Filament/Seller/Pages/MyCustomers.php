@@ -27,23 +27,20 @@ class MyCustomers extends Page implements HasForms, HasTable
         return __(parent::getNavigationLabel());
     }
 
-    public function getTitle(): string
-    {
-        return __(parent::getTitle());
-    }
-
     public static function getNavigationGroup(): ?string
     {
         return __(parent::getNavigationGroup());
     }
 
-
-
+    public function getTitle(): string
+    {
+        return __(parent::getTitle());
+    }
 
     public function table(Table $table): Table
     {
         return $table
-            ->query(Auction::with('winner')->where('end', '<', now()))
+            ->query(Auction::with('winner')->whereNotNull('winner_id'))
             ->columns([
                 TextColumn::make('winner_name')->label('Winner Name')->translateLabel(),
                 TextColumn::make('winner.email')->label('Winner Email')->translateLabel(),
