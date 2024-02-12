@@ -32,10 +32,12 @@
                 <h1 class="text-5xl font-black	 uppercase text-center">{{__('FIND YOUR NEXT DEAL!')}}</h1>
                 <p class="text-center font-semibold md:w-1/3">{{__('Anyone can bid on great deals from local, county, and state government agencies, schools, authorities, and more.')}}</p>
                 <div class="mt-4 space x-4">
-                    <x-primary-button onclick="location.href='{{route('login')}}'" class="bg-blue-500 hover:bg-blue-700 text-4xl">
+                    <x-primary-button onclick="location.href='{{route('login')}}'"
+                                      class="bg-blue-500 hover:bg-blue-700 text-4xl">
                         {{ __('Sign in') }}
                     </x-primary-button>
-                    <x-primary-button onclick="location.href='{{route('register')}}'" class="bg-green-500 hover:bg-green-700">
+                    <x-primary-button onclick="location.href='{{route('register')}}'"
+                                      class="!bg-green-500 hover:bg-green-700">
                         {{ __('Create Free Account') }}
                     </x-primary-button>
                 </div>
