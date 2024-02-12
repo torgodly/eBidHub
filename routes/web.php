@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [App\Http\Controllers\AuctionController::class, 'index'])->name('auctions.index');
+//contact
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
 
 
 Route::middleware('auth', 'verified')->group(function () {
