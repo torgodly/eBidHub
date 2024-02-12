@@ -74,7 +74,7 @@
                     <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"/>
                     <path d="M12 7v5l3 3"/>
                 </svg>
-                <div class="text-sm flex gap-3">
+                <div class="text-sm flex gap-3" dir="ltr">
                     <template x-if="displayMode === 'days'">
                        <div>
                            <span class="text-gray-300 text-lg">{{__('Time Left')}}</span>
