@@ -47,7 +47,7 @@
                             <div >
                                 @if(Auth::user()->avatar_url)
                                     <img src="{{asset(Auth::user()->getFilamentAvatarUrl())}}"
-                                         alt="{{ Auth::user()->name }}" class=" h-10 rounded-full"/>
+                                         alt="{{ Auth::user()->name }}" class="w-10 h-10 rounded-full"/>
                                 @else
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true"
                                          role="presentation" focusable="false"
