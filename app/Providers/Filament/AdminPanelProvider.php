@@ -27,13 +27,8 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->routes(function () {
-                return [
-                    Route::get('/approve-auctions/{record}/view', \App\Filament\Pages\ViewAuction::class)
-                        ->name('approve-auctions.view')
-                        ->middleware(Authenticate::class),
-                ];
-            })->font('Cairo')
+
+            ->font('Cairo')
             ->darkMode(false)
             ->defaultThemeMode(ThemeMode::Light)
             ->plugin(new FilamentEmail())

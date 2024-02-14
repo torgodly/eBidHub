@@ -110,7 +110,7 @@ class ApproveAuctions extends Page implements HasTable
                 Action::make(__('View'))
                     ->icon('tabler-eye')
                     ->color('primary')
-                    ->url(fn(Auction $record) => route('filament.admin.approve-auctions.view', $record->getKey()))
+                    ->url(fn(Auction $record) => ViewAuction::getUrl(['record'=>$record]))
                     ->sendSuccessNotification(),
             ])
             ->bulkActions([

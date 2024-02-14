@@ -21,6 +21,8 @@ class ViewAuction extends Page implements HasInfolists
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static bool $shouldRegisterNavigation = false;
+
+    protected static ?string $slug = 'approve-auctions/{record}/view';
     protected static string $view = 'filament.pages.view-auction';
 
 
