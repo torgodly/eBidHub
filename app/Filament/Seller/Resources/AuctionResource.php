@@ -37,7 +37,7 @@ class AuctionResource extends Resource
     protected static ?string $model = Auction::class;
 
     protected static ?string $navigationIcon = 'tabler-building-store';
-    protected static ?string $navigationGroup = 'Auctions';
+    protected static ?string $navigationGroup = 'المزادات';
 
 
     public static function getModelLabel(): string

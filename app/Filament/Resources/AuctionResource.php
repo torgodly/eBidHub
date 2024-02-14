@@ -72,7 +72,6 @@ class AuctionResource extends Resource
                     ->dateTime('Y-m-d H:i:s')
                     ->description(fn(Auction $record): string => Carbon::parse($record->end)->diffForHumans())
                     ->sortable(),
-
                 TextColumn::make('status')->translateLabel()
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
@@ -80,19 +79,29 @@ class AuctionResource extends Resource
                         'closed' => 'danger',
                         'ending soon' => 'warning',
                     })
-                ->formatStateUsing(fn(string $state): string => match ($state) {
+                    ->formatStateUsing(fn(string $state): string => match ($state) {
+                        'ending soon' => __('Ending Soon'),
                         'active' => __('Active'),
                         'closed' => __('Closed'),
-                        'ending soon' => __('Ending Soon'),
                     })
                 ,
                 TextColumn::make('approved')->label('Approve Status')
                     ->translateLabel()
-                    ->formatStateUsing(fn(string $state): string => $state === '1' ? __('Approved') : __('Declined'))
+                    ->default('Pending')
+                    ->formatStateUsing(function (string $state): string {
+                        if ($state === '1') {
+                            return __('Approved');
+                        }
+                        if ($state === '0') {
+                            return __('Declined');
+                        }
+                        return __('Pending');
+                    })
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
                         '1' => 'success',
                         '0' => 'danger',
+                        default => 'gray',
                     }),
                 TextColumn::make('bids_count')->translateLabel()
 
@@ -112,13 +121,13 @@ class AuctionResource extends Resource
                         return $query
                             ->when(
                                 $data['Status'] === 'active',
-                                fn(Builder $query, $date): Builder => $query->where('end', '>', now()),
+                                fn(Builder $query, $date): Builder => $query->where('end', '>', now())->whereNull('winner_id'),
                             )->when(
                                 $data['Status'] === 'closed',
-                                fn(Builder $query, $date): Builder => $query->where('end', '<', now()),
+                                fn(Builder $query, $date): Builder => $query->where('end', '<', now())->orWhereNotNull('winner_id'),
                             )->when(
                                 $data['Status'] === 'ending soon',
-                                fn(Builder $query, $date): Builder => $query->where('end', '<', now()->addHours(3)),
+                                fn(Builder $query, $date): Builder => $query->where('end', '<', now()->addHours(3))->whereNull('winner_id'),
                             );
                     })
 
