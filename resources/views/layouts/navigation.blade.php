@@ -10,19 +10,12 @@
                     </a>
                 </div>
                 <!-- Navigation Links -->
-                <div class="hidden gap-8 sm:-my-px sm:ms-10 sm:flex" >
+                <div class="hidden gap-8 sm:-my-px sm:ms-10 sm:flex">
 
-                    <x-nav-link :href="route('auctions.index')" :active="request()->routeIs('auctions.index')">
-                        {{ __('Auctions') }}
-                    </x-nav-link>
 
-                    <x-nav-link :href="route('favorites.index')" :active="request()->routeIs('favorites.index')">
-                        {{ __('Favorites') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('auctions.won-auctions')"
-                                :active="request()->routeIs('auctions.won-auctions')">
-                        {{ __('My Won Auctions') }}
+                    <x-nav-link :href="route('contact')"
+                                :active="request()->routeIs('contact')">
+                        {{ __('Contact Us') }}
                     </x-nav-link>
 
                 </div>
@@ -44,7 +37,7 @@
                             class="inline-flex items-center  border  text-sm leading-4 font-medium rounded-full text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150   gap-2 border-gray-300 ">
 
 
-                            <div >
+                            <div>
                                 @if(Auth::user()->avatar_url)
                                     <img src="{{asset(Auth::user()->getFilamentAvatarUrl())}}"
                                          alt="{{ Auth::user()->name }}" class="w-10 h-10 rounded-full"/>
@@ -62,6 +55,18 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        <x-dropdown-link :href="route('auctions.index')">
+                            {{ __('Auctions') }}
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('favorites.index')">
+                            {{ __('Favorites') }}
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('auctions.won-auctions')">
+                            {{ __('My Won Auctions') }}
+                        </x-dropdown-link>
+
                         @if(Auth::user()->is_seller || Auth::user()->is_admin)
                             @if(Auth::user()->is_admin)
                                 <x-dropdown-link href="/admin">
@@ -93,6 +98,7 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
+
                     </x-slot>
                 </x-dropdown>
             </div>

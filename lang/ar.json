@@ -963,5 +963,12 @@
     "Contact us": "تواصل معنا",
     "Return Home": "العودة إلى الصفحة الرئيسية",
     "Page Not Found": "الصفحة غير موجودة",
-    "Sorry, the page you are looking for could not be found.": "عذراً، لا يمكن العثور على الصفحة التي تبحث عنها."
+    "Sorry, the page you are looking for could not be found.": "عذراً، لا يمكن العثور على الصفحة التي تبحث عنها.",
+    "Thank you for contacting us. We will get back to you soon.": "شكراً لتواصلك معنا. سنعود إليك قريباً.",
+    "Mark as Read": "وضع علامة كمقروء",
+    "Mark as Unread": "وضع علامة كغير مقروء",
+    "Phone": "الهاتف",
+    "Is read": "تمت القراءة",
+    "Message": "الرسالة",
+    "Messages": "الرسائل"
 }

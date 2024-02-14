@@ -22,6 +22,9 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
+//contactus.store
+Route::post('/contact', [App\Http\Controllers\ContactController::class, 'store'])->name('contact.store');
+
 
 Route::middleware('auth', 'verified')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
