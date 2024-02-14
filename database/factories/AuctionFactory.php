@@ -18,7 +18,7 @@ class AuctionFactory extends Factory
     {
 
         return [
-            'approved' => true,
+//            'approved' => true,
             'title' => $this->faker->sentence,
             'info' => [
                 'color' => $this->faker->colorName,
