@@ -76,7 +76,10 @@
                 </svg>
                 <div class="text-sm" dir="ltr">
                     <template x-if="displayMode === 'days'">
-                        <span x-text="timer.days + ' ' + 'ايام'"></span>
+                        <div class="flex gap-1">
+                            <span >{{__('Days')}}</span>
+                            <span x-text="timer.days"></span>
+                        </div>
                     </template>
                     <template x-if="displayMode === 'time'">
                         <div>
