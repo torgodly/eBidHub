@@ -31,8 +31,9 @@
                 <div class="absolute inset-0 bg-gradient-to-b from-gray-300 to-transparent h-[50vh]"></div>
 
                 <div class="absolute inset-0 flex flex-col items-center justify-center  mt-20 h-[50vh]">
-                    <h1 class="text-5xl font-black	 uppercase text-center">{{__('FIND YOUR NEXT DEAL!')}}</h1>
-                    <p class="text-center font-semibold md:w-1/3">{{__('Anyone can bid on great deals from local, county, and state government agencies, schools, authorities, and more.')}}</p>
+                    <h1 class="text-5xl font-black	 uppercase text-center">بوابتك الإلكترونية للمزادات في ليبيا</h1>
+                    <p class="text-center text-base font-semibold md:w-1/3">
+                        استكشف، اكتشف، واشترِ من مجموعة واسعة من المنتجات في مختلف الفئات. نحن نضمن لك تجربة مزايدة آمنة وممتعة!.                    </p>
                     <div class="mt-4 space x-4">
                         <x-primary-button onclick="location.href='{{route('login')}}'"
                                           class="bg-blue-500 hover:bg-blue-700 ">
