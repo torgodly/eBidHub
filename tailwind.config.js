@@ -11,7 +11,17 @@ export default {
     ],
 
     theme: {
+        fontSize: {
+            sm: '1rem',
+            base: '1.2rem',
+            xl: '1.45rem',
+            '2xl': '1.763rem',
+            '3xl': '2.153rem',
+            '4xl': '2.641rem',
+            '5xl': '3.252rem',
+        },
         extend: {
+
             dropShadow: {
                 glow: [
                     "0 0px 20px rgba(255,255, 255, 0.35)",
@@ -19,7 +29,9 @@ export default {
                 ]
             },
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Cairo', ...defaultTheme.fontFamily.sans],
+                // sans: ['Cairo', sans-serif;],
+                // sans: ['Figtree', sans-serif;],
             },
             colors:{
                 primary: "#086bd6"

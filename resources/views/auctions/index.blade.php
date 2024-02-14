@@ -38,7 +38,7 @@
                     <x-input-error class="mt-2" :messages="$errors->get('buy_now')"/>
                 </div>
 
-                <x-primary-button class="bg-blue-500 hover:bg-blue-700 text-4xl mt-6">
+                <x-primary-button class="bg-blue-500 hover:bg-blue-700 text-sm mt-6">
                     <x-tabler-filter-search/> {{ __('Search') }}
                 </x-primary-button>
 
