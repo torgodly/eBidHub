@@ -76,7 +76,7 @@
                 </svg>
                 <div class="text-sm" dir="ltr">
                     <template x-if="displayMode === 'days'">
-                        <span x-text="timer.days + ' Days'"></span>
+                        <span x-text="timer.days + ' ' + 'ايام'"></span>
                     </template>
                     <template x-if="displayMode === 'time'">
                         <div>
@@ -87,7 +87,7 @@
                     </template>
                     <template x-if="displayMode === 'sold'">
                         <div>
-                            <span x-text="'Sold For'"></span>
+                            <span x-text="'{{__('Sold For')}}'"></span>
                         </div>
                     </template>
                 </div>
