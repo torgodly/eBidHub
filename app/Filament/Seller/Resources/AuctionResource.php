@@ -202,7 +202,7 @@ class AuctionResource extends Resource
                                     'bulletList',
                                     'heading',
                                     'italic',
-                                    'link',
+//                                    'link',
                                     'orderedList',
                                     'redo',
                                     'undo',
