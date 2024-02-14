@@ -1,6 +1,100 @@
 <x-app-layout >
-    <div class="relative isolate bg-white" dir="ltr">
+    <div class="relative isolate bg-white" >
         <div class="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
+            <div class="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48">
+                <div class="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
+                    {{--                    flash message--}}
+                    @if(session('message'))
+                        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
+                             role="alert">
+                            <strong class="font-bold">{{__("Success!")}}</strong>
+                            <span class="block sm:inline">{{session('message')}}</span>
+                            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                                <svg onclick="this.parentElement.parentElement.style.display='none';"
+                                     class="fill-current h-6 w-6 text-green-500" role="button"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <title>Close</title>
+                                    <path fill-rule="evenodd"
+                                          d="M14.354 5.354a2 2 0 00-2.828 0L10 7.172 7.172 5.354a2 2 0 10-2.828 2.828L7.172 10l-2.828 2.828a2 2 0 102.828 2.828L10 12.828l2.828 2.828a2 2 0 102.828-2.828L12.828 10l2.828-2.828a2 2 0 000-2.828z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </span>
+                        </div>
+                    @endif
+                    <form action="{{route('contact.store')}}" method="POST">
+                        @csrf
+                        <div>
+                            <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+
+                                <div>
+                                    <label for="first-name" class="block text-sm font-semibold leading-6 text-gray-900">{{__('First name')}}</label>
+                                    <div class="mt-2.5">
+                                        <input type="text" name="first_name" id="first-name" autocomplete="given-name"
+                                               class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    </div>
+                                    @error('first-name')
+                                    <span class="text-red-500">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div>
+                                    <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">{{__("Last name")}}</label>
+                                    <div class="mt-2.5">
+                                        <input type="text" name="last_name" id="last-name" autocomplete="family-name"
+                                               class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    </div>
+                                    @error('last-name')
+                                    <span class="text-red-500">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label for="email"
+                                           class="block text-sm font-semibold leading-6 text-gray-900">{{__('Email')}}</label>
+                                    <div class="mt-2.5">
+                                        <input type="email" name="email" id="email" autocomplete="email"
+                                               class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    </div>
+                                    @error('email')
+                                    <span class="text-red-500">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label for="phone-number"
+                                           class="block text-sm font-semibold leading-6 text-gray-900">{{__('Phone number')}}</label>
+                                    <div class="mt-2.5">
+                                        <input type="tel" name="phone" id="phone-number" autocomplete="tel"
+                                               class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    </div>
+                                    @error('phone-number')
+                                    <span class="text-red-500">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label for="message"
+                                           class="block text-sm font-semibold leading-6 text-gray-900">{{__('Message')}}</label>
+                                    <div class="mt-2.5">
+                                    <textarea name="message" id="message" rows="4"
+                                              class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                                    </div>
+                                    @error('message')
+                                    <span class="text-red-500">{{$message}}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="mt-8 flex justify-between">
+
+                                <button type="submit"
+                                        class="rounded-md h-fit bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                    {{__('Send message')}}
+                                </button>
+
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
             <div class="relative px-6 pb-20 pt-24 sm:pt-32 lg:static lg:px-8 lg:py-48">
                 <div class="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
                     <div
@@ -22,14 +116,14 @@
                                   fill="url(#83fd4e5a-9d52-42fc-97b6-718e5d7ee527)"/>
                         </svg>
                     </div>
-                    <h2 class="text-3xl font-bold tracking-tight text-gray-900">Get in touch</h2>
+                    <h2 class="text-3xl font-bold tracking-tight text-gray-900">{{__('Get in touch')}}</h2>
                     <p class="mt-6 text-lg leading-8 text-gray-600">
-                        If you have any questions about our programs, campus, or events, please don't hesitate to reach out. We're here to help.
+                        {{__("If you have any questions about our programs, campus, or events, please don't hesitate to reach out. We're here to help.")}}
                     </p>
                     <dl class="mt-10 space-y-4 text-base leading-7 text-gray-600">
                         <div class="flex gap-x-4">
                             <dt class="flex-none">
-                                <span class="sr-only">Address</span>
+                                <span class="sr-only">{{__('Address')}}</span>
                                 <svg class="h-7 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                      stroke="currentColor" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -42,7 +136,7 @@
                         </div>
                         <div class="flex gap-x-4">
                             <dt class="flex-none">
-                                <span class="sr-only">Telephone</span>
+                                <span class="sr-only">{{__('Telephone')}}</span>
                                 <svg class="h-7 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                      stroke="currentColor" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -53,7 +147,7 @@
                         </div>
                         <div class="flex gap-x-4">
                             <dt class="flex-none">
-                                <span class="sr-only">Email</span>
+                                <span class="sr-only">{{__('Email')}}</span>
                                 <svg class="h-7 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                      stroke="currentColor" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -64,108 +158,12 @@
                         </div>
                         <div class="flex gap-x-4">
                             <dt class="flex-none">
-                                <span class="sr-only">Facebook</span>
+                                <span class="sr-only">{{__('Facebook')}}</span>
                                 <x-tabler-brand-facebook class="h-7 w-6 text-gray-400"/>
                             </dt>
                             <dd><a class="hover:text-gray-900" href="#">eBidHub </a></dd>
                         </div>
                     </dl>
-                </div>
-            </div>
-            <div class="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48">
-                <div class="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
-                    {{--                    flash message--}}
-                    @if(session('message'))
-                        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
-                             role="alert">
-                            <strong class="font-bold">Success!</strong>
-                            <span class="block sm:inline">{{session('message')}}</span>
-                            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
-                                <svg onclick="this.parentElement.parentElement.style.display='none';"
-                                     class="fill-current h-6 w-6 text-green-500" role="button"
-                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <title>Close</title>
-                                    <path fill-rule="evenodd"
-                                          d="M14.354 5.354a2 2 0 00-2.828 0L10 7.172 7.172 5.354a2 2 0 10-2.828 2.828L7.172 10l-2.828 2.828a2 2 0 102.828 2.828L10 12.828l2.828 2.828a2 2 0 102.828-2.828L12.828 10l2.828-2.828a2 2 0 000-2.828z"
-                                          clip-rule="evenodd"/>
-                                </svg>
-                            </span>
-                        </div>
-                    @endif
-                    <form action="{{route('contact.store')}}" method="POST">
-                        @csrf
-                        <div>
-                            <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-
-                                <div>
-                                    <label for="first-name" class="block text-sm font-semibold leading-6 text-gray-900">First
-                                        name</label>
-                                    <div class="mt-2.5">
-                                        <input type="text" name="first_name" id="first-name" autocomplete="given-name"
-                                               class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                    </div>
-                                    @error('first-name')
-                                    <span class="text-red-500">{{$message}}</span>
-                                    @enderror
-                                </div>
-                                <div>
-                                    <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Last
-                                        name</label>
-                                    <div class="mt-2.5">
-                                        <input type="text" name="last_name" id="last-name" autocomplete="family-name"
-                                               class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                    </div>
-                                    @error('last-name')
-                                    <span class="text-red-500">{{$message}}</span>
-                                    @enderror
-                                </div>
-                                <div class="sm:col-span-2">
-                                    <label for="email"
-                                           class="block text-sm font-semibold leading-6 text-gray-900">Email</label>
-                                    <div class="mt-2.5">
-                                        <input type="email" name="email" id="email" autocomplete="email"
-                                               class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                    </div>
-                                    @error('email')
-                                    <span class="text-red-500">{{$message}}</span>
-                                    @enderror
-                                </div>
-                                <div class="sm:col-span-2">
-                                    <label for="phone-number"
-                                           class="block text-sm font-semibold leading-6 text-gray-900">Phone
-                                        number</label>
-                                    <div class="mt-2.5">
-                                        <input type="tel" name="phone" id="phone-number" autocomplete="tel"
-                                               class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                    </div>
-                                    @error('phone-number')
-                                    <span class="text-red-500">{{$message}}</span>
-                                    @enderror
-                                </div>
-                                <div class="sm:col-span-2">
-                                    <label for="message"
-                                           class="block text-sm font-semibold leading-6 text-gray-900">Message</label>
-                                    <div class="mt-2.5">
-                                    <textarea name="message" id="message" rows="4"
-                                              class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
-                                    </div>
-                                    @error('message')
-                                    <span class="text-red-500">{{$message}}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="mt-8 flex justify-between">
-
-                                <button type="submit"
-                                        class="rounded-md h-fit bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                    Send message
-                                </button>
-
-                            </div>
-
-                        </div>
-                    </form>
-
                 </div>
             </div>
 
