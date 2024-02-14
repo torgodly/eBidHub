@@ -1,7 +1,7 @@
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')"/>
-    <div class="flex justify-center items-center w-full">
+    <div class="flex justify-center items-center w-full  ">
         <div class="w-full sm:max-w-md flex justify-center items-center flex-col ">
             <a href="/">
                 <x-application-logo class="h-16  fill-current text-gray-500" />
@@ -66,7 +66,7 @@
             </form>
 
         </div>
-        <svg class="w-full sm:max-w-md mt-6 px-6 py-4   overflow-hidden sm:rounded-lg" id="Layer_2" data-name="Layer 2"
+        <svg class="w-full sm:max-w-md mt-6 px-6 py-4   overflow-hidden sm:rounded-lg hidden md:block" id="Layer_2" data-name="Layer 2"
              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 3710 3710">
             <defs>
                 <style>

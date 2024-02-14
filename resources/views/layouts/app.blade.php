@@ -30,8 +30,8 @@
                      src="https://res.cloudinary.com/municibid/image/upload/v1671223582/-backgrounds/homepage/shutterstock_2198260155_1.jpg">
                 <div class="absolute inset-0 bg-gradient-to-b from-gray-300 to-transparent h-[50vh]"></div>
 
-                <div class="absolute inset-0 flex flex-col items-center justify-center  mt-20 h-[50vh]">
-                    <h1 class="text-5xl font-black	 uppercase text-center">بوابتك الإلكترونية للمزادات في ليبيا</h1>
+                <div class="absolute inset-0 flex flex-col items-center justify-center  md:mt-20 mt-10 h-[50vh]">
+                    <h1 class="md:text-5xl font-black text-xl	 uppercase text-center">بوابتك الإلكترونية للمزادات في ليبيا</h1>
                     <p class="text-center text-base font-semibold md:w-1/3">
                         استكشف، اكتشف، واشترِ من مجموعة واسعة من المنتجات في مختلف الفئات. نحن نضمن لك تجربة مزايدة آمنة وممتعة!.                    </p>
                     <div class="mt-4 space x-4">
