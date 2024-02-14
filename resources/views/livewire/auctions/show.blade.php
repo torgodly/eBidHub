@@ -28,7 +28,6 @@
                         </svg>
                     </div>
 
-                    <span class="text-sm font-bold underline">{{__('Likes')}}</span>
                 </div>
             </div>
         </div>
