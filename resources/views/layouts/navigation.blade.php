@@ -33,9 +33,6 @@
                 </div>
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <div class="bg-red-600">
-
-                        </div>
                         <button
                             class="inline-flex items-center  border  text-sm leading-4 font-medium rounded-full text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150   gap-2 border-gray-300 ">
 
@@ -54,7 +51,10 @@
                                     </svg>
                                 @endif
                             </div>
+
                         </button>
+
+
                     </x-slot>
 
                     <x-slot name="content">
@@ -104,6 +104,12 @@
 
                     </x-slot>
                 </x-dropdown>
+                <div class="cursor-pointer">
+                    <a href="{{route('favorites.index')}}">
+                        <x-tabler-heart class="w-10 h-10 stroke-gray-400"/>
+
+                    </a>
+                </div>
             </div>
             <!-- Hamburger -->
 
@@ -155,9 +161,7 @@
             <x-responsive-nav-link :href="route('auctions.index')" :active="request()->routeIs('auctions.index')">
                 {{ __('Auctions') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('favorites.index')" :active="request()->routeIs('favorites.index')">
-                {{ __('Favorites') }}
-            </x-responsive-nav-link>
+
             <x-responsive-nav-link :href="route('auctions.won-auctions')"
                                    :active="request()->routeIs('auctions.won-auctions')">
                 {{ __('My Won Auctions') }}

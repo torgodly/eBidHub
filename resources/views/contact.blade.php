@@ -117,10 +117,12 @@
                             <rect width="100%" height="100%" stroke-width="0"
                                   fill="url(#83fd4e5a-9d52-42fc-97b6-718e5d7ee527)"/>
                         </svg>
+                        <x-contact-svg/>
+
                     </div>
                     <h2 class="text-3xl font-bold tracking-tight text-gray-900">{{__('Get in touch')}}</h2>
                     <p class="mt-6 text-lg leading-8 text-gray-600">
-                        {{__("If you have any questions about our programs, campus, or events, please don't hesitate to reach out. We're here to help.")}}
+                        {{__("مرحباً، نحن هنا للمساعدة! إذا كان لديك أي أسئلة، أو تواجه أي مشكلات، أو لديك أي اقتراحات، فلا تتردد في الاتصال بنا. نحن نقدر ملاحظاتك ونتطلع إلى سماعك!")}}
                     </p>
                     <div class="flex w-full">
                         <dl class="mt-10 space-y-4 text-base leading-7 text-gray-600 w-full">
@@ -149,7 +151,8 @@
                                               d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/>
                                     </svg>
                                 </dt>
-                                <dd><a class="hover:text-gray-900" href="tel:+218 91 11 111 111">+218 91 111 111
+                                <dd><a class="hover:text-gray-900" dir="ltr" href="tel:+218 91 11 111 111">+218 91 111
+                                        111
                                         1</a></dd>
                             </div>
                             <div class="flex gap-x-4">
@@ -175,9 +178,9 @@
 
 
                         </dl>
-                        <x-contact-svg/>
 
                     </div>
+
 
 
                 </div>
