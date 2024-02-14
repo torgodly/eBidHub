@@ -14,7 +14,10 @@ class AuctionController extends Controller
     public function index()
     {
         $categories = \App\Models\Category::with('auctions')->get();
-        $auctions = Auction::where('approved', true)->with('media', 'bids');
+        $auctions = Auction::where('approved', true)->with('media', 'bids')
+            ->whereDate('end', '>', now()->subWeek())
+
+        ;
         $filters = (new Request())->merge(
             [
                 // get the filter keys and the values is the querey string if exist
