@@ -26,6 +26,7 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->font('Cairo')
             ->darkMode(false)
             ->defaultThemeMode(ThemeMode::Light)
             ->plugin(new FilamentEmail())
