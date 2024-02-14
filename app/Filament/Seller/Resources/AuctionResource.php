@@ -112,11 +112,21 @@ class AuctionResource extends Resource
                 ,
                 TextColumn::make('approved')->label('Approve Status')
                     ->translateLabel()
-                    ->formatStateUsing(fn(string $state): string => $state === '1' ? __('Approved') : __('Declined'))
+                    ->default('Pending')
+                    ->formatStateUsing(function (string $state): string {
+                        if ($state === '1') {
+                            return __('Approved');
+                        }
+                        if ($state === '0') {
+                            return __('Declined');
+                        }
+                        return __('Pending');
+                    })
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
                         '1' => 'success',
                         '0' => 'danger',
+                        default => 'gray',
                     }),
                 TextColumn::make('bids_count')->translateLabel()
 
@@ -292,17 +302,33 @@ class AuctionResource extends Resource
                                         ->dateTime('Y-m-d H:i:s'),
                                     TextEntry::make('status')->translateLabel()
                                         ->badge()
+                                        ->formatStateUsing(fn(string $state): string => match ($state) {
+                                            'ending soon' => __('Ending Soon'),
+                                            'active' => __('Active'),
+                                            'closed' => __('Closed'),
+                                        })
                                         ->color(fn(string $state): string => match ($state) {
                                             'ending soon' => 'warning',
                                             'active' => 'success',
                                             'closed' => 'danger',
                                         }),
-                                    TextEntry::make('approved')->translateLabel()
-                                        ->formatStateUsing(fn(string $state): string => $state === '1' ? __('Approved') : __('Declined'))
+                                    TextEntry::make('approved')->label('Approve Status')
+                                        ->translateLabel()
+                                        ->default('Pending')
+                                        ->formatStateUsing(function (string $state): string {
+                                            if ($state === '1') {
+                                                return __('Approved');
+                                            }
+                                            if ($state === '0') {
+                                                return __('Declined');
+                                            }
+                                            return __('Pending');
+                                        })
                                         ->badge()
                                         ->color(fn(string $state): string => match ($state) {
                                             '1' => 'success',
                                             '0' => 'danger',
+                                            default => 'gray',
                                         }),
                                     TextEntry::make('bids_count')->translateLabel(),
 

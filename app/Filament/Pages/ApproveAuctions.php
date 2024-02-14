@@ -19,6 +19,7 @@ class ApproveAuctions extends Page implements HasTable
 {
     use InteractsWithTable;
 
+
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
 
     protected static string $view = 'filament.pages.approve-auctions';
@@ -32,6 +33,7 @@ class ApproveAuctions extends Page implements HasTable
     {
         return __(parent::getNavigationLabel());
     }
+
 
     public function getTitle(): string
     {
@@ -73,6 +75,7 @@ class ApproveAuctions extends Page implements HasTable
                         'ending soon' => 'warning',
                     }),
 
+
             ])
             ->filters([
                 // ...
@@ -81,6 +84,7 @@ class ApproveAuctions extends Page implements HasTable
                 Action::make(__('Approve'))
                     ->requiresConfirmation()
                     ->icon('tabler-clipboard-check')
+                    ->color('success')
                     ->action(function (Auction $record) {
                         $record->approve();
                         Notification::make()
@@ -100,13 +104,28 @@ class ApproveAuctions extends Page implements HasTable
                             ->success()
                             ->send();
                     })
-                    ->sendSuccessNotification()
+                    ->sendSuccessNotification(),
+
+                //view Auction with route registerd in AdminPanelProvider.php
+                Action::make(__('View'))
+                    ->icon('tabler-eye')
+                    ->color('primary')
+                    ->url(fn(Auction $record) => route('filament.admin.approve-auctions.view', $record->getKey()))
+                    ->sendSuccessNotification(),
             ])
             ->bulkActions([
                 BulkActionGroup::make([
                     BulkAction::make('Approve')
                         ->requiresConfirmation()
+                        ->icon('tabler-clipboard-check')
+                        ->color('success')
                         ->action(fn(Collection $records) => $records->each->approve())->deselectRecordsAfterCompletion(),
+
+                    BulkAction::make('Decline')
+                        ->requiresConfirmation()
+                        ->icon('tabler-clipboard-x')
+                        ->color('danger')
+                        ->action(fn(Collection $records) => $records->each->decline())->deselectRecordsAfterCompletion(),
                 ]),
             ]);
     }

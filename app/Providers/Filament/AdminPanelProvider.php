@@ -17,6 +17,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\Route;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Jeffgreco13\FilamentBreezy\BreezyCore;
 use RickDBCN\FilamentEmail\FilamentEmail;
@@ -26,7 +27,13 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->font('Cairo')
+            ->routes(function () {
+                return [
+                    Route::get('/approve-auctions/{record}/view', \App\Filament\Pages\ViewAuction::class)
+                        ->name('approve-auctions.view')
+                        ->middleware(Authenticate::class),
+                ];
+            })->font('Cairo')
             ->darkMode(false)
             ->defaultThemeMode(ThemeMode::Light)
             ->plugin(new FilamentEmail())
