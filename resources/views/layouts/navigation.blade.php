@@ -31,85 +31,87 @@
                     class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-green-500 bg-white hover:drop-shadow-glow focus:outline-none transition ease-in-out duration-150">
                     <div>{{ Auth::user()->balance ?? '-' }} $</div>
                 </div>
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button
-                            class="inline-flex items-center  border  text-sm leading-4 font-medium rounded-full text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150   gap-2 border-gray-300 ">
+               <div class="flex gap-3 justify-center items-center">
+                   <x-dropdown align="right" width="48">
+                       <x-slot name="trigger">
+                           <button
+                               class="inline-flex items-center  border  text-sm leading-4 font-medium rounded-full text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150   gap-2 border-gray-300 ">
 
 
-                            <div>
-                                @if(Auth::user()->avatar_url)
-                                    <img src="{{asset(Auth::user()->getFilamentAvatarUrl())}}"
-                                         alt="{{ Auth::user()->name }}" class="w-10 h-10 rounded-full"/>
-                                @else
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true"
-                                         role="presentation" focusable="false"
-                                         class="w-6 h-6 fill-gray-600">
-                                        <path
-                                            d="M16 .7C7.56.7.7 7.56.7 16S7.56 31.3 16 31.3 31.3 24.44 31.3 16 24.44.7 16 .7zm0 28c-4.02 0-7.6-1.88-9.93-4.81a12.43 12.43 0 0 1 6.45-4.4A6.5 6.5 0 0 1 9.5 14a6.5 6.5 0 0 1 13 0 6.51 6.51 0 0 1-3.02 5.5 12.42 12.42 0 0 1 6.45 4.4A12.67 12.67 0 0 1 16 28.7z"
-                                            class=""></path>
-                                    </svg>
-                                @endif
-                            </div>
+                               <div>
+                                   @if(Auth::user()->avatar_url)
+                                       <img src="{{asset(Auth::user()->getFilamentAvatarUrl())}}"
+                                            alt="{{ Auth::user()->name }}" class="w-10 h-10 rounded-full"/>
+                                   @else
+                                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true"
+                                            role="presentation" focusable="false"
+                                            class="w-6 h-6 fill-gray-600">
+                                           <path
+                                               d="M16 .7C7.56.7.7 7.56.7 16S7.56 31.3 16 31.3 31.3 24.44 31.3 16 24.44.7 16 .7zm0 28c-4.02 0-7.6-1.88-9.93-4.81a12.43 12.43 0 0 1 6.45-4.4A6.5 6.5 0 0 1 9.5 14a6.5 6.5 0 0 1 13 0 6.51 6.51 0 0 1-3.02 5.5 12.42 12.42 0 0 1 6.45 4.4A12.67 12.67 0 0 1 16 28.7z"
+                                               class=""></path>
+                                       </svg>
+                                   @endif
+                               </div>
 
-                        </button>
-
-
-                    </x-slot>
-
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('auctions.index')">
-                            {{ __('Auctions') }}
-                        </x-dropdown-link>
-
-                        <x-dropdown-link :href="route('favorites.index')">
-                            {{ __('Favorites') }}
-                        </x-dropdown-link>
-
-                        <x-dropdown-link :href="route('auctions.won-auctions')">
-                            {{ __('My Won Auctions') }}
-                        </x-dropdown-link>
-
-                        @if(Auth::user()->is_seller || Auth::user()->is_admin)
-                            @if(Auth::user()->is_admin)
-                                <x-dropdown-link href="/admin">
-                                    {{ __('Admin Dashboard') }}
-                                </x-dropdown-link>
-                                <x-dropdown-link href="/seller">
-                                    {{ __('Seller Dashboard') }}
-                                </x-dropdown-link>
-                            @else
-                                <x-dropdown-link href="/seller">
-                                    {{ __('Seller Dashboard') }}
-                                </x-dropdown-link>
-                            @endif
-
-                        @endif
+                           </button>
 
 
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
+                       </x-slot>
 
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
+                       <x-slot name="content">
+                           <x-dropdown-link :href="route('auctions.index')">
+                               {{ __('Auctions') }}
+                           </x-dropdown-link>
 
-                            <x-dropdown-link :href="route('logout')"
-                                             onclick="event.preventDefault();
+                           <x-dropdown-link :href="route('favorites.index')">
+                               {{ __('Favorites') }}
+                           </x-dropdown-link>
+
+                           <x-dropdown-link :href="route('auctions.won-auctions')">
+                               {{ __('My Won Auctions') }}
+                           </x-dropdown-link>
+
+                           @if(Auth::user()->is_seller || Auth::user()->is_admin)
+                               @if(Auth::user()->is_admin)
+                                   <x-dropdown-link href="/admin">
+                                       {{ __('Admin Dashboard') }}
+                                   </x-dropdown-link>
+                                   <x-dropdown-link href="/seller">
+                                       {{ __('Seller Dashboard') }}
+                                   </x-dropdown-link>
+                               @else
+                                   <x-dropdown-link href="/seller">
+                                       {{ __('Seller Dashboard') }}
+                                   </x-dropdown-link>
+                               @endif
+
+                           @endif
+
+
+                           <x-dropdown-link :href="route('profile.edit')">
+                               {{ __('Profile') }}
+                           </x-dropdown-link>
+
+                           <!-- Authentication -->
+                           <form method="POST" action="{{ route('logout') }}">
+                               @csrf
+
+                               <x-dropdown-link :href="route('logout')"
+                                                onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
+                                   {{ __('Log Out') }}
+                               </x-dropdown-link>
+                           </form>
 
-                    </x-slot>
-                </x-dropdown>
-                <div class="cursor-pointer">
-                    <a href="{{route('favorites.index')}}">
-                        <x-tabler-heart class="w-10 h-10 stroke-gray-400"/>
+                       </x-slot>
+                   </x-dropdown>
+                   <div class="cursor-pointer">
+                       <a href="{{route('favorites.index')}}">
+                           <x-tabler-heart class="w-8 h-8 stroke-gray-400"/>
 
-                    </a>
-                </div>
+                       </a>
+                   </div>
+               </div>
             </div>
             <!-- Hamburger -->
 

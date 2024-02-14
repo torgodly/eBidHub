@@ -70,7 +70,7 @@
                                 <h1 class="font-thin text-base text-gray-500 ">
                                     {{ $auction->about}}
                                 </h1>
-                                <h1 class="text-base font-bold ">د.ل.{{number_format($auction->end_price)}}</h1>
+                                <h1 class="text-base font-bold ">{{number_format($auction->end_price)}}د.ل.</h1>
 
                             </div>
                         </div>

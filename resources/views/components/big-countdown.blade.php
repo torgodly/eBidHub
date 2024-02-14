@@ -92,7 +92,7 @@
                     <template x-if="displayMode === 'sold'">
                         <div class="text-lg text-white">
                             <span x-text="{{__('Sold For')}}"></span>
-                            <span class="text-white text-lg">د.ل.{{number_format($auction->end_price)}}</span>
+                            <span class="text-white text-lg">{{number_format($auction->end_price)}}د.ل.</span>
                         </div>
                     </template>
                 </div>
@@ -111,7 +111,7 @@
 {{--            <template x-if="displayMode !== 'sold'">--}}
                 <span class="text-gray-300 text-lg">{{__('High Bid')}}</span>
 {{--            </template>--}}
-            <span class="text-white text-lg">د.ل.{{number_format($auction->end_price)}}</span>
+            <span class="text-white text-lg">{{number_format($auction->end_price)}}د.ل.</span>
         </div>
         <div class="md:flex gap-1 justify-center items-center hidden  ">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash stroke-gray-300" width="24"

@@ -100,7 +100,7 @@
             <template x-if="displayMode !== 'sold'">
                 <span class="text-gray-300">{{__('Bid')}}</span>
             </template>
-            <span class="text-sm text-white">د.ل.{{number_format($auction->end_price)}}</span>
+            <span class="text-sm text-white">{{number_format($auction->end_price)}}د.ل.</span>
         </div>
     </div>
 </div>

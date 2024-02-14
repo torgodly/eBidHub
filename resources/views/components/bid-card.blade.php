@@ -14,7 +14,7 @@
         <div
             class="max-w-xs w-full bg-white border border-gray-200 rounded-lg shadow  p-6 flex flex-col justify-center text-center drop-shadow-xl">
 
-            <h1 class="font-bold text-4xl">د.ل.{{number_format($auction->end_price)}}</h1>
+            <h1 class="font-bold text-4xl">{{number_format($auction->end_price)}}د.ل.</h1>
             <div class="flex flex-col gap-3 justify-center items-center">
 
                 <x-text-input
