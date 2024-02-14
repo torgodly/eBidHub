@@ -16,6 +16,7 @@ class AuctionController extends Controller
         $categories = \App\Models\Category::with('auctions')->get();
         $auctions = Auction::where('approved', true)->with('media', 'bids')
             ->whereDate('end', '>', now()->subWeek())
+            ->orderBy('created_at', 'desc')
 
         ;
         $filters = (new Request())->merge(
