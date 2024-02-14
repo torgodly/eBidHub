@@ -146,13 +146,13 @@ class AuctionResource extends Resource
                         return $query
                             ->when(
                                 $data['Status'] === 'active',
-                                fn(Builder $query, $date): Builder => $query->where('end', '>', now()),
+                                fn(Builder $query, $date): Builder => $query->where('end', '>', now())->whereNull('winner_id'),
                             )->when(
                                 $data['Status'] === 'closed',
-                                fn(Builder $query, $date): Builder => $query->where('end', '<', now()),
+                                fn(Builder $query, $date): Builder => $query->where('end', '<', now())->orWhereNotNull('winner_id'),
                             )->when(
                                 $data['Status'] === 'ending soon',
-                                fn(Builder $query, $date): Builder => $query->where('end', '<', now()->addHours(3)),
+                                fn(Builder $query, $date): Builder => $query->where('end', '<', now()->addHours(3))->whereNull('winner_id'),
                             );
                     })
 

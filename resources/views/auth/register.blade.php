@@ -60,7 +60,7 @@
                 <div class="block mt-4 ">
                     <label for="terms_and_conditions" class="inline-flex items-center">
                         <input id="terms_and_conditions" type="checkbox"
-                               class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
+                               class="rounded border-primary text-primary shadow-sm focus:ring-primary"
                                name="terms_and_conditions">
                         <a href="{{route('terms-and-conditions')}}"
                            class="ms-2 text-sm text-blue-500 hover:underline">{{ __('I agree to the terms and conditions') }}</a>
