@@ -12,6 +12,9 @@
                 <!-- Navigation Links -->
                 <div class="hidden gap-8 sm:-my-px sm:ms-10 sm:flex">
 
+                    <x-nav-link :href="route('auctions.index')" :active="request()->routeIs('auctions.index')">
+                        {{ __('Main') }}
+                    </x-nav-link>
 
                     <x-nav-link :href="route('contact')"
                                 :active="request()->routeIs('contact')">
