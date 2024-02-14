@@ -76,6 +76,8 @@ class CheckWinners extends Page implements HasTable
                 //check winner action
                 Action::make('Check Winners')
                     ->translateLabel()
+                    ->icon('tabler-trophy')
+                    ->color('success')
                     ->action(function (Auction $record): void {
                         $record->checkWinners();
                     })->successNotificationTitle(__('Winner Has Been Notified')),
