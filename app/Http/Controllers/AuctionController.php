@@ -29,7 +29,8 @@ class AuctionController extends Controller
                 'category' => \request('category'),
             ]
         );
-        $auctions = (new AuctionsFilter($filters))->apply($auctions)->get();
+        $auctions = (new AuctionsFilter($filters))->apply($auctions)->paginate(9);
+//        dd($auctions);
         return view('auctions.index', compact('auctions', 'categories'));
     }
 

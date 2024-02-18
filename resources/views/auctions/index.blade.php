@@ -180,7 +180,9 @@
                     @endforeach
 
                 </div>
-
+            <div    class="mt-10" dir="auto">
+                {{$auctions->links()}}
+            </div>
             </div>
 
         </div>

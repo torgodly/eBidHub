@@ -15,9 +15,34 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 //        \App\Models\User::factory(20)->create();
-        Category::factory(20)->create();
-
-        Auction::factory(3)->create()->each(function (Auction $auction) {
+        $categories = [
+            "سيارات",
+            "مجوهرات",
+            "الساعات",
+            "أجهزة إلكترونية",
+            "معدات صناعية",
+            "الفنون والتحف",
+            "الأدوات التقليدية",
+            "الملابس والأزياء",
+            "الأثاث المنزلي",
+            "أدوات الطهي",
+            "الكتب والمطبوعات",
+            "الألعاب والترفيه",
+            "الأدوات الرياضية",
+            "الأجهزة الطبية",
+            "مستلزمات الحيوانات الأليفة",
+            "المواد الغذائية",
+            "مستحضرات التجميل",
+            "المنتجات الصحية",
+            "الأثاث المكتبي",
+            "معدات الرياضة واللياقة البدنية"
+        ];
+        foreach ($categories as $category) {
+            Category::factory()->create([
+                'name' => $category,
+            ]);
+        }
+        Auction::factory(100)->create()->each(function (Auction $auction) {
             for ($i = 0; $i < 5; $i++) {
                 $auction->addMediaFromUrl('https://picsum.photos/1024/683')->toMediaCollection('Auctions');
             }
