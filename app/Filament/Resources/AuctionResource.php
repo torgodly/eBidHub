@@ -133,12 +133,17 @@ class AuctionResource extends Resource
 
             ])
             ->actions([
-
+                Tables\Actions\Action::make('Delete')
+                    ->color('danger')
+                    ->translateLabel()
+                    ->icon('tabler-trash')
+                    ->visible(fn(Auction $record) => !$record->bids()->exists())
+                    ->action(fn(Auction $record) => $record->delete())
+                    ->requiresConfirmation()
+                    ->modalIcon('tabler-trash')
+                    ->modelLabel('Delete Auction')
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ])
             ->emptyStateActions([
             ]);
