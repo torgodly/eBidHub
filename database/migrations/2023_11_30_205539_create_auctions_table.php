@@ -17,7 +17,6 @@ return new class extends Migration {
             $table->text('about');
             $table->text('description');
             $table->integer('price');
-            //minium bid
             $table->integer('minimum_bid');
             $table->timestamp('end');
             $table->foreignId('user_id');

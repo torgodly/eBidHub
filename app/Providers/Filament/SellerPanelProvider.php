@@ -32,8 +32,8 @@ class SellerPanelProvider extends PanelProvider
             ->font('Cairo')
             ->darkMode(false)
             ->defaultThemeMode(ThemeMode::Light)
-
-            ->plugin(BreezyCore::make()->myProfile(
+            ->plugin(
+                BreezyCore::make()->myProfile(
                 shouldRegisterUserMenu: true, // Sets the 'account' link in the panel User Menu (default = true)
                 shouldRegisterNavigation: false, // Adds a main navigation item for the My Profile page (default = false)
                 navigationGroup: 'Settings', // Sets the navigation group for the My Profile page (default = null)
@@ -56,8 +56,6 @@ class SellerPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Seller/Widgets'), for: 'App\\Filament\\Seller\\Widgets')
             ->widgets([
-//                Widgets\AccountWidget::class,
-//                Widgets\FilamentInfoWidget::class
                 StatsOverview::class,
             ])->plugins([
 
