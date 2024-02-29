@@ -6,40 +6,45 @@
             <div>
                 <x-input-label for="price" :value="__('Price')"/>
                 <x-text-input id="price" name="price" type="number" class="mt-1 block w-full"
-                                wire:model.live="price"
+                              wire:model="price"
+                              min="1"
+                              placeholder="{{__('Price')}}"
                               autofocus autocomplete="price"/>
                 <x-input-error class="mt-2" :messages="$errors->get('price')"/>
             </div>
             <div>
                 <x-input-label for="min_bid" :value="__('Minimum bid')"/>
                 <x-text-input id="min_bid" name="min_bid" type="number" class="mt-1 block w-full"
-                              wire:model.live="min_bid"
+                              wire:model="min_bid"
+                              min="1"
+                              placeholder="{{__('Minimum bid')}}"
                               autofocus autocomplete="min_bid"/>
                 <x-input-error class="mt-2" :messages="$errors->get('min_bid')"/>
             </div>
             <div>
                 <x-input-label for="end" :value="__('Ending')"/>
                 <x-text-input id="end" name="end" type="date" class="mt-1 block w-full"
-                              wire:model.live="end"
+                              wire:model="end"
+                              placeholder="{{__('Ending')}}"
                               autofocus autocomplete="end"/>
                 <x-input-error class="mt-2" :messages="$errors->get('end')"/>
             </div>
             <div>
                 <x-input-label for="buy_now" :value="__('Buy Now')"/>
                 <select id="buy_now" name="buy_now"
-                        wire:model.live="buy_now"
+                        wire:model="buy_now"
                         class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full"
                         autofocus autocomplete="buy_now">
-                    <option value="">{{__('Select')}}</option>
-                    <option value="1" >{{__('Yes')}}</option>
+                    <option value="">{{__('Buy Now')}}</option>
+                    <option value="1">{{__('Yes')}}</option>
                     <option value="0">{{__('No')}}</option>
                 </select>
                 <x-input-error class="mt-2" :messages="$errors->get('buy_now')"/>
             </div>
 
-
-
-
+            <x-primary-button class="bg-blue-500 hover:bg-blue-700 text-sm mt-6">
+                <x-tabler-filter-search/> {{ __('Search') }}
+            </x-primary-button>
         </form>
     </div>
     <div class="max-w-full mx-auto sm:px-6 lg:px-8 flex md:flex-row flex-col  gap-5">
@@ -55,7 +60,7 @@
             @foreach($categories as $category)
 
                 <p class="text-sm text-gray-800 cursor-pointer hover:text-blue-500 transition duration-300 ease-in-out hover:underline"
-                    wire:click="$set('category', {{$category->id}})"
+                   wire:click="$set('category', {{$category->id}})"
                 >{{$category->name}} ({{$category->auctions_count}})</p>
 
             @endforeach
