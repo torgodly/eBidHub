@@ -35,7 +35,7 @@ class Index extends Component
             ->whereDate('end', '>', now()->subWeek())
             ->orderBy('created_at', 'desc');
         $auctions = $this->applyFilters($auctions);
-        $auctions = $auctions->paginate(10);
+        $auctions = $auctions->paginate(9);
 
 
         return view('livewire.auctions.index', compact('auctions', 'categories'));
