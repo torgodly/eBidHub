@@ -19,7 +19,7 @@
             </div>
             <div>
                 <x-input-label for="end" :value="__('Ending')"/>
-                <x-text-input id="end" name="end" type="datetime-local" class="mt-1 block w-full"
+                <x-text-input id="end" name="end" type="date" class="mt-1 block w-full"
                               wire:model.live="end"
                               autofocus autocomplete="end"/>
                 <x-input-error class="mt-2" :messages="$errors->get('end')"/>
