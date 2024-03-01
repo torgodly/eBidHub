@@ -3,10 +3,27 @@
     <div
         class="max-w-7xl mx-auto  pt-10 relative md:px-0  px-6 "
     >
+        <div class="flex justify-start items-center gap-2 md:hidden  ">
+            <div class="flex gap-2">
+                <div class="cursor-pointer" wire:click="favorite">
+                    <svg xmlns="http://www.w3.org/2000/svg"
 
+                         class="w-10 h-10 {{$auction->isFavorited() ? 'fill-[#E51D53] stroke-[#E51D53]' : ''}}"
+                         viewBox="0 0 24 24" stroke-width="1"
+                         stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path
+                            d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
+                    </svg>
+                </div>
+
+            </div>
+        </div>
         <div class="flex justify-between items-center">
             <div class="flex justify-start  flex-col ">
-                <h1 class="text-2xl font-bold">{{$auction->title}}</h1>
+                <h1 class="text-2xl font-bold">{{$auction->title}}
+
+                </h1>
                 <div class="flex justify-center items-center">
                     <h6
 
@@ -117,16 +134,17 @@
 
                     <h1 class="text-gray-600 py-2 text-right">
                         {{__('Ending')}} {{\Carbon\Carbon::parse($auction->end)->translatedFormat('d F H:m:a')}}</h1>
-                        <div class="border-b-2"></div>
-                        <div class="my-3 flex justify-start items-center gap-5">
-                            <img
-                                src="{{asset($auction->creator->getFilamentAvatarUrl()??'https://ui-avatars.com/api/?name='.$auction->creator->name)}}"
-                                 alt="Creator" class="w-10 h-10 rounded-full"/>
-                            <div>
-                                <h1 class="text-lg font-bold">{{$auction->creator->name}}</h1>
-                                <h1 class="text-sm font-light">{{$auction->creator->auctions->count()}} {{__('Auctions Count')}}</h1>
-                            </div>
+                    <div class="border-b-2"></div>
+                    <div class="my-3 flex justify-start items-center gap-5">
+                        <img
+                            src="{{asset($auction->creator->getFilamentAvatarUrl()??'https://ui-avatars.com/api/?name='.$auction->creator->name)}}"
+                            alt="Creator" class="w-10 h-10 rounded-full"/>
+                        <div>
+                            <h1 class="text-lg font-bold">{{$auction->creator->name}}</h1>
+                            <h1 class="text-sm font-light"> {{__('Auctions Count')}} {{$auction->creator->auctions->count()}}</h1>
+
                         </div>
+                    </div>
 
                     <div>
 
@@ -222,9 +240,9 @@
 
 
     <x-modal name="Show-all-photos" focusable wire:ignore>
-{{--        <div class="flex justify-center items-center gap-2 p-6" wire:ignore>--}}
-{{--            <x-splade :auction="$auction"/>--}}
-{{--        </div>--}}
+        {{--        <div class="flex justify-center items-center gap-2 p-6" wire:ignore>--}}
+        {{--            <x-splade :auction="$auction"/>--}}
+        {{--        </div>--}}
         <div class="group contents "
              x-data="{ activeSlide: 1, slides: {{ count($auction->media) }} }">
             <div class="relative">

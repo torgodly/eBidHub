@@ -31,8 +31,8 @@
                         <div class="relative flex items-start space-x-3">
                             <div class="relative">
                                 <img
-                                    class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ring-8 ring-white"
-                                    src="{{asset($comment->user->getFilamentAvatarUrl())}}"
+                                    class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ring-1 ring-white"
+                                    src="{{asset($comment->user->getFilamentAvatarUrl()??'https://ui-avatars.com/api/?name='.$comment->user->name)}}"
                                     alt="">
 
                                 <span class="absolute -bottom-0.5 -right-1 rounded-tl bg-white px-0.5 py-px">
@@ -45,7 +45,7 @@
                             </div>
                             <div class="min-w-0 flex-1">
                                 <div>
-                                    <div class="text-sm">
+                                    <div class="text-sm  mr-3">
                                         <a href="#" class="font-medium text-gray-900">{{$comment->user->name}}</a>
                                     </div>
                                     <p class="mt-0.5 text-sm text-gray-500">{{$comment->created_at->diffforhumans()}}</p>

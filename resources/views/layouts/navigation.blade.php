@@ -34,7 +34,7 @@
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <div
                     class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-green-500 bg-white hover:drop-shadow-glow focus:outline-none transition ease-in-out duration-150">
-                    <div>{{ Auth::user()->balance ?? '-' }} $</div>
+                    <div>{{ Auth::user()->balance ?? '-' }} د.ل</div>
                 </div>
                <div class="flex gap-3 justify-center items-center">
                    <x-dropdown align="right" width="48">

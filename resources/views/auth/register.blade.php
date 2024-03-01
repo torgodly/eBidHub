@@ -80,7 +80,7 @@
                 </div>
             </form>
         </div>
-        <svg class="w-full sm:max-w-md mt-6 px-6 py-4   overflow-hidden sm:rounded-lg hidden md:block" id="Layer_2"
+        <svg class="w-full sm:max-w-md mt-6    overflow-hidden sm:rounded-lg hidden md:block" id="Layer_2"
              data-name="Layer 2" xmlns="http://www.w3.org/2000/svg"
              xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 3710 3710">
             <defs>

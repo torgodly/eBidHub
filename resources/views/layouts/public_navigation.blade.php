@@ -105,6 +105,14 @@
                 <x-responsive-nav-link :href="route('register')">
                     {{ __('Sign up') }}
                 </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('contact')"
+                                       :active="request()->routeIs('contact')">
+                    {{ __('Contact Us') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('about')"
+                                       :active="request()->routeIs('about')">
+                    {{ __('About Us') }}
+                </x-responsive-nav-link>
             </div>
 
             <!-- Responsive Settings Options -->

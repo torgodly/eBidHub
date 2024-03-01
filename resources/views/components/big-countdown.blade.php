@@ -78,7 +78,7 @@
                     <template x-if="displayMode === 'days'">
                        <div>
                            <span class="text-gray-300 text-lg">{{__('Time Left')}}</span>
-                           <span class="text-lg text-white" x-text="timer.days + ' ايام'"></span>
+                           <span class="text-lg text-white" x-text="timer.days + ' أيام'"></span>
                        </div>
                     </template>
                     <template x-if="displayMode === 'time'">
