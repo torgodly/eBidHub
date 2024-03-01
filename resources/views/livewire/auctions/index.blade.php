@@ -33,7 +33,7 @@
                 <x-input-label for="buy_now" :value="__('Buy Now')"/>
                 <select id="buy_now" name="buy_now"
                         wire:model="buy_now"
-                        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full"
+                        class="border-gray-300 focus:border-primary focus:ring-primary rounded-md shadow-sm mt-1 block w-full"
                         autofocus autocomplete="buy_now">
                     <option value="">{{__('Buy Now')}}</option>
                     <option value="1">{{__('Yes')}}</option>
@@ -70,7 +70,7 @@
             <button
 
                 @click="open = !open"
-                class="flex justify-center items-center w-full bg-white border border-gray-300 rounded-md shadow-sm px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                class="flex justify-center items-center w-full bg-white border border-gray-300 rounded-md shadow-sm px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                 id="options-menu" aria-haspopup="true" x-bind:aria-expanded="open">
                 <x-tabler-category-2/>
                 {{__('Categories')}}

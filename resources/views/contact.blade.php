@@ -31,7 +31,7 @@
                                            class="block text-sm font-semibold leading-6 text-gray-900">{{__('First name')}}</label>
                                     <div class="mt-2.5">
                                         <input type="text" name="first_name" id="first-name" autocomplete="given-name"
-                                               class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                               class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6">
                                     </div>
                                     @error('first_name')
                                     <span class="text-red-500">{{$message}}</span>
@@ -42,7 +42,7 @@
                                            class="block text-sm font-semibold leading-6 text-gray-900">{{__("Last name")}}</label>
                                     <div class="mt-2.5">
                                         <input type="text" name="last_name" id="last-name" autocomplete="family-name"
-                                               class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                               class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6">
                                     </div>
                                     @error('last_name')
                                     <span class="text-red-500">{{$message}}</span>
@@ -53,7 +53,7 @@
                                            class="block text-sm font-semibold leading-6 text-gray-900">{{__('Email')}}</label>
                                     <div class="mt-2.5">
                                         <input type="email" name="email" id="email" autocomplete="email"
-                                               class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                               class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6">
                                     </div>
                                     @error('email')
                                     <span class="text-red-500">{{$message}}</span>
@@ -64,7 +64,7 @@
                                            class="block text-sm font-semibold leading-6 text-gray-900">{{__('Phone number')}}</label>
                                     <div class="mt-2.5">
                                         <input type="tel" name="phone" id="phone-number" autocomplete="tel"
-                                               class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                               class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6">
                                     </div>
                                     @error('phone')
                                     <span class="text-red-500">{{$message}}</span>
@@ -75,7 +75,7 @@
                                            class="block text-sm font-semibold leading-6 text-gray-900">{{__('Message')}}</label>
                                     <div class="mt-2.5">
                                     <textarea name="message" id="message" rows="4"
-                                              class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                                              class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"></textarea>
                                     </div>
                                     @error('message')
                                     <span class="text-red-500">{{$message}}</span>

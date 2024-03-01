@@ -6,7 +6,7 @@
 
         <div class="relative flex-auto">
             <div
-                class="overflow-hidden rounded-lg pb-12 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600 bg-white">
+                class="overflow-hidden rounded-lg pb-12 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-primary bg-white">
                 <label for="comment" class="sr-only">{{__('Add your comment')}}</label>
                 <input rows="2" name="comment" id="comment" wire:model="comment"
                        class="block w-full resize-none border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
