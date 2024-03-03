@@ -14,7 +14,7 @@
         x-on:click.prevent="$dispatch('open-modal', 'confirm-seller')"
     >{{ __('Become a Seller') }}</x-primary-button>
 
-    <x-modal name="confirm-seller" :show="$errors->seller->isNotEmpty()" focusable>
+    <x-modal name="confirm-seller" :show="$errors->has('password')" focusable>
         <form method="post" action="{{ route('sellers.create') }}" class="p-6">
             @csrf
             @method('post')
@@ -38,7 +38,7 @@
                     placeholder="{{ __('Password') }}"
                 />
 
-                <x-input-error :messages="$errors->seller->get('password')" class="mt-2" />
+                <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
 
             <div class="mt-6 flex justify-end">

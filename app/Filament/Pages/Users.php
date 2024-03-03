@@ -67,6 +67,7 @@ class Users extends Page implements HasTable
                     ])
                     ->form([
                         TextInput::make('balance')
+                            ->minValue(0)
                             ->label('Balance')->numeric()->maxValue(100000000)
                             ->required()->translateLabel()->prefix('د.ل')
                     ])
