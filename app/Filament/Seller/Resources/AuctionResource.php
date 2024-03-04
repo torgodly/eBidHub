@@ -216,6 +216,7 @@ class AuctionResource extends Resource
                                 ->numeric()
                                 ->disabled(fn($record) => $record?->bids()?->exists())
                                 ->dehydrated()
+                                ->minValue(0)
                                 ->prefix('LYD'),
                             TextInput::make('minimum_bid')
                                 ->translateLabel()
@@ -223,6 +224,7 @@ class AuctionResource extends Resource
                                 ->numeric()
                                 ->disabled(fn($record) => $record?->bids()?->exists())
                                 ->dehydrated()
+                                ->minValue(0)
                                 ->prefix('LYD'),
                             DateTimePicker::make('end')
                                 ->translateLabel()
@@ -240,6 +242,7 @@ class AuctionResource extends Resource
                                 ->numeric()
                                 ->disabled(fn($record) => $record?->bids()?->exists())
                                 ->dehydrated()
+                                ->minValue(0)
                                 ->prefix('LYD')
                                 ->visible(fn(Get $get): bool => $get('buy_now')),
 

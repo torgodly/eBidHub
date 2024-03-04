@@ -41,6 +41,11 @@ class CategoryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()->translateLabel(),
+                //AuctionsCount
+                Tables\Columns\TextColumn::make('auctions_count')
+                    ->label(__('Auctions Count'))
+                    ->searchable()
+                    ->translateLabel(),
             ])
             ->filters([
                 //
@@ -52,13 +57,11 @@ class CategoryResource extends Resource
                     ->modalDescription(__('Edit this category'))
                     ->modalSubmitActionLabel(__('Edit Category'))
                     ->modalIcon('heroicon-o-tag')
-                    ->requiresConfirmation()
+                    ->requiresConfirmation(),
+                Tables\Actions\DeleteAction::make()->hidden(fn($record) => $record->auctions()->exists())
 
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make()
@@ -82,6 +85,18 @@ class CategoryResource extends Resource
         ];
     }
 
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->unique(Category::class, 'name')
+                    ->maxLength(255)->columnSpanFull()->translateLabel(),
+
+            ]);
+    }
+
     protected function getHeaderActions(): array
     {
         return [
@@ -92,17 +107,7 @@ class CategoryResource extends Resource
                 ->modalSubmitActionLabel(__('Add Category'))
                 ->modalIcon('heroicon-o-tag')
                 ->requiresConfirmation(),
-        ];
-    }
 
-    public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->unique(Category::class, 'name')
-                    ->maxLength(255)->columnSpanFull()->translateLabel(),
-            ]);
+        ];
     }
 }

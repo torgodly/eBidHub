@@ -116,12 +116,14 @@ class ApproveAuctions extends Page implements HasTable
             ->bulkActions([
                 BulkActionGroup::make([
                     BulkAction::make('Approve')
+                        ->translateLabel()
                         ->requiresConfirmation()
                         ->icon('tabler-clipboard-check')
                         ->color('success')
                         ->action(fn(Collection $records) => $records->each->approve())->deselectRecordsAfterCompletion(),
 
                     BulkAction::make('Decline')
+                        ->translateLabel()
                         ->requiresConfirmation()
                         ->icon('tabler-clipboard-x')
                         ->color('danger')

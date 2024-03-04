@@ -7,7 +7,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
@@ -36,12 +35,12 @@ class ProfileController extends Controller
     {
         $request->user()->fill($request->validated());
 
-         if ($request->hasFile('avatar_url')) {
+        if ($request->hasFile('avatar_url')) {
             $avatar = $request->file('avatar_url');
             $filename = time() . '.' . $avatar->getClientOriginalExtension();
             $avatar->storeAs('public/', $filename);
             $request->user()->avatar_url = $filename;
-         }
+        }
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
@@ -58,10 +57,15 @@ class ProfileController extends Controller
     {
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current_password'],
+
         ]);
 
-        $user = $request->user();
 
+        $user = $request->user();
+        // Check if the user has any relations that prevent account deletion
+        if ($user->auctions()->exists() || $user->bids()->exists()) {
+            return back()->withErrors(['relations' => __('You cannot delete your account because you have active auctions or bids.')]);
+        }
         Auth::logout();
 
         $user->delete();

@@ -164,4 +164,10 @@ class User extends Authenticatable implements HasAvatar, FilamentUser, MustVerif
     }
 
 
+    //check if user has any bids or balance  or auctions or any other relation
+    public function hasAnyRelation()
+    {
+        return $this->bids->count() > 0 || $this->balance > 0 || $this->auctions->count() > 0 || $this->wonAuctions->count() > 0;
+    }
+
 }

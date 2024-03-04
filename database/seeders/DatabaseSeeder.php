@@ -43,9 +43,9 @@ class DatabaseSeeder extends Seeder
             ]);
         }
         Auction::factory(100)->create()->each(function (Auction $auction) {
-            for ($i = 0; $i < 5; $i++) {
-                $auction->addMediaFromUrl('https://picsum.photos/1024/683')->toMediaCollection('Auctions');
-            }
+//            for ($i = 0; $i < 5; $i++) {
+//                $auction->addMediaFromUrl('https://picsum.photos/1024/683')->toMediaCollection('Auctions');
+//            }
             $auction->categories()->attach(Category::inRandomOrder()->limit(5)->get());
         });
 ////        Bid::factory(50)->create();
