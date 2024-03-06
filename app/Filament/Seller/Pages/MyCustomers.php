@@ -44,7 +44,7 @@ class MyCustomers extends Page implements HasForms, HasTable
             ->columns([
                 TextColumn::make('winner_name')->label('Winner Name')->translateLabel(),
                 TextColumn::make('winner.email')->label('Winner Email')->translateLabel(),
-                TextColumn::make('phone_number')->translateLabel(),
+                TextColumn::make('winner.phone_number')->translateLabel(),
                 TextColumn::make('end_price')->suffix('د.ل')->translateLabel(),
                 TextColumn::make('title')->translateLabel(),
 

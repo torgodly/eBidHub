@@ -56,5 +56,5 @@ Route::middleware('auth', 'verified')->group(function () {
 //terms and conditions
 Route::get('/terms-and-conditions', function () {
     return view('terms-and-conditions');
-})->name('terms-and-conditions')->middleware(['guest']);
+})->name('terms-and-conditions');
 require __DIR__ . '/auth.php';
