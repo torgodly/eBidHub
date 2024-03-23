@@ -24,7 +24,7 @@ class CheckWinners extends Page implements HasTable
 
     public static function getNavigationBadge(): ?string
     {
-        return Auction::query()->where('end', '<', now())->whereNull('winner_id')->count();
+        return Auction::query()->where('end', '<', now())->where('approved', 1)->whereNull('winner_id')->count();
     }
     public static function getNavigationLabel(): string
     {
@@ -44,7 +44,7 @@ class CheckWinners extends Page implements HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(Auction::query()->where('end', '<', now())->whereNull('winner_id'))
+            ->query(Auction::query()->where('end', '<', now())->where('approved', 1)->whereNull('winner_id'))
             ->columns([
                 TextColumn::make('title')->translateLabel()
                     ->searchable()
