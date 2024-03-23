@@ -31,7 +31,7 @@ class Index extends Component
     public function render()
     {
         $categories = \App\Models\Category::with('auctions')->get();
-        $auctions = Auction::where('approved', true)->with('media', 'bids')
+        $auctions = Auction::where('approved', 1)->with('media', 'bids')
             ->whereDate('end', '>', now()->subWeek())
             ->orderBy('created_at', 'desc');
         $auctions = $this->applyFilters($auctions);

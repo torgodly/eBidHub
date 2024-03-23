@@ -10,7 +10,7 @@ class AuctionsFilter extends Filters
     {
         return $this->builder->whereHas('bids', function ($query)  {
             $query->where('amount', '<=', $this->request->price);
-        })->orWhere('price', '<=', $this->request->price);
+        })->orWhere('price', '<=', $this->request->price)->where('approved', 1);
     }
 
     public function min_bid()
