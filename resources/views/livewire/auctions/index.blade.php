@@ -55,7 +55,7 @@
                 <span>{{__('Categories')}}</span></h1>
             <p class="text-sm text-gray-800 cursor-pointer hover:text-blue-500 transition duration-300 ease-in-out hover:underline"
                dir="auto"
-               onclick="location.href='{{route('auctions.index')}}'">{{__('All')}} ({{\App\Models\Auction::where('approved',true)->whereDate('end', '>', now()->subWeek())->count()}})</p>
+               onclick="location.href='{{route('auctions.index')}}'">{{__('All')}} ({{\App\Models\Auction::where('approved',true)->where('end', '>', now()->subWeek())->count()}})</p>
 
             @foreach($categories as $category)
 
