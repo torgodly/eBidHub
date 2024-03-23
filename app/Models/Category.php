@@ -22,6 +22,6 @@ class Category extends Model
     //use count method to get the number of auctions in a category Attribute
     public function getAuctionsCountAttribute()
     {
-        return $this->auctions->where('approved', true)->count();
+        return $this->auctions->where('approved', true)->whereDate('end', '>', now()->subWeek())->count();
     }
 }
