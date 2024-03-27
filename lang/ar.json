@@ -986,5 +986,6 @@
     "Buy now": "اشتري الآن",
     "active": "نشط",
     "Pending": "قيد الانتظار",
-    "You cannot delete your account because you have active auctions or bids.": "لا يمكنك حذف حسابك لأن لديك مزادات أو مزايدات نشطة."
+    "You cannot delete your account because you have active auctions or bids.": "لا يمكنك حذف حسابك لأن لديك مزادات أو مزايدات نشطة.",
+    "Congratulations you are the winner": "تهانينا أنت الفائز"
 }
